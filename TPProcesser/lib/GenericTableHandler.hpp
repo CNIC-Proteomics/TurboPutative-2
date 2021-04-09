@@ -1,0 +1,46 @@
+#ifndef GENERIC_TABLE_HANDLER
+#define GENERIC_TABLE_HANDLER
+
+#include <string>
+#include <vector>
+#include <filesystem>
+
+// Class used to read and handle MS table
+class GenericTableHandler
+{
+    protected:
+
+    int nrows=0;
+    std::vector<std::string> columns;
+    std::vector<std::vector<std::string>> table;
+
+
+    public:
+
+    // Constructor
+    // GenericTableHandler();
+
+    // Table reader
+    void readTable(std::filesystem::path workDirPath, std::string fileName);
+
+    // Method to get column
+    std::vector<std::string>& getColumn(std::string colName);
+
+    // Method to get column names
+    std::vector<std::string>& getColumnNames();
+
+    // Method to get index of a column
+    int getIndexOfColumn(std::string colName);
+
+    // Method to add a column at certain position
+    void addColumn(std::vector<std::string> columnArr, int position, std::string colName);
+
+    // Method to remove rows given a vector with indexes
+    void removeIndexes(std::vector<int>& indexes);
+
+    // Method to write output table
+    void writeTable(std::filesystem::path outfilePath);
+
+};
+
+#endif

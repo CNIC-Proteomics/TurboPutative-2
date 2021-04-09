@@ -1,0 +1,33 @@
+#
+# Ignore visual studio code
+#
+/.vscode/*
+/.pylintrc
+
+#
+# Ignore compilation files
+#
+**/*.obj
+**/*.pdb
+**/*.ilk
+**/*.exe
+
+#
+# Ignore Python pycache
+#
+/TPPreProcesser/modules/__pycache__/*
+
+#
+# Ignore Processer libraries
+#
+# boost
+/TPProcesser/lib/boost_1_75_0/*
+/TPProcesser/lib/boost_1_75_0.zip
+
+# goslin
+/TPProcesser/REname/lib/cppgoslin-1.1.2/examples
+/TPProcesser/REname/lib/cppgoslin-1.1.2/cppgoslin/tests
+
+
+# Ignore tests
+/test/*
