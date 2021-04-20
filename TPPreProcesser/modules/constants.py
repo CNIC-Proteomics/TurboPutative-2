@@ -18,13 +18,14 @@ OUTNAME_TMTABLE = "TM_table.tsv"
 # Format accepted by TurboPutative
 ACCEPTED_FORMAT = [".xls", ".xlsx", ".tsv"]
 
-# Possible names in different columns
+# Possible names in different columns (all in lower case)
 COLUMN_NAMES = {
-    "name": ["Name"], 
-    "mass": ["Experimental mass", "Apex m/z", "mz", "m/z"],
-    "rt": ["RT [min]", "RT[s]", "RT[sec]", "RT", "retention time"],
+    "name": ["name"], 
+    "mass": ["experimental mass", "apex m/z", "mz", "m/z"],
+    "rt": ["rt [min]", "rt[s]", "rt[sec]", "rt", "retention time"],
     "tags": ["Food", "Drug", "Microbial", "Halogenated", "Peptide", "Plant", "NaturalProduct"],
-    "chemical_formula": ["Chemical Formula", "Formula"]
+    "chemical_formula": ["chemical Formula", "formula"],
+    "inchi_key": ["Inchikey"]
     }
 
 # Column required to input MS table (used to find header)

@@ -88,12 +88,14 @@ class ModuleInfo:
             if module == '2': # REname
                 self.iniDict["REname"]["column_name"] = self.getColumnNameFromType(msColumns, "name")
                 self.iniDict["REname"]["column_mass"] = self.getColumnNameFromType(msColumns, "mass")
+                self.iniDict["REname"]["column_inchi_key"] = self.getColumnNameFromType(msColumns, "inchi_key")
 
             if module == '3': # RowMerger
                 self.iniDict["RowMerger"]["column_name"] = self.getColumnNameFromType(msColumns, "name")
                 self.iniDict["RowMerger"]["column_mass"] = self.getColumnNameFromType(msColumns, "mass")
 
             if module == '4': # TableMerger
+                self.iniDict["TableMerger"]["ms_column_name"] = self.getColumnNameFromType(msColumns, "name")
                 self.iniDict["TableMerger"]["ms_column_mass"] = self.getColumnNameFromType(msColumns, "mass")
                 self.iniDict["TableMerger"]["ms_column_rt"] = self.getColumnNameFromType(msColumns, "rt")
 
@@ -152,7 +154,7 @@ class InputINI:
         config.read(self.fullPath)
         return config
     
-    def transferToModuleInfo(self, moduleInfo):
+    def transferToModuleInfo(self, moduleInfo, columnsList):
         """
         Transfer parameters from user ini to ini used by C++ modules (ModuleInfo)
         """
@@ -175,10 +177,54 @@ class InputINI:
                 moduleInfo.iniDict[module]["remove_row"] = self.config[module]["remove_row"]
             
             if module == "RowMerger":
-                moduleInfo.iniDict[module]["compared_columns"] = self.config[module]["compared_columns"]
-                moduleInfo.iniDict[module]["conserved_columns"] = self.config[module]["conserved_columns"]
+                # check compared and conserved columns
+                comparedList, conservedList, nameCompare = self.checkComparedConserved(self.config[module]["compared_columns"], self.config[module]["conserved_columns"], columnsList)
+                moduleInfo.iniDict[module]["compared_columns"] = ','.join(comparedList)
+                moduleInfo.iniDict[module]["conserved_columns"] = ','.join(conservedList)
+                moduleInfo.iniDict[module]["compared_name"] = nameCompare
             
             if module == "TableMerger":
                 moduleInfo.iniDict[module]["n_digits"] = self.config[module]["n_digits"]
         
         return moduleInfo
+
+    
+    def checkComparedConserved(self, compared, conserved, columnsList):
+        """
+        Check compared and conserved columns in RowMerger
+        """
+
+        comparedList = [i.strip() for i in compared.split(",")]
+        conservedList = [i.strip() for i in conserved.split(",")]
+
+        # if nothing is added to compare, add by default (default in JavaScript will overwrite this default...)
+        if len(comparedList)==1 and comparedList[0]=='':
+            comparedList = [
+                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mass"]][0],
+                "Adduct"
+            ]
+
+        # if conserved is empty, add all columns (excluding compared)
+        if len(conservedList)==1 and conservedList[0]=='':
+            conservedList = [i for i in columnsList if i not in comparedList]
+
+
+        # check that all columns are in the table
+        if any([i not in columnsList for i in comparedList]):
+            TPExc.TPRowMergerComparedColumn(comparedList, columnsList, logging)
+        
+        if any([i not in columnsList for i in conservedList]):
+            TPExc.TPRowMergerConservedColumn(conservedList, columnsList, logging)
+        
+        # add to compare tag columns
+        _ = [comparedList.append(i) for i in constants.COLUMN_NAMES["tags"] if i in columnsList]
+
+        # if name is in compare, save it in a parameter
+        preNameCompare = [i for i in comparedList if i.lower() in constants.COLUMN_NAMES["name"]]
+        nameCompare = "" if len(preNameCompare)==0 else preNameCompare[0]
+
+        # remove name from compared (if present)
+        comparedList = [i for i in comparedList if i.lower() not in constants.COLUMN_NAMES["name"]]
+
+        # return compare, conserve and name
+        return [comparedList, conservedList, nameCompare]

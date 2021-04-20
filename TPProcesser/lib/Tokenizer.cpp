@@ -21,7 +21,7 @@ std::vector<std::string> Tokenizer::tokenize(std::string line)
         std::string token = line_tmp.substr(0, lastPos);
         tokenArr.push_back(token);
 
-        line_tmp = line_tmp.substr(lastPos+1);
+        line_tmp = line_tmp.substr(lastPos+delim.length());
         lastPos = line_tmp.find(delim);
     }
 

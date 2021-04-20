@@ -5,6 +5,8 @@
 #include <sstream>
 #include <map>
 #include <filesystem>
+#include <algorithm>
+#include <cctype>
 
 #include "LipidList_and_PreProcess.hpp"
 #include "boost/regex.hpp"
@@ -39,7 +41,7 @@ std::vector<bool> LipidList::findLipids(std::vector<std::string>& compoundNames)
         bool isGoslinLipid = false;
         for (std::string& lipid : lipidList)
         {
-            boost::regex lipidRE("^" + lipid);
+            boost::regex lipidRE("^" + lipid, boost::regex::icase);
             
             if (boost::regex_search(compound, lipidRE))
             {

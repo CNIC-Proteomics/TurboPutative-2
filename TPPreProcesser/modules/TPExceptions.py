@@ -100,3 +100,31 @@ class TMTableColumnError(Exception):
         """)
         self.code = 10007
         sys.exit(self.code)
+
+
+class TPRowMergerComparedColumn(Exception):
+    """
+    Error raised when compared column is not in table
+    """
+
+    def __init__(self, comparedList, columnsList):
+
+        logging.info(f"""
+        TPRowMergerComparedColumn: Not all compared column ({', '.join(comparedList)}) are in input table.
+        """)
+        self.code = 10008
+        sys.exit(self.code)
+
+
+class TPRowMergerConservedColumn(Exception):
+    """
+    Error raised when compared column is not in table
+    """
+
+    def __init__(self, conservedList, columnsList, logging):
+
+        logging.info(f"""
+        TPRowMergerConservedColumn: Not all conserved column ({', '.join(conservedList)}) are in input table.
+        """)
+        self.code = 10008
+        sys.exit(self.code)

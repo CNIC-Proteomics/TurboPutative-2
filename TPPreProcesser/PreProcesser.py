@@ -47,7 +47,7 @@ def main(args):
     msTable.readTable()
 
     # Replace \n by \s
-    msTable.removeLineFall()
+    # msTable.removeLineFall()
 
     # test input table
     msTableTester = MSTableTester(args.workflow)
@@ -93,7 +93,7 @@ def main(args):
 
     # read user ini file and transfer parts of its content to c++ ini file
     userINI = InputINI(args.workdir)
-    moduleInfo = userINI.transferToModuleInfo(moduleInfo)
+    moduleInfo = userINI.transferToModuleInfo(moduleInfo, msTable.table.columns.to_list())
 
     # Write info file
     moduleInfo.writeINI(args.workdir)
