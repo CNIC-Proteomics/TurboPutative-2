@@ -178,7 +178,7 @@ class InputINI:
             
             if module == "RowMerger":
                 # check compared and conserved columns
-                comparedList, conservedList, nameCompare = self.checkComparedConserved(self.config[module]["compared_columns"], self.config[module]["conserved_columns"], columnsList)
+                comparedList, conservedList, nameCompare = self.checkComparedConserved(self.config[module]["compared_columns"], self.config[module]["conserved_columns"], columnsList, moduleInfo)
                 moduleInfo.iniDict[module]["compared_columns"] = ','.join(comparedList)
                 moduleInfo.iniDict[module]["conserved_columns"] = ','.join(conservedList)
                 moduleInfo.iniDict[module]["compared_name"] = nameCompare
@@ -189,7 +189,7 @@ class InputINI:
         return moduleInfo
 
     
-    def checkComparedConserved(self, compared, conserved, columnsList):
+    def checkComparedConserved(self, compared, conserved, columnsList, moduleInfo):
         """
         Check compared and conserved columns in RowMerger
         """
@@ -217,7 +217,9 @@ class InputINI:
             TPExc.TPRowMergerConservedColumn(conservedList, columnsList, logging)
         
         # add to compare tag columns
-        _ = [comparedList.append(i) for i in constants.COLUMN_NAMES["tags"] if i in columnsList]
+        if "Tagger" in moduleInfo.iniDict.keys():
+            _ = [comparedList.append(constants.TAGS_DICT[i]) for i in constants.TAGS_DICT if moduleInfo.iniDict["Tagger"][i]=="True"]
+            # _ = [comparedList.append(i) for i in constants.COLUMN_NAMES["tags"] if i in columnsList]
 
         # if name is in compare, save it in a parameter
         preNameCompare = [i for i in comparedList if i.lower() in constants.COLUMN_NAMES["name"]]

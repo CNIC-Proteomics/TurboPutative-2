@@ -33,20 +33,24 @@ void TagList::readList(std::filesystem::path relativePath)
     std::ifstream listFile(relativePath);
 
     // object to split lines
-    Tokenizer tokenizer(DELIM);
+    //Tokenizer tokenizer(DELIM);
 
     // start by getting column names
     std::string line;
     std::getline(listFile, line);
-    columns = tokenizer.tokenize(line);
+    //columns = tokenizer.tokenize(line);
     
     // read all compounds
     list.reserve(1000000); // reserve space to avoid memory reallocation
+    //identifier.reserve(1000000);
     while(std::getline(listFile, line))
     {
+        /*
         std::vector<std::string> tokens = tokenizer.tokenize(line);
         list.push_back(tokens[0]);
         identifier.push_back(tokens[1]);
+        */
+       list.push_back(line);
     }
 
     // logging
@@ -120,6 +124,23 @@ std::vector<std::string> TagList::addTag(std::vector<std::string>& compoundNames
     std::stringstream log;
     log << "Tag was added";
     LOG_F(INFO, &(log.str()[0]));
+
+    return tagColumn;
+}
+
+// ADD TAG WITHOUT INDEX (CHECK IF IT IS FASTER)
+std::vector<std::string> TagList::addTagNoIndex(std::vector<std::string>& compoundNamesColumn, std::string tag)
+{
+    std::vector<std::string> tagColumn;
+    tagColumn.reserve(compoundNamesColumn.size());
+
+    for (std::string& compound : compoundNamesColumn)
+    {
+        std::string compoundLower = compound;
+        std::transform(compound.begin(), compound.end(), compoundLower.begin(), [](unsigned char c) { return std::tolower(c); });
+        std::vector<std::string>::iterator it = std::find(list.begin(), list.end(), compoundLower);
+        it == list.end() ? tagColumn.push_back("") : tagColumn.push_back(tag);
+    }
 
     return tagColumn;
 }

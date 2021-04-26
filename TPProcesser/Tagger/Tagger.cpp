@@ -157,11 +157,16 @@ std::vector<std::string> taggerFromList(std::string listFileName, std::string ta
     fullListPath /= listFileName;
     TagList tagList(fullListPath);
 
+    
     // build index in this object
     tagList.buildIndex();
 
     // add tags
     std::vector<std::string> tagColumn = tagList.addTag(compoundNamesColumn, tag);
+    
+    /*
+    std::vector<std::string> tagColumn = tagList.addTagNoIndex(compoundNamesColumn, tag);
+    */
 
     return tagColumn;
 }

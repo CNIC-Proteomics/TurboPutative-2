@@ -11,18 +11,22 @@
 **/*.pdb
 **/*.ilk
 **/*.exe
+**/*.log
 
 #
 # Ignore Python pycache
 #
+/TPPreProcesser/__pycache__/*
 /TPPreProcesser/modules/__pycache__/*
+/TPPostProcesser/__pycache__/*
+/TPPostProcesser/modules/__pycache__/*
 
 #
 # Ignore Processer libraries
 #
 # boost
-/TPProcesser/lib/boost_1_75_0/*
-/TPProcesser/lib/boost_1_75_0.zip
+/TPProcesser/lib/boost_1_76_0/*
+/TPProcesser/lib/boost_1_76_0.zip
 
 # goslin
 /TPProcesser/REname/lib/cppgoslin-1.1.2/examples

@@ -315,7 +315,7 @@ void GenericTableHandler::fuseRows(std::vector<std::string> compareCol, std::vec
             // --> Loop conserved column
             for (int k=0; k<conserveIdx.size(); k++)
             {
-                newRow[conserveIdx[k]] = conserveField(table[conserveIdx[k]][sortedRowIdx[i]], table[conserveIdx[k]][sortedRowIdx[j]]);
+                newRow[conserveIdx[k]] = conserveField(newRow[conserveIdx[k]], table[conserveIdx[k]][sortedRowIdx[j]]);
             }
 
             processedRows.push_back(sortedRowIdx[j]);
@@ -345,7 +345,10 @@ bool GenericTableHandler::compareNames(std::string& name1, std::string& name2)
     std::string name1_rep, name2_rep;
 
     name1_rep = std::regex_replace(name1, re, "");
+    std::transform(name1_rep.begin(), name1_rep.end(), name1_rep.begin(), [](unsigned char c) { return std::tolower(c); });
+
     name2_rep = std::regex_replace(name2, re, "");
+    std::transform(name2_rep.begin(), name2_rep.end(), name2_rep.begin(), [](unsigned char c) { return std::tolower(c); });
 
     bool equal = (name1_rep == name2_rep);
 

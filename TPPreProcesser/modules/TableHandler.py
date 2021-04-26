@@ -85,6 +85,36 @@ class TPTable:
         self.table = self.table.apply(func, axis=0)
 
 
+    def replaceChars(self):
+        """
+        Replace rare characters in name column: 
+            - ± -> +/-
+            - α -> alpha
+            - β -> beta
+            - γ -> gamma
+            - δ -> delta
+            - ω -> omega
+        """
+
+        characterToReplace = {
+            '±': '+/-',
+            'α': 'alpha',
+            'β': 'beta',
+            'γ': 'gamma',
+            'δ': 'delta',
+            'ω': 'omega'
+        }
+
+        # if table has a column with name of the compounds, make there the replace
+        nameColName = [i for i in self.table.columns if i.lower() in constants.COLUMN_NAMES["name"]]
+        if len(nameColName) > 0:
+
+            # make all replacements
+            for i in characterToReplace:
+                self.table[nameColName[0]] = self.table[nameColName[0]].str.replace(i, characterToReplace[i], regex=True)
+
+
+
     def writeTable(self, directory, outName):
         """
         Write output table

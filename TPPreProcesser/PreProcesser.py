@@ -21,9 +21,9 @@ import logging
 import numpy as np
 import pandas as pd
 from configparser import ConfigParser
-# import pdb
 
 # Import project modules
+#import modules.TPExceptions as TPExc
 import modules.TPExceptions as TPExc
 from modules.TableHandler import MSTable, TMTable
 from modules.INIHandler import ModuleInfo, InputINI
@@ -32,7 +32,7 @@ import modules.constants as constants
 
 
 # Main function
-def main(args):
+def main(args, logging):
     """
     Execute main function
     """
@@ -64,10 +64,13 @@ def main(args):
 
         # Remove fields with more than one compound
     colNameCompounds = moduleInfo.getColumnNameFromType(msTable.table.columns, "name")
-    msTable.table[colNameCompounds] = msTable.table[colNameCompounds].str.replace(r"(;|\s/\s)(\n|.)*$", "")
+    msTable.table[colNameCompounds] = msTable.table[colNameCompounds].str.replace(r"(;|\s/\s|\n)(\n|.)*$", "")
 
         # Replace \n by \s
     msTable.removeLineFall()
+
+        # Replace strange characters (±, α, β, γ, δ, ω)
+    msTable.replaceChars()
 
         # strip compound names
     msTable.table[colNameCompounds] = msTable.table[colNameCompounds].str.strip()
@@ -122,7 +125,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # logging information
-    log_file = os.path.join(args.workdir, os.path.splitext(args.infile)[0] + '_PreProcesser_log.txt')
+    log_file = os.path.join(args.workdir, os.path.splitext(args.infile)[0] + '_PreProcesser.log')
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s',
                         datefmt='%m/%d/%Y %I:%M:%S %p',
@@ -131,5 +134,5 @@ if __name__ == "__main__":
 
     # start main function
     logging.info('start script: '+"{0}".format(" ".join([x for x in sys.argv])))
-    main(args)
+    main(args, logging)
     logging.info('end script')

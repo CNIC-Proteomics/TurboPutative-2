@@ -5,9 +5,13 @@
 #include <regex>
 #include <chrono>
 #include <ctime>
+#include <regex>
 
 #include "cppgoslin/cppgoslin.h"
 
+// Constants
+// FAHFA(15:0-(18-O-22:0))
+#define FAHFA_REGEX "^(FAHFA)\\((\\d+):(\\d+)-\\(\\d+-O-(\\d+):(\\d+)\\)\\)"
 
 /* DECLARE FUNCTION */
 std::string getHydroxyl(std::string& compound);
@@ -26,6 +30,11 @@ int  main(int argc, char *argv[])
     auto start = std::chrono::system_clock::now();
     std::time_t start_time = std::chrono::system_clock::to_time_t(start);
     logFile << "** Start script: " << std::ctime(&start_time) << std::endl;
+
+    //
+    // DEFINE REGEX TO DETECT FAHFA
+    //
+    std::regex reFAHFA(FAHFA_REGEX);
 
     //
     // READ COMPOUNDS
@@ -105,7 +114,20 @@ int  main(int argc, char *argv[])
         {
             logFile << "** Error with compound: " << compound << std::endl;
             logFile << "** " << e.what() << '\n';
-            parsedCompoundNames.push_back(compound);
+
+            std::smatch matchObject;
+            if (std::regex_search(compound, matchObject, reFAHFA))
+            {
+                int Catoms = std::stoi(matchObject.str(2)) + std::stoi(matchObject.str(4));
+                int dBonds = std::stoi(matchObject.str(3)) + std::stoi(matchObject.str(5));
+                
+                std::string parsedCompound = "###" + matchObject.str(1) + "(" + std::to_string(Catoms) + ":" + std::to_string(dBonds) + ")" + "###";
+                parsedCompoundNames.push_back(parsedCompound);
+                logFile << "** " << compound << "was manually parsed to " << parsedCompound << std::endl;
+            } else
+            {
+                parsedCompoundNames.push_back(compound);
+            }
         }
     }
 

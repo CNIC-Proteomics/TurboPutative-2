@@ -45,3 +45,14 @@ INFO_FILENAME = "configFile.ini"
 
 # List with possible tags
 TAGS = ["food", "drug", "natural_product", "microbial_compound", "halogenated", "peptide", "plant"]
+
+# From parameter to name of column in tags
+TAGS_DICT = {
+    "food": "Food",
+    "drug": "Drug",
+    "natural_product": "NaturalProduct",
+    "microbial_compound": "Microbial",
+    "halogenated": "Halogenated",
+    "peptide": "Peptide",
+    "plant": "Plant"
+}

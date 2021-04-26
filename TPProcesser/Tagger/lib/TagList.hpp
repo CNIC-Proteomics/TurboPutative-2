@@ -42,6 +42,9 @@ class TagList
 
         // method to add tag --> Returns the tag column (vector of strings) that will be added to the table
         std::vector<std::string> addTag(std::vector<std::string>& compoundNamesColumn, std::string tag);
+
+        // METHOD TO ADD TAG WITHOUT INDEX
+        std::vector<std::string> addTagNoIndex(std::vector<std::string>& compoundNamesColumn, std::string tag);
 };
 
 #endif // TAG_LIST
