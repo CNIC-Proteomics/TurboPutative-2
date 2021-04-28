@@ -3,7 +3,7 @@
 
 #include <string>
 #include <map>
-#include <filesystem>
+//#include <filesystem>
 
 // DEFINE
 #define CONFIG_FILE_NAME "configFile.ini"
@@ -15,8 +15,8 @@ class ConfigReader
 
     // Info to read config file
     std::string configFileName = CONFIG_FILE_NAME;
-    std::filesystem::path workDirPath;
-    std::filesystem::path pathToConfig; // Path to config file set during initialization
+    std::string workDirPath;
+    std::string pathToConfig; // Path to config file set during initialization
     
     // Parameters that will be read
     std::map<std::string, std::string> params;
@@ -24,7 +24,7 @@ class ConfigReader
     public:
 
     // Constructor
-    ConfigReader(std::filesystem::path& workDirPathArg);
+    ConfigReader(std::string& workDirPathArg);
 
     // Read file
     void readConfigFile(std::string module);

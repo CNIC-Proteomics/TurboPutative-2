@@ -1,21 +1,19 @@
 #include <fstream>
 #include <sstream>
-
 #include <string>
 #include <regex>
-
-#include <filesystem>
+//#include <filesystem>
 
 #include "ConfigReader.hpp"
 #include "logging/loguru.hpp"
 
-ConfigReader::ConfigReader(std::filesystem::path& workDirPathArg)
+ConfigReader::ConfigReader(std::string& workDirPathArg)
 {
     // Set work dir path as attribute of ConfigReader
     workDirPath = workDirPathArg;
 
     // Set full path to config file
-    pathToConfig = workDirPath / configFileName;
+    pathToConfig = workDirPath + "/" + configFileName;
 }
 
 void ConfigReader::readConfigFile(std::string module)

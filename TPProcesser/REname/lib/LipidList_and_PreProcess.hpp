@@ -15,7 +15,7 @@ class LipidList
 {
     protected:
     std::vector<std::string> lipidList;
-    std::filesystem::path lipidListPath = LIPID_LIST_PATH;
+    std::string lipidListPath = LIPID_LIST_PATH;
 
     public:
     // Constructor

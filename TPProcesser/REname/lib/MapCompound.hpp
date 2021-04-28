@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include <filesystem>
+// #include <filesystem>
 
 // Constants
 #define MAP_FILE_PATH "./TPProcesser/REname/data/preProcessedNames.tsv"
@@ -55,7 +55,7 @@ class MapCompound
     void mapCompounds (std::vector <std::string>& compoundList);
 
     // Method to write in a file the index of compounds that were mapped
-    void writeIndexResult (std::filesystem::path path);
+    void writeIndexResult (std::string path);
 
     // Method to get position of preprocessed compounds
     std::vector <int>& getPositionResult ();

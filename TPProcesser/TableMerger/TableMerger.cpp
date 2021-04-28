@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <filesystem>
+//#include <filesystem>
 #include <math.h>
 #include <cmath>
 
@@ -28,10 +28,10 @@ std::vector<std::vector<std::string>> combineRows(std::vector<int>& matches);
 int main(int argc, char *argv[])
 {
     // get path to working directory
-    std::filesystem::path workDirPath = argv[1];
+    std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru
-    std::string logFilePath = (workDirPath / "TableMerger.log").string();    // Add file and convert to string
+    std::string logFilePath = workDirPath + "/TableMerger.log";    // Add file and convert to string
     char* logFilePathPtr = &logFilePath[0]; // Get pointer to first character (received by loguru)
 
     loguru::init(argc, argv);
@@ -216,8 +216,8 @@ int main(int argc, char *argv[])
     //
     // WRITE TABLE
     //
-    std::filesystem::path outfilePath = workDirPath;
-    outfilePath /= config.getValue("outfile");
+    std::string outfilePath = workDirPath;
+    outfilePath += "/" + config.getValue("outfile");
 
     std::ofstream myFile(outfilePath);
 

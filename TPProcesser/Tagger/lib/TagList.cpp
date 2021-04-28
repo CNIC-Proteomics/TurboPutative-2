@@ -6,7 +6,7 @@
 #include <cctype>
 #include <math.h>
 #include <map>
-#include <filesystem>
+// #include <filesystem>
 
 #include "../../lib/logging/loguru.hpp"
 
@@ -15,7 +15,7 @@
 
 #define DELIM "\t"
 
-TagList::TagList(std::filesystem::path relativePath)
+TagList::TagList(std::string relativePath)
 {
     // std::filesystem::path relativePath = strRelativePath;
 
@@ -23,7 +23,7 @@ TagList::TagList(std::filesystem::path relativePath)
     readList(relativePath);
 }
 
-void TagList::readList(std::filesystem::path relativePath)
+void TagList::readList(std::string relativePath)
 {
     // logging
     std::stringstream log;

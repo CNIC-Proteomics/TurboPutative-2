@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sstream>
-#include <filesystem>
+//#include <filesystem>
 #include <string>
 #include <vector>
 #include <regex>
@@ -36,10 +36,10 @@ int main(int argc, char *argv[])
 {
 
     // get path to working directory
-    std::filesystem::path workDirPath = argv[1];
+    std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru
-    std::string logFilePath = (workDirPath / "Tagger.log").string();    // Add file and convert to string
+    std::string logFilePath = workDirPath + "/Tagger.log";    // Add file and convert to string
     char* logFilePathPtr = &logFilePath[0]; // Get pointer to first character (received by loguru)
 
     loguru::init(argc, argv);
@@ -137,8 +137,8 @@ int main(int argc, char *argv[])
     }
 
     // write table
-    std::filesystem::path outfilePath = workDirPath;
-    outfilePath /= config.getValue("outfile");
+    std::string outfilePath = workDirPath;
+    outfilePath += "/" + config.getValue("outfile");
     msTable.writeTable(outfilePath);
 
     return 0;
@@ -153,8 +153,8 @@ std::vector<std::string> taggerFromList(std::string listFileName, std::string ta
     LOG_F(INFO, &(log.str()[0]));
 
     // read file with list of compounds
-    std::filesystem::path fullListPath = LIST_FOLDER;
-    fullListPath /= listFileName;
+    std::string fullListPath = LIST_FOLDER;
+    fullListPath += "/" + listFileName;
     TagList tagList(fullListPath);
 
     

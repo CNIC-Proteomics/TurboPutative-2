@@ -1,6 +1,6 @@
 #include <vector>
 #include <string>
-#include <filesystem>
+// #include <filesystem>
 
 // Use Loguru (https://github.com/emilk/loguru) for logging
 #include "../lib/logging/loguru.hpp"
@@ -19,10 +19,10 @@
 int main(int argc, char *argv[])
 {
     // get path to working directory
-    std::filesystem::path workDirPath = argv[1];
+    std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru
-    std::string logFilePath = (workDirPath / "RowMerger.log").string();    // Add file and convert to string
+    std::string logFilePath = workDirPath + "/RowMerger.log";    // Add file and convert to string
     char* logFilePathPtr = &logFilePath[0]; // Get pointer to first character (received by loguru)
 
     loguru::init(argc, argv);
@@ -54,8 +54,8 @@ int main(int argc, char *argv[])
     //
     // WRITE TABLE
     //
-    std::filesystem::path outfilePath = workDirPath;
-    outfilePath /= config.getValue("outfile");
+    std::string outfilePath = workDirPath;
+    outfilePath += "/" + config.getValue("outfile");
     msTable.writeTable(outfilePath);
 
     return 0;

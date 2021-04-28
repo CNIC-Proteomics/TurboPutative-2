@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <filesystem>
+// #include <filesystem>
 #include <regex> // boost regex is no necessary; We should apply boost only to regexObject
 
 #include "logging/loguru.hpp"
@@ -20,9 +20,9 @@ GenericTableHandler::GenericTableHandler()
 }
 */
 
-void GenericTableHandler::readTable(std::filesystem::path workDirPath, std::string inFileName)
+void GenericTableHandler::readTable(std::string workDirPath, std::string inFileName)
 {
-    std::filesystem::path fullPath = workDirPath / inFileName;
+    std::string fullPath = workDirPath + "/" + inFileName;
 
     // logging
     std::stringstream log;
@@ -154,7 +154,7 @@ void GenericTableHandler::removeIndexes(std::vector<int>& indexes)
     LOG_F(INFO, &(log.str()[0]));
 }
 
-void GenericTableHandler::writeTable(std::filesystem::path outfilePath)
+void GenericTableHandler::writeTable(std::string outfilePath)
 {
     // logging
     std::stringstream log;

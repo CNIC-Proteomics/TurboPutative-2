@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sstream>
-#include <filesystem>
+// #include <filesystem>
 #include <string>
 #include <vector>
 #include <regex>
@@ -29,10 +29,10 @@
 int main(int argc, char *argv[])
 {
     // get path to working directory
-    std::filesystem::path workDirPath = argv[1];
+    std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru
-    std::string logFilePath = (workDirPath / "REname1.log").string();    // Add file and convert to string
+    std::string logFilePath = workDirPath + "/REname1.log";    // Add file and convert to string
     char* logFilePathPtr = &logFilePath[0]; // Get pointer to first character (received by loguru)
 
     loguru::init(argc, argv);
@@ -86,8 +86,8 @@ int main(int argc, char *argv[])
     //
     // WRITE PRE-TABLE OF RENAME (GOSLIN WILL BE APPLIED)
     //
-    std::filesystem::path outFilePath = workDirPath;
-    outFilePath /= RENAME1_OUT_TABLE;
+    std::string outFilePath = workDirPath + "/";
+    outFilePath += RENAME1_OUT_TABLE;
     msTable.writeTable(outFilePath);
 
 
@@ -118,14 +118,14 @@ int main(int argc, char *argv[])
     preProcessLipids.preProcessLipids(goslinLipids);
     
     // --> SAVE NAME OF COMPOUNDS TO APPLY TPGOSLIN
-    std::ofstream compoundFile(workDirPath / "compound.txt");
+    std::ofstream compoundFile(workDirPath + "/compound.txt");
     for (std::string& compoundName : goslinLipids)
     {
         compoundFile << compoundName << std::endl;
     }
 
     // --> SAVE INDEX OF THESE COMPOUNDS
-    std::ofstream indexFile(workDirPath / "compound_index.txt");
+    std::ofstream indexFile(workDirPath + "/compound_index.txt");
     for (int& idx : goslinLipidsIdx)
     {
         indexFile << idx << std::endl;

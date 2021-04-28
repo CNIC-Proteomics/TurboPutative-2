@@ -1,6 +1,6 @@
 #include <fstream>
 #include <sstream>
-#include <filesystem>
+// #include <filesystem>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -133,14 +133,14 @@ int MapCompound::getPosInMap (std::string compound, int startIndex, int endIndex
     return posInMap;
 }
 
-void MapCompound::writeIndexResult (std::filesystem::path path)
+void MapCompound::writeIndexResult (std::string path)
 {
     // logging
     std::stringstream log;
     log << "Write index of mapped compounds";
     LOG_F(INFO, &(log.str()[0]));
 
-    std::ofstream myFile (path / OUTFILE_NAME);
+    std::ofstream myFile (path + "/" + OUTFILE_NAME);
 
     for (int& i : positionResult)
     {

@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <filesystem>
+//#include <filesystem>
 
 // Class used to read and handle MS table
 class GenericTableHandler
@@ -27,7 +27,7 @@ class GenericTableHandler
     // GenericTableHandler();
 
     // Table reader
-    void readTable(std::filesystem::path workDirPath, std::string fileName);
+    void readTable(std::string workDirPath, std::string fileName);
 
     // Method to get column
     std::vector<std::string>& getColumn(std::string colName);
@@ -57,7 +57,7 @@ class GenericTableHandler
     void fuseRows(std::vector<std::string> compareCol, std::vector<std::string> conserveCol, std::string name="");
 
     // Method to write output table
-    void writeTable(std::filesystem::path outfilePath);
+    void writeTable(std::string outfilePath);
 
 };
 

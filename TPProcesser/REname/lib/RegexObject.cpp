@@ -2,7 +2,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
-#include <filesystem>
+// #include <filesystem>
 #include "boost/regex.hpp"
 #include "RegexObject.hpp"
 #include "../../lib/logging/loguru.hpp"
@@ -17,7 +17,7 @@ void RegexObject::readRegexINI()
     log << "Reading regex.ini";
     LOG_F(INFO, &(log.str()[0]));
 
-    std::filesystem::path regexINIPath = REGEX_INI_PATH;
+    std::string regexINIPath = REGEX_INI_PATH;
 
     // open regex.ini file and extract information
     std::ifstream regexFile(regexINIPath);

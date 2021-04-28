@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <filesystem>
+// #include <filesystem>
 
 class TagList
 {
@@ -25,7 +25,7 @@ class TagList
         //std::map<std::string, int> indexMap;
 
         // method to read list file and get list
-        void readList(std::filesystem::path relativePath);
+        void readList(std::string relativePath);
 
         // method to get position when sorting alphabetically
         int getSortedPos(std::string compound);
@@ -35,7 +35,7 @@ class TagList
     public:
 
         // constructor
-        TagList(std::filesystem::path strRelativePath);
+        TagList(std::string strRelativePath);
 
         // method to get index and indexMap
         void buildIndex();

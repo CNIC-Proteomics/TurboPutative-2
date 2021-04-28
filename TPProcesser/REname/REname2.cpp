@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sstream>
-#include <filesystem>
+// #include <filesystem>
 #include <string>
 #include <vector>
 #include <regex>
@@ -32,10 +32,10 @@
 int main(int argc, char *argv[])
 {
     // get path to working directory
-    std::filesystem::path workDirPath = argv[1];
+    std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru
-    std::string logFilePath = (workDirPath / "REname2.log").string();    // Add file and convert to string
+    std::string logFilePath = workDirPath + "/REname2.log";    // Add file and convert to string
     char* logFilePathPtr = &logFilePath[0]; // Get pointer to first character (received by loguru)
 
     loguru::init(argc, argv);
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
     std::vector<int> goslinLipidsIdx={};
 
     // READ COMPOUND NAMES
-    std::ifstream parsedCompoundFile(workDirPath/"parsed_compound.txt");
+    std::ifstream parsedCompoundFile(workDirPath+"/parsed_compound.txt");
     std::string line;
     while(std::getline(parsedCompoundFile, line))
     {
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     }
 
     // READ INDEX
-    std::ifstream compoundIdxFile(workDirPath/"compound_index.txt");
+    std::ifstream compoundIdxFile(workDirPath+"/compound_index.txt");
     line = "";
     while(std::getline(compoundIdxFile, line))
     {
@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
     // READ INDEX OF COMPOUNDS THAT WERE PREPROCESSED
     //
     std::vector<int> mappedIndex;
-    std::ifstream mappedIndexFile (workDirPath / "mappedIndex.txt");
+    std::ifstream mappedIndexFile (workDirPath + "/mappedIndex.txt");
 
     line = "";
     while(std::getline(mappedIndexFile, line))
@@ -180,7 +180,7 @@ int main(int argc, char *argv[])
     //
     // WRITE TABLE
     //
-    std::filesystem::path outfilePath = workDirPath;
-    outfilePath /= config.getValue("outfile");
+    std::string outfilePath = workDirPath;
+    outfilePath += "/" + config.getValue("outfile");
     msTable.writeTable(outfilePath);
 }
