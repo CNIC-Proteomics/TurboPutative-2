@@ -15,7 +15,8 @@
 #include "../lib/GenericTableHandler.hpp"
 
 #include "./lib/RemoveRow.hpp"
-#include "./lib/SynonymsReader.hpp"
+#include "./lib/MapCompound.hpp"
+//#include "./lib/SynonymsReader.hpp"
 #include "./lib/LipidList_and_PreProcess.hpp"
 
 // DEFINES
@@ -60,7 +61,18 @@ int main(int argc, char *argv[])
     std::vector<int> removeIndex = removeRowObject.getIndexes(msTable.getColumn(config.getValue("column_name")));
     msTable.removeIndexes(removeIndex);
 
+    //
+    // MAP COMPOUND NAMES TO PREPROCESSED LIST
+    //
+    std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
+    MapCompound mapCompound;
+    mapCompound.readMapFile();
+    mapCompound.readIndex();
+    mapCompound.mapCompounds(compoundNamesColumn);
+    mapCompound.writeIndexResult(workDirPath);
 
+
+    /*
     //
     // SYNONYMS
     //
@@ -68,6 +80,7 @@ int main(int argc, char *argv[])
     std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
     SynonymsReader synonymsReader;
     synonymsReader.replace(compoundNamesColumn);
+    */
 
 
     //
@@ -84,7 +97,7 @@ int main(int argc, char *argv[])
 
     // --> FIND GOSLIN LIPID
     LipidList lipidListObject;
-    std::vector<bool> isGoslinLipidVector = lipidListObject.findLipids(compoundNamesColumn);
+    std::vector<bool> isGoslinLipidVector = lipidListObject.findLipids(compoundNamesColumn, mapCompound.getPositionResult());
 
     
     // --> EXTRACT AND PRE-PROCESS TO BE ABLE TO APPLY GOSLIN

@@ -49,7 +49,20 @@ int  main(int argc, char *argv[])
         compoundNames.push_back(line);
     }
 
-    logFile << "** compound.txt was read" << std::endl;
+    //
+    // READ INDEX OF THESE COMPOUNDS
+    //
+    std::vector<int> compoundIndexes;
+    compoundIndexes.reserve(compoundNames.size());
+
+    std::ifstream idxFile(workDirPath+"\\compound_index.txt");
+    line = "";
+    while(std::getline(idxFile, line))
+    {
+        compoundIndexes.push_back(std::stoi(line));
+    }
+
+    logFile << "** compound.txt and compound_index.txt were read" << std::endl;
 
     //
     // APPLY GOSLIN
@@ -57,8 +70,10 @@ int  main(int argc, char *argv[])
     logFile << "** Applying Goslin" << std::endl;
 
     std::vector<std::string> parsedCompoundNames;
+    std::vector<int> parsedCompoundIndexes;
 
     LipidParser lipid_parser;
+    int count = 0;
     for (std::string& compound : compoundNames)
     {
         try
@@ -104,10 +119,11 @@ int  main(int argc, char *argv[])
             std::string hydroxyl = getHydroxyl(compound);
             std::string methyl = getMethyl(compound);
 
-            std::string parsedCompound = "###" + header_group + "(" + bond_type + std::to_string(carbon_atoms) + 
-                                         ":" + std::to_string(double_bonds) + methyl + hydroxyl + ")" + "###";
+            std::string parsedCompound = header_group + "(" + bond_type + std::to_string(carbon_atoms) + 
+                                         ":" + std::to_string(double_bonds) + methyl + hydroxyl + ")";
         
             parsedCompoundNames.push_back(parsedCompound);
+            parsedCompoundIndexes.push_back(compoundIndexes[count]);
 
         }
         catch(const std::exception& e)
@@ -121,14 +137,16 @@ int  main(int argc, char *argv[])
                 int Catoms = std::stoi(matchObject.str(2)) + std::stoi(matchObject.str(4));
                 int dBonds = std::stoi(matchObject.str(3)) + std::stoi(matchObject.str(5));
                 
-                std::string parsedCompound = "###" + matchObject.str(1) + "(" + std::to_string(Catoms) + ":" + std::to_string(dBonds) + ")" + "###";
+                std::string parsedCompound = matchObject.str(1) + "(" + std::to_string(Catoms) + ":" + std::to_string(dBonds) + ")";
                 parsedCompoundNames.push_back(parsedCompound);
+                parsedCompoundIndexes.push_back(compoundIndexes[count]);
                 logFile << "** " << compound << "was manually parsed to " << parsedCompound << std::endl;
             } else
             {
                 parsedCompoundNames.push_back(compound);
             }
         }
+        count++;
     }
 
     //
@@ -142,6 +160,16 @@ int  main(int argc, char *argv[])
         parsedFile << parsedCompound << std::endl;
     }
 
+    //
+    // APPEND TO mappedIndex.txt THE INDEX OF COMPOUNDS PARSED BY TPGOSLIN
+    //
+    std::ofstream mappedIndexFile (workDirPath+"\\mappedIndex.txt", std::ios_base::app);
+
+    for (int& i : parsedCompoundIndexes)
+    {
+        mappedIndexFile << i << std::endl;
+    }
+
 
     //
     // END SCRIPT
@@ -151,7 +179,6 @@ int  main(int argc, char *argv[])
     logFile << "** End script: " << std::ctime(&end_time) << std::endl;
 
     return 0;
-    
 }
 
 /* FUNCTION DEFINITION */

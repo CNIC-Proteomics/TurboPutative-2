@@ -59,7 +59,7 @@ def main(args, logging):
 
     # --> Save xlsx file with all tables
     logging.info("Generating combined table")
-    resultWriter.saveCombinedTable()
+    #resultWriter.saveCombinedTable()
 
     logging.info("Final tables were generated")
 
@@ -67,32 +67,8 @@ def main(args, logging):
     #
     # Zip results
     #
-
     resultWriter.zipResults()
 
-    """
-    #
-    # Sort .log, .ini and .tsv files
-    #
-
-    # --> ini files
-    extension = "ini"
-    iniMover = ExtensionMover(extension, args.workdir, logging)
-    iniMover.makeDir()
-    iniMover.moveFiles()
-
-    # --> log files
-    extension = "log"
-    logMover = ExtensionMover(extension, args.workdir, logging)
-    logMover.makeDir()
-    logMover.moveFiles()
-
-    # --> tsv files
-    extension = "tsv"
-    tsvMover = ExtensionMover(extension, args.workdir, logging)
-    tsvMover.makeDir()
-    tsvMover.moveFiles()
-    """
 
 if __name__ == "__main__":
 

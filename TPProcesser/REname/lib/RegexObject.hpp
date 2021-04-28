@@ -17,7 +17,7 @@ class RegexObject
     void readRegexINI();
 
     // Method to apply regex to compounds
-    void applyRegex(std::vector<std::string>& compoundNamesColumn);
+    void applyRegex(std::vector<std::string>& compoundNamesColumn, std::vector<int>& mappedIndex);
 };
 
 #endif

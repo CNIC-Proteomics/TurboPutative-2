@@ -22,7 +22,7 @@ class ResultWriter:
         self.infile = infile
         self.combinedOutFileName = os.path.splitext(infile)[0] + "_AllResults.xlsx"
         self.combinedOutFileFullPath = os.path.join(self.workDir, self.combinedOutFileName)
-        self.writer = pd.ExcelWriter(self.combinedOutFileFullPath, engine="openpyxl")
+        # self.writer = pd.ExcelWriter(self.combinedOutFileFullPath, engine="openpyxl")
 
         self.tableFileNames = [] # list with the name of tables added (.tsv here)
         self.finalFileNames = [] # list with name of final files (.xlsx here)
@@ -46,7 +46,7 @@ class ResultWriter:
         self.writeTable(fileName, df) if writeApart else self.finalFileNames.append(fileName)
         
         # add to combined results
-        self.addSheet(fileName, df)
+        # self.addSheet(fileName, df)
 
         self.logging.info(f"Table was added: {fileName}")
 
@@ -66,6 +66,8 @@ class ResultWriter:
             df = pd.read_csv(os.path.join(self.workDir, fileName), sep="\t")
         
         self.tableFileNames.append(fileName)
+
+        self.logging.info(f"Table read")
         
         return df
     
@@ -74,9 +76,13 @@ class ResultWriter:
         """
         Write table in a isolated file (xlsx)
         """
+        self.logging.info(f"Writing table: {fileName}")
+        
         outFileName = f"{os.path.splitext(fileName)[0]}_{os.path.splitext(self.infile)[0]}.xlsx"
         df.to_excel(os.path.join(self.workDir, outFileName), index=False, engine="openpyxl")
         self.finalFileNames.append(outFileName)
+        
+        self.logging.info(f"Table written")
     
 
     def addSheet(self, fileName, df):

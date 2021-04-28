@@ -16,6 +16,7 @@ __status__ = "Development"
 import time; start_time=time.time()
 ti = lambda: f"{str(round(time.time()-start_time, 3))}s"
 
+
 # Import modules
 import os
 import sys
@@ -84,6 +85,7 @@ def main(args):
             os.remove(os.path.join(args.workdir, "compound.txt"))
             os.remove(os.path.join(args.workdir, "parsed_compound.txt"))
             os.remove(os.path.join(args.workdir, "compound_index.txt"))
+            os.remove(os.path.join(args.workdir, "mappedIndex.txt"))
 
         if module == '3': # RowMerger
             logging.info(f"{ti()} - Start RowMerger")

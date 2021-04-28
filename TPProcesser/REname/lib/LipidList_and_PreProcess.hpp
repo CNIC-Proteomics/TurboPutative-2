@@ -22,7 +22,7 @@ class LipidList
     LipidList();
 
     // Method to identify lipids in the list
-    std::vector<bool> findLipids(std::vector<std::string>& compoundNames);
+    std::vector<bool> findLipids(std::vector<std::string>& compoundNames, std::vector<int>& mappedLipids);
 };
 
 

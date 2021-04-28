@@ -61,24 +61,20 @@ void RegexObject::readRegexINI()
 }
 
 
-void RegexObject::applyRegex(std::vector<std::string>& compoundNamesColumn)
+void RegexObject::applyRegex(std::vector<std::string>& compoundNamesColumn, std::vector<int>& mappedIndex)
 {
     // logging
     std::stringstream log;
     log << "Applying regular expressions";
     LOG_F(INFO, &(log.str()[0]));
 
+    int index = -1;
     for (std::string& compound : compoundNamesColumn)
     {
-        // If they have tag (###), remove it
-        if (boost::regex_search(compound, boost::regex("^###[^#]*###$")))
-        {
-            compound.replace(compound.begin(), compound.begin()+3, "");
-            compound.replace(compound.end()-3, compound.end(), "");
-            continue;
-        }
+        // Apply regular expression to compounds that were not mapped nor processed by Goslin
+        index++;
+        if (std::find(mappedIndex.begin(), mappedIndex.end(), index) != mappedIndex.end()) continue;
 
-        // Apply regular expression
         for (int  i=0; i<REs.size(); i++)
         {
             compound = boost::regex_replace(compound, REs[i], replaces[i], boost::format_perl);
@@ -86,7 +82,7 @@ void RegexObject::applyRegex(std::vector<std::string>& compoundNamesColumn)
 
         // Strip compound name to remove whitespace
         compound = boost::regex_replace(compound, boost::regex("^\\s+"), "", boost::format_perl);
-        compound = boost::regex_replace(compound, boost::regex("\\s+$"), "", boost::format_perl);
+        compound = boost::regex_replace(compound, boost::regex("\\s+$"), "", boost::format_perl);       
     }
 
     log.str("");

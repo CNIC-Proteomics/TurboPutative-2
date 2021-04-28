@@ -55,14 +55,13 @@ int main(int argc, char *argv[])
     // get the name of the column containing compound names and its index
     std::string compoundColumnName = config.getValue("column_name");
     std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
-    // int compoundColumnNameIdx = msTable.getIndexOfColumn(compoundColumnName);
 
 
     //
     // READ PARSED COMPOUND NAMES AND THEIR INDEX. THEN, REPLACE COMPOUNDS IN THE TABLE (USING THAT INDEX)
     //
     std::vector<std::string> parsedCompounds={};
-    std::vector<int> goslinLipidsIdx={}; 
+    std::vector<int> goslinLipidsIdx={};
 
     // READ COMPOUND NAMES
     std::ifstream parsedCompoundFile(workDirPath/"parsed_compound.txt");
@@ -92,26 +91,39 @@ int main(int argc, char *argv[])
     // END GOSLIN //
     //            //
 
+    //
+    // READ INDEX OF COMPOUNDS THAT WERE PREPROCESSED
+    //
+    std::vector<int> mappedIndex;
+    std::ifstream mappedIndexFile (workDirPath / "mappedIndex.txt");
+
+    line = "";
+    while(std::getline(mappedIndexFile, line))
+    {
+        mappedIndex.push_back(std::stoi(line));
+    }
 
     //
     // APPLY REGULAR EXPRESSIONS
     //
     RegexObject REObject;
     REObject.readRegexINI();
-    REObject.applyRegex(compoundNamesColumn);
+    REObject.applyRegex(compoundNamesColumn, mappedIndex);
 
     //
     // SORT PEPTIDES
     //
     SortPeptide sortPeptideObject(config.getValue("aminoacid_separator"));
-    sortPeptideObject.sortAA(compoundNamesColumn);
+    sortPeptideObject.sortAA(compoundNamesColumn, mappedIndex);
 
+    /*
     //
     // APPLY SYNONYMS
     //
     // std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
     SynonymsReader synonymsReader;
     synonymsReader.replace(compoundNamesColumn);
+    */
 
     //
     // FUSE ROWS WITH SAME NAME AND EXPERIMENTAL MASS PRESERVING THE REST

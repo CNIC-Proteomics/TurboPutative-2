@@ -13,15 +13,20 @@ SortPeptide::SortPeptide(std::string sep)
     separator = sep;
 }
 
-void SortPeptide::sortAA(std::vector<std::string>& compoundNamesColumn)
+void SortPeptide::sortAA(std::vector<std::string>& compoundNamesColumn, std::vector<int>& mappedIndex)
 {
     // logging
     std::stringstream log;
     log << "Sorting peptides";
     LOG_F(INFO, &(log.str()[0]));
 
+    int index=-1;
     for (std::string& compound : compoundNamesColumn)   
     {
+        index++;
+        // if index has been mapped, continue
+        if (std::find(mappedIndex.begin(), mappedIndex.end(), index) != mappedIndex.end()) continue;
+        
         std::string compound_tmp = compound;
 
         int firstPos = 0;

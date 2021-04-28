@@ -28,7 +28,7 @@ LipidList::LipidList()
 }
 
 
-std::vector<bool> LipidList::findLipids(std::vector<std::string>& compoundNames)
+std::vector<bool> LipidList::findLipids(std::vector<std::string>& compoundNames, std::vector<int>& mappedLipids)
 {
     std::stringstream log;
     log << "Find Goslin lipids";
@@ -36,17 +36,24 @@ std::vector<bool> LipidList::findLipids(std::vector<std::string>& compoundNames)
 
     std::vector<bool> isGoslinLipidVector;
 
-    for (std::string& compound : compoundNames)
+    for (int i=0; i<compoundNames.size(); i++)
     {
         bool isGoslinLipid = false;
-        for (std::string& lipid : lipidList)
+
+        // If lipid was mapped in preProcessing, do not check if it is Goslin lipid
+        std::vector<int>::iterator it = std::find(mappedLipids.begin(), mappedLipids.end(), i);
+        
+        if (it == mappedLipids.end())
         {
-            boost::regex lipidRE("^" + lipid, boost::regex::icase);
-            
-            if (boost::regex_search(compound, lipidRE))
+            for (std::string& lipid : lipidList)
             {
-                isGoslinLipid = true;
-                break;
+                boost::regex lipidRE("^" + lipid, boost::regex::icase);
+                
+                if (boost::regex_search(compoundNames[i], lipidRE))
+                {
+                    isGoslinLipid = true;
+                    break;
+                }
             }
         }
 

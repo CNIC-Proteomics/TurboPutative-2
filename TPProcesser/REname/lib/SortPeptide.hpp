@@ -24,7 +24,7 @@ class SortPeptide
     SortPeptide(std::string sep);
     
     // Method to sort peptide amino acids
-    void sortAA(std::vector<std::string>& compoundNamesColumn);
+    void sortAA(std::vector<std::string>& compoundNamesColumn, std::vector<int>& mappedIndex);
 
 };
 
