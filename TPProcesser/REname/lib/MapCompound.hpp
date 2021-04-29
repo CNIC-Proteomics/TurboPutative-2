@@ -6,8 +6,10 @@
 // #include <filesystem>
 
 // Constants
-#define MAP_FILE_PATH "./TPProcesser/REname/data/preProcessedNames.tsv"
-#define INDEX_FILE_PATH "./TPProcesser/REname/data/preProcessedNamesIndex.tsv"
+// #define MAP_FILE_PATH "./TPProcesser/REname/data/preProcessedNames.tsv"
+#define MAP_FILE_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/preProcessedNames.tsv"
+// #define INDEX_FILE_PATH "./TPProcesser/REname/data/preProcessedNamesIndex.tsv"
+#define INDEX_FILE_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/preProcessedNamesIndex.tsv"
 
 class MapCompound
 {

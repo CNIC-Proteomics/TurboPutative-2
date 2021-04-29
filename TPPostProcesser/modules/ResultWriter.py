@@ -109,7 +109,7 @@ class ResultWriter:
         """
         self.logging.info("Make a zip with all result files")
 
-        zipName = f"{os.path.splitext(self.infile)[0]}_Results.zip"
+        zipName = f"TurboPutative_results.zip"
         fullPath = os.path.join(self.workDir, zipName)
 
         with zipfile.ZipFile(fullPath, 'w') as myzip:

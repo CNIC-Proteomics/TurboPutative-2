@@ -9,7 +9,8 @@
 
 #include "boost/regex.hpp"
 
-#define LIPID_LIST_PATH ".\\TPProcesser\\REname\\data\\goslinLipids.txt"
+// #define LIPID_LIST_PATH "./TPProcesser/REname/data/goslinLipids.txt"
+#define LIPID_LIST_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/goslinLipids.txt"
 
 class LipidList
 {

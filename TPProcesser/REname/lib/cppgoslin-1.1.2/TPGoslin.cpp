@@ -42,7 +42,7 @@ int  main(int argc, char *argv[])
     std::vector<std::string> compoundNames;
     compoundNames.reserve(20000);
 
-    std::ifstream compoundFile(workDirPath+"\\compound.txt");
+    std::ifstream compoundFile(workDirPath+"/compound.txt");
     std::string line;
     while(std::getline(compoundFile, line))
     {
@@ -55,7 +55,7 @@ int  main(int argc, char *argv[])
     std::vector<int> compoundIndexes;
     compoundIndexes.reserve(compoundNames.size());
 
-    std::ifstream idxFile(workDirPath+"\\compound_index.txt");
+    std::ifstream idxFile(workDirPath+"/compound_index.txt");
     line = "";
     while(std::getline(idxFile, line))
     {
@@ -153,7 +153,7 @@ int  main(int argc, char *argv[])
     // WRITE PARSED COMPOUNDS
     //
 
-    std::ofstream parsedFile (workDirPath+"\\parsed_compound.txt");
+    std::ofstream parsedFile (workDirPath+"/parsed_compound.txt");
 
     for (std::string& parsedCompound : parsedCompoundNames)
     {
@@ -163,7 +163,7 @@ int  main(int argc, char *argv[])
     //
     // APPEND TO mappedIndex.txt THE INDEX OF COMPOUNDS PARSED BY TPGOSLIN
     //
-    std::ofstream mappedIndexFile (workDirPath+"\\mappedIndex.txt", std::ios_base::app);
+    std::ofstream mappedIndexFile (workDirPath+"/mappedIndex.txt", std::ios_base::app);
 
     for (int& i : parsedCompoundIndexes)
     {

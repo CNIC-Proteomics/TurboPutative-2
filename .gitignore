@@ -12,6 +12,13 @@
 **/*.ilk
 **/*.exe
 **/*.log
+TPProcesser/REname/REname1
+TPProcesser/REname/REname2
+TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin
+TPProcesser/RowMerger/RowMerger
+TPProcesser/TableMerger/TableMerger
+TPProcesser/Tagger/Tagger
+
 
 #
 # Ignore Python pycache
@@ -27,6 +34,7 @@
 # boost
 /TPProcesser/lib/boost_1_76_0/*
 /TPProcesser/lib/boost_1_76_0.zip
+/TPProcesser/lib/boost_1_61_0/*
 
 # goslin
 /TPProcesser/REname/lib/cppgoslin-1.1.2/examples

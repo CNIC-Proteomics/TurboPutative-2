@@ -201,7 +201,8 @@ class InputINI:
         if len(comparedList)==1 and comparedList[0]=='':
             comparedList = [
                 [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mass"]][0],
-                "Adduct"
+                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["adduct"]][0],
+                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mzError"]][0]
             ]
 
         # if conserved is empty, add all columns (excluding compared)
@@ -218,7 +219,7 @@ class InputINI:
         
         # add to compare tag columns
         if "Tagger" in moduleInfo.iniDict.keys():
-            _ = [comparedList.append(constants.TAGS_DICT[i]) for i in constants.TAGS_DICT if moduleInfo.iniDict["Tagger"][i]=="True"]
+            _ = [comparedList.append(constants.TAGS_DICT[i]) for i in constants.TAGS_DICT if moduleInfo.iniDict["Tagger"][i]=="true"]
             # _ = [comparedList.append(i) for i in constants.COLUMN_NAMES["tags"] if i in columnsList]
 
         # if name is in compare, save it in a parameter

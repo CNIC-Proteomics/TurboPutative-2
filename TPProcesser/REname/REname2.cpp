@@ -14,7 +14,7 @@
 #include "../lib/ConfigReader.hpp"
 #include "../lib/GenericTableHandler.hpp"
 
-#include "./lib/SynonymsReader.hpp"
+// #include "./lib/SynonymsReader.hpp"
 #include "./lib/LipidList_and_PreProcess.hpp"
 #include "./lib/RegexObject.hpp"
 #include "./lib/SortPeptide.hpp"

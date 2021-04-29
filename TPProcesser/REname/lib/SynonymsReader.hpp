@@ -1,7 +1,7 @@
 #ifndef SYNONYMS_READER
 #define SYNONYMS_READER
 
-#include <filesystem>
+// #include <filesystem>
 #include <vector>
 #include <string>
 
@@ -11,7 +11,7 @@ class SynonymsReader
 {
     protected:
     std::vector<std::string> key, value;
-    std::filesystem::path synonymPath = SYNONYM_PATH;
+    std::string synonymPath = SYNONYM_PATH;
 
     public:
     // constructor

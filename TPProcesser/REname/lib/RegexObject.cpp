@@ -1,3 +1,4 @@
+//#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -8,7 +9,7 @@
 #include "../../lib/logging/loguru.hpp"
 
 
-#define REGEX_INI_PATH "TPProcesser\\REname\\data\\regex.ini"
+#define REGEX_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regex.ini"
 
 void RegexObject::readRegexINI()
 {
@@ -27,6 +28,7 @@ void RegexObject::readRegexINI()
 
     while(std::getline(regexFile, line))
     {
+        //std::cout << line << std::endl;
         boost::smatch matchObject;
 
         // skip commented lines

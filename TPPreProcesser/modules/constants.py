@@ -23,9 +23,11 @@ COLUMN_NAMES = {
     "name": ["name"], 
     "mass": ["experimental mass", "apex m/z", "mz", "m/z"],
     "rt": ["rt [min]", "rt[s]", "rt[sec]", "rt", "retention time"],
-    "tags": ["Food", "Drug", "Microbial", "Halogenated", "Peptide", "Plant", "NaturalProduct"],
+    "tags": ["food", "drug", "microbial", "nalogenated", "peptide", "plant", "naturalproduct"],
     "chemical_formula": ["chemical Formula", "formula"],
-    "inchi_key": ["Inchikey"]
+    "inchi_key": ["inchikey"],
+    "adduct": ["adduct"],
+    "mzError": ["mz error (ppm)", "mzerror"]
     }
 
 # Column required to input MS table (used to find header)

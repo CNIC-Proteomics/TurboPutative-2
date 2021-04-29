@@ -19,6 +19,7 @@
 int main(int argc, char *argv[])
 {
     // get path to working directory
+
     std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru

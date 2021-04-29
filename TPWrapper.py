@@ -25,20 +25,21 @@ import argparse
 import subprocess
 
 # TurboPutative modules
-sys.path.append(os.path.join(".", "TPPreProcesser"))
-sys.path.append(os.path.join(".", "TPPostProcesser"))
+scriptPath = os.path.dirname(__file__)
+sys.path.append(os.path.join(scriptPath, "TPPreProcesser"))
+sys.path.append(os.path.join(scriptPath, "TPPostProcesser"))
 from TPPreProcesser.PreProcesser import main as PreProcesser
 from TPPostProcesser.PostProcesser import main as PostProcesser
 from TPPostProcesser.modules.ExtensionMover import ExtensionMover
 
 # Constants
 modulePath = {
-    'Tagger': os.path.join(".", "TPProcesser", "Tagger", "Tagger.exe"),
-    'REname1': os.path.join(".", "TPProcesser", "REname", "REname1.exe"),
-    'TPGoslin': os.path.join(".", "TPProcesser", "REname", "lib", "cppgoslin-1.1.2", "TPGoslin.exe"),
-    'REname2': os.path.join(".", "TPProcesser", "REname", "REname2.exe"),
-    'RowMerger': os.path.join(".", "TPProcesser", "RowMerger", "RowMerger.exe"),
-    'TableMerger': os.path.join(".", "TPProcesser", "TableMerger", "TableMerger.exe")
+    'Tagger': os.path.join(scriptPath, "TPProcesser", "Tagger", "Tagger"),
+    'REname1': os.path.join(scriptPath, "TPProcesser", "REname", "REname1"),
+    'TPGoslin': os.path.join(scriptPath, "TPProcesser", "REname", "lib", "cppgoslin-1.1.2", "TPGoslin"),
+    'REname2': os.path.join(scriptPath, "TPProcesser", "REname", "REname2"),
+    'RowMerger': os.path.join(scriptPath, "TPProcesser", "RowMerger", "RowMerger"),
+    'TableMerger': os.path.join(scriptPath, "TPProcesser", "TableMerger", "TableMerger")
 }
 
 # Main
@@ -61,24 +62,24 @@ def main(args):
 
         if module == '1': # Tagger
             logging.info(f"{ti()} - Start Tagger")
-            subprocess.run([modulePath['Tagger'], args.workdir], shell=True, check=True)
+            subprocess.run([modulePath['Tagger'], args.workdir])#, shell=True, check=True)
             logging.info(f"{ti()} - End Tagger")
 
         if module == '2': # REname
 
             # REname1
             logging.info(f"{ti()} - Start REname1")
-            subprocess.run([modulePath['REname1'], args.workdir], shell=True, check=True)
+            subprocess.run([modulePath['REname1'], args.workdir])#, shell=True, check=True)
             logging.info(f"{ti()} - End REname1")
 
             # TPGoslin
             logging.info(f"{ti()} - Start TPGoslin")
-            subprocess.run([modulePath['TPGoslin'], args.workdir], shell=True, check=True)
+            subprocess.run([modulePath['TPGoslin'], args.workdir])#, shell=True, check=True)
             logging.info(f"{ti()} - End TPGoslin")
 
             # REname2
             logging.info(f"{ti()} - Start REname2")
-            subprocess.run([modulePath['REname2'], args.workdir], shell=True, check=True)
+            subprocess.run([modulePath['REname2'], args.workdir])# , shell=True, check=True)
             logging.info(f"{ti()} - End REname2")
 
             # Remove files
@@ -89,12 +90,12 @@ def main(args):
 
         if module == '3': # RowMerger
             logging.info(f"{ti()} - Start RowMerger")
-            subprocess.run([modulePath['RowMerger'], args.workdir], shell=True, check=True)
+            subprocess.run([modulePath['RowMerger'], args.workdir])#, shell=True, check=True)
             logging.info(f"{ti()} - End RowMerger")
 
         if module == '4': # TableMerger
             logging.info(f"{ti()} - Start TableMerger")
-            subprocess.run([modulePath['TableMerger'], args.workdir], shell=True, check=True)
+            subprocess.run([modulePath['TableMerger'], args.workdir])#, shell=True, check=True)
             logging.info(f"{ti()} - End TableMerger")
 
     #

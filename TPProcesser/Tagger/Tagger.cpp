@@ -18,7 +18,8 @@
 // DEFINES
 #define MODULE "Tagger"
 
-#define LIST_FOLDER ".\\TPProcesser\\Tagger\\data"
+//#define LIST_FOLDER "./TPProcesser/Tagger/data"
+#define LIST_FOLDER "./src/TurboPutative-2.0-built/TPProcesser/Tagger/data"
 #define FOOD_LIST_FILENAME "food_list.tsv"
 #define DRUG_LIST_FILENAME "drug_list.tsv"
 #define MICROBIAL_LIST_FILENAME "microbial_list.tsv"
@@ -64,7 +65,7 @@ int main(int argc, char *argv[])
     std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
 
     // check tag by tag
-    if (config.getValue("food") == "True")
+    if (config.getValue("food") == "true")
     {
         // tag from list
         std::vector<std::string> tagColumnList;
@@ -85,35 +86,35 @@ int main(int argc, char *argv[])
         msTable.addColumn(tagColumnCombined, compoundColumnNameIdx+1, "Food");
     }
 
-    if (config.getValue("drug") == "True")
+    if (config.getValue("drug") == "true")
     {
         std::vector<std::string> tagColumn;
         tagColumn = taggerFromList(DRUG_LIST_FILENAME, "Drug", compoundNamesColumn);
         msTable.addColumn(tagColumn, compoundColumnNameIdx+1, "Drug");
     }
 
-    if (config.getValue("microbial_compound") == "True")
+    if (config.getValue("microbial_compound") == "true")
     {
         std::vector<std::string> tagColumn;
         tagColumn = taggerFromList(MICROBIAL_LIST_FILENAME, "MC", compoundNamesColumn);
         msTable.addColumn(tagColumn, compoundColumnNameIdx+1, "Microbial");
     }
 
-    if (config.getValue("natural_product") == "True")
+    if (config.getValue("natural_product") == "true")
     {
         std::vector<std::string> tagColumn;
         tagColumn = taggerFromList(NATURAL_PRODUCT_LIST_FILENAME, "NP", compoundNamesColumn);
         msTable.addColumn(tagColumn, compoundColumnNameIdx+1, "NaturalProduct");
     }
 
-    if (config.getValue("plant") == "True")
+    if (config.getValue("plant") == "true")
     {
         std::vector<std::string> tagColumn;
         tagColumn = taggerFromList(PLANT_LIST_FILENAME, "Plant", compoundNamesColumn);
         msTable.addColumn(tagColumn, compoundColumnNameIdx+1, "Plant");
     }
 
-    if (config.getValue("halogenated") == "True")
+    if (config.getValue("halogenated") == "true")
     {
         std::vector<std::string> tagColumn;
         
@@ -129,7 +130,7 @@ int main(int argc, char *argv[])
         msTable.addColumn(tagColumn, compoundColumnNameIdx+1, "Halogenated");
     }
 
-    if (config.getValue("peptide") == "True")
+    if (config.getValue("peptide") == "true")
     {
         std::vector<std::string> tagColumn;
         tagColumn = taggerFromRegex(config.getValue("peptide_regex"), "Pep", compoundNamesColumn, true);
