@@ -172,7 +172,7 @@ class InputINI:
                 moduleInfo.iniDict[module]["peptide_regex"] = self.config[module]["peptide_regex"]
             
             if module == "REname":
-                moduleInfo.iniDict[module]["separator"] = self.config[module]["separator"]
+                # moduleInfo.iniDict[module]["separator"] = self.config[module]["separator"]
                 moduleInfo.iniDict[module]["aminoacid_separator"] = self.config[module]["aminoacid_separator"]
                 moduleInfo.iniDict[module]["remove_row"] = self.config[module]["remove_row"]
             
