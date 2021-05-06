@@ -167,9 +167,14 @@ class InputINI:
                 for tag in constants.TAGS:
                     moduleInfo.iniDict[module][tag] = self.config[module][tag]
 
-                # transfer other information of interest
-                moduleInfo.iniDict[module]["halogenated_regex"] = self.config[module]["halogenated_regex"]
-                moduleInfo.iniDict[module]["peptide_regex"] = self.config[module]["peptide_regex"]
+                # transfer other information of interest (REGEX)
+                userHalogenatedRegex = self.config[module]["halogenated_regex"]
+                halogenatedRegex = userHalogenatedRegex if len(userHalogenatedRegex)!=0 else constants.DEFAULT_HALOGENATED_REGEX
+                moduleInfo.iniDict[module]["halogenated_regex"] = halogenatedRegex
+
+                userPeptideRegex = self.config[module]["peptide_regex"]
+                peptideRegex = userPeptideRegex if len(userPeptideRegex)!=0 else constants.DEFAULT_PEPTIDE_REGEX
+                moduleInfo.iniDict[module]["peptide_regex"] = peptideRegex
             
             if module == "REname":
                 # moduleInfo.iniDict[module]["separator"] = self.config[module]["separator"]
