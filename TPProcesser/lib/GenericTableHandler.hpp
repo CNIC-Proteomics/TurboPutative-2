@@ -31,6 +31,7 @@ class GenericTableHandler
 
     // Method to get column
     std::vector<std::string>& getColumn(std::string colName);
+    std::vector <std::string> getColumnCopy(std::string colName);
 
     // Method to get specific value
     std::string getValue(int& row, int& col);

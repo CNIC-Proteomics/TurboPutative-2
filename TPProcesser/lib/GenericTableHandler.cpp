@@ -80,6 +80,20 @@ std::vector<std::string>& GenericTableHandler::getColumn(std::string colName)
     return column;
 }
 
+std::vector<std::string> GenericTableHandler::getColumnCopy(std::string colName)
+{
+    // Get iterator to position of that colname
+    std::vector<std::string>::iterator it = std::find(columns.begin(), columns.end(), colName);
+
+    // Get index of that name
+    int colNameIndex = it - columns.begin();
+
+    // Get and return column 
+    std::vector<std::string> column = table[colNameIndex];
+
+    return column;
+}
+
 std::string GenericTableHandler::getValue(int& row, int& col)
 {
     return table[col][row];

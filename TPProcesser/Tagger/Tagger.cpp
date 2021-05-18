@@ -18,7 +18,7 @@
 // DEFINES
 #define MODULE "Tagger"
 
-//#define LIST_FOLDER "./TPProcesser/Tagger/data"
+// #define LIST_FOLDER "./TPProcesser/Tagger/data"
 #define LIST_FOLDER "./src/TurboPutative-2.0-built/TPProcesser/Tagger/data"
 #define FOOD_LIST_FILENAME "food_list.tsv"
 #define DRUG_LIST_FILENAME "drug_list.tsv"
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     int compoundColumnNameIdx = msTable.getIndexOfColumn(compoundColumnName);
 
     // get the column with the name of the compounds
-    std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
+    std::vector<std::string> compoundNamesColumn = msTable.getColumnCopy(compoundColumnName);
 
     // check tag by tag
     if (config.getValue("food") == "true")
