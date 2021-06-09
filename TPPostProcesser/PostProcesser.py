@@ -47,14 +47,14 @@ def main(args, logging):
     resultWriter = ResultWriter(args.workdir, args.infile, logging)
 
     # --> Add input tables tables
-    resultWriter.addTable(args.infile, False) # add infile
+    resultWriter.addTable(args.infile, None) # add infile
     
-    if "4" in args.workflow: resultWriter.addTable(args.tmfile, False) # add tmTable if module 4
+    if "4" in args.workflow: resultWriter.addTable(args.tmfile, None) # add tmTable if module 4
 
     # --> Add and write output tables
     for i, mod in enumerate(args.workflow):
         fileName = f"{str(i+1)}_{numToMod[mod]}.tsv"
-        resultWriter.addTable(fileName, True)
+        resultWriter.addTable(fileName, numToMod[mod])
 
 
     # --> Save xlsx file with all tables
