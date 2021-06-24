@@ -225,3 +225,67 @@ class TPRowMergerConservedColumn(Exception, TPErrorClassBase):
         TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
         self.writeErrorLog()
         self.exitProgram()
+
+
+class TPTaggerError(Exception, TPErrorClassBase):
+    """
+    Error raised when there is an error in Tagger execution
+    """
+
+    def __init__(self, workdir):
+        
+        self.code = 20001
+        self.msg = f"TPTaggerError: Error raised in Tagger execution"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
+class TPREnameError(Exception, TPErrorClassBase):
+    """
+    Error raised when there is an error in REname execution
+    """
+
+    def __init__(self, subModule, workdir):
+        
+        self.code = 30001
+        self.msg = f"TPREnameError: Error raised in REname execution (sub-module: {subModule})"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
+class TPRowMergerError(Exception, TPErrorClassBase):
+    """
+    Error raised when there is an error in Tagger execution
+    """
+
+    def __init__(self, workdir):
+        
+        self.code = 40001
+        self.msg = f"TPRowMergerError: Error raised in RowMerger execution"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
+class TPTableMergerError(Exception, TPErrorClassBase):
+    """
+    Error raised when there is an error in Tagger execution
+    """
+
+    def __init__(self, workdir):
+        
+        self.code = 50001
+        self.msg = f"TPTableMergerError: Error raised in TableMerger execution"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()

@@ -29,6 +29,7 @@ scriptPath = os.path.dirname(__file__)
 sys.path.append(os.path.join(scriptPath, "TPPreProcesser"))
 sys.path.append(os.path.join(scriptPath, "TPPostProcesser"))
 from TPPreProcesser.PreProcesser import main as PreProcesser
+import TPPreProcesser.modules.TPExceptions as TPExc
 from TPPostProcesser.PostProcesser import main as PostProcesser
 from TPPostProcesser.modules.ExtensionMover import ExtensionMover
 
@@ -63,25 +64,57 @@ def main(args):
 
         if module == '1': # Tagger
             logging.info(f"{ti()} - Start Tagger")
-            subprocess.run([modulePath['Tagger'], args.workdir])#, shell=True, check=True)
+            
+            try:
+                subprocess.run([modulePath['Tagger'], args.workdir], check=True)#, shell=True)
+            
+            except Exception as e:
+                logging.exception("Error raised when executing Tagger. Traceback:")
+                raise TPExc.TPTaggerError(args.workdir)
+
             logging.info(f"{ti()} - End Tagger")
+
 
         if module == '2': # REname
 
             # REname1
             logging.info(f"{ti()} - Start REname1")
-            subprocess.run([modulePath['REname1'], args.workdir])#, shell=True, check=True)
+
+            try:
+                subprocess.run([modulePath['REname1'], args.workdir], check=True)#, shell=True)
+            
+            except Exception as e:
+                logging.exception("Error raised when executing REname1. Traceback:")
+                raise TPExc.TPREnameError("REname1", args.workdir)
+            
             logging.info(f"{ti()} - End REname1")
+
 
             # TPGoslin
             logging.info(f"{ti()} - Start TPGoslin")
-            subprocess.run([modulePath['TPGoslin'], args.workdir])#, shell=True, check=True)
+
+            try:
+                subprocess.run([modulePath['TPGoslin'], args.workdir], check=True)#, shell=True)
+            
+            except Exception as e:
+                logging.exception("Error raised when executing TPGoslin. Traceback:")
+                raise TPExc.TPREnameError("TPGoslin", args.workdir)
+
             logging.info(f"{ti()} - End TPGoslin")
+
 
             # REname2
             logging.info(f"{ti()} - Start REname2")
-            subprocess.run([modulePath['REname2'], args.workdir])# , shell=True, check=True)
+
+            try:
+                subprocess.run([modulePath['REname2'], args.workdir], check=True)# , shell=True)
+            
+            except Exception as e:
+                logging.exception("Error raised when executing REname2. Traceback:")
+                raise TPExc.TPREnameError("REname2", args.workdir)
+
             logging.info(f"{ti()} - End REname2")
+
 
             # Remove files
             os.remove(os.path.join(args.workdir, "compound.txt"))
@@ -89,14 +122,30 @@ def main(args):
             os.remove(os.path.join(args.workdir, "compound_index.txt"))
             os.remove(os.path.join(args.workdir, "mappedIndex.txt"))
 
+
         if module == '3': # RowMerger
             logging.info(f"{ti()} - Start RowMerger")
-            subprocess.run([modulePath['RowMerger'], args.workdir])#, shell=True, check=True)
+
+            try:
+                subprocess.run([modulePath['RowMerger'], args.workdir], check=True)#, shell=True)
+            
+            except Exception as e:
+                logging.exception("Error raised when executing RowMerger. Traceback:")
+                raise TPExc.TPRowMergerError(args.workdir)
+
             logging.info(f"{ti()} - End RowMerger")
+
 
         if module == '4': # TableMerger
             logging.info(f"{ti()} - Start TableMerger")
-            subprocess.run([modulePath['TableMerger'], args.workdir])#, shell=True, check=True)
+
+            try:
+                subprocess.run([modulePath['TableMerger'], args.workdir], check=True)#, shell=True)
+            
+            except Exception as e:
+                logging.exception("Error raised when executing TableMerger. Traceback:")
+                raise TPExc.TPTableMergerError(args.workdir)
+            
             logging.info(f"{ti()} - End TableMerger")
 
     #
