@@ -1,130 +1,227 @@
 #!/usr/bin/env python
 
 # -*- coding: utf-8 -*-
-
 import sys
+import os
+import json
+import logging
 
-class TPFormatError(Exception):
+# Import TP modules
+import modules.constants as constants
+
+class TPErrorClassBase:
     """
-    Error raised user table has wrong format
+    Base class inherited by TurboPutative error classes
     """
 
-    def __init__(self, inFormat, accFormat, logging):
+    def __init__(self, workdir, msg, code):
 
-        logging.info(f"TPFormatError: {inFormat if len(inFormat) > 0 else 'No'} format was specified (accepted: {', '.join([i for i in accFormat])}).")
-        self.code = 10000
-        sys.exit(self.code)
+        self.workdir = workdir
+        #self.logging = logging
+        
+        self.errorInfo = {
+            'msg': msg,
+            'code': code
+        }
 
 
-class TPOpenError(Exception):
+    def writeErrorLog(self):
+        """
+        Write error.log file with error information used by the server
+        """
+        
+        errorFile = os.path.join(self.workdir, "error.log")
+
+        with open(errorFile, 'w') as f:
+            json.dump(self.errorInfo, f)
+        
+        logging.info('error.log file was written')
+
+
+    def exitProgram(self):
+        """
+        Print last logging and exit program
+        """
+
+        logging.info(self.errorInfo['msg'])
+        logging.info(f"Leaving execution with code {self.errorInfo['code']}")
+        sys.exit(self.errorInfo['code'])
+
+
+class TPSizeTableError(Exception, TPErrorClassBase):
+    """
+    Error raised when input table has more than x rows
+    and more than y columns
+    """
+
+    def __init__(self, shape, fullName, workdir):
+
+        self.code = 10001
+        self.msg = f"TPSizeTableError: Table dimensions are exceeded (maximum allowed: {constants.MAX_ROWS}x{constants.MAX_COLS}; {fullName}: {shape[0]}x{shape[1]})"
+
+        # Initialize base class and go out
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
+class TPFormatError(Exception, TPErrorClassBase):
+    """
+    Error raised when user table has wrong format
+    """
+
+    def __init__(self, inFormat, accFormat, workdir):
+
+        self.code = 10002
+        self.msg = f"TPFormatError: {inFormat if len(inFormat) > 0 else 'No'} format was specified (accepted formats: {', '.join([i for i in accFormat])})"
+
+        # Initialize base class and go out
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
+class TPOpenError(Exception, TPErrorClassBase):
     """
     Error raised when table cannot be openned
     """
 
-    def __init__(self):
+    def __init__(self, fullName, workdir):
 
-        self.code = 10001
-        sys.exit(self.code)
+        self.code = 10003
+        self.msg = f"TPOpenError: An error occurred when openning {fullName}"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
 
 
-class TPHeaderError(Exception):
+class TPHeaderError(Exception, TPErrorClassBase):
     """
     Error raised when header is not found in user table
     """
 
-    def __init__(self, requiredColumns, maxRowsToFindHeader, inFileName, logging):
+    def __init__(self, fullName, workdir):
 
-        logging.info(f"TPHeaderError: Header was not found in {inFileName}.")
-        self.code = 10002
-        sys.exit(self.code)
+        self.code = 10004
+        self.msg = f"TPHeaderError: Header was not found in {fullName}"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
 
 
-class TPColumnError(Exception):
+class TPColumnError(Exception, TPErrorClassBase):
     """
     Error raised when certain column is not present
     """
 
-    def __init__(self, missingColumn, possibleNames, logging):
+    def __init__(self, missingColumn, possibleNames, fullName, workdir):
 
-        logging.info(f"TPColumnError: {missingColumn} column was not found. Possible names: {', '.join(possibleNames)}.")
-        self.code = 10003
-        sys.exit(self.code)
+        self.code = 10005
+        self.msg = f"TPColumnError: {missingColumn} column was not found in {fullName} (possible names: {', '.join(possibleNames)})"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
 
 
-class TPWriteError(Exception):
+class TPWriteError(Exception, TPErrorClassBase):
     """
     Error raised when exception during file writing 
     """
 
-    def __init__(self, fullPath, logging):
+    def __init__(self, outName, workdir):
 
         # logging.info(f"TPWriteError: An error occurred when writing {fullPath}")
-        self.code = 10004
-        sys.exit(self.code)
+        self.code = 10006
+        self.msg = f"TPWriteError: An error occurred when writing {outName}"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
 
 
-class TPAdditionalInfoTableError(Exception):
+class TPAdditionalInfoTableError(Exception, TPErrorClassBase):
     """
-    Error raised when Table Merger table with additional information has no header and number of rows different from 3
+    Error raised when Table Merger table with additional information has 
+    no header and number of rows different from 3
     """
 
-    def __init__(self, nCols, logging):
+    def __init__(self, fullName, workdir):
 
-        logging.info(f"""
-        TPAdditionalInfoTableError: TableMerger table with additional information has no header and 
-        it contains {nCols} columns (it should contain 3 columns if there is no header).
-        """)
-        self.code = 10005
-        sys.exit(self.code)
+        self.code = 10007
+        self.msg = f"TPAdditionalInfoTableError: No header detected in {fullName}. Hence, it must contain 3 columns ('Feature', 'Experimental mass', 'RT [min]')"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
 
 
-class TPDataTypeError(Exception):
+class TPDataTypeError(Exception, TPErrorClassBase):
     """
     Error raised when converting second column of TableMerger column with additional information
     """
 
-    def __init__(self):
+    def __init__(self, fullName, workdir):
 
-        self.code = 10006
-        sys.exit(self.code)
+        self.code = 10008
+        self.msg = f"TPDataTypeError: Experimental mass column in {fullName} could not be converted to float64 data type"
 
-class TMTableColumnError(Exception):
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
+class TMTableColumnError(Exception, TPErrorClassBase):
     """
     Error raised when missing column containing experimental mass in TMTable
     """
 
-    def __init__(self, possibleNames, logging):
+    def __init__(self, possibleNames, fullName, workdir):
 
-        logging.info(f"""
-        TMTableColumnError: Column containing experimental mass was not found. Possible names: {', '.join(possibleNames)}.
-        """)
-        self.code = 10007
-        sys.exit(self.code)
+        self.code = 10009
+        self.msg = f"TMTableColumnError: Column containing experimental mass was not found in {fullName}. Possible names: {', '.join(possibleNames)}"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
 
 
-class TPRowMergerComparedColumn(Exception):
+class TPRowMergerComparedColumn(Exception, TPErrorClassBase):
     """
     Error raised when compared column is not in table
     """
 
-    def __init__(self, comparedList, columnsList):
+    def __init__(self, missingCol, columnsList, fullName, workdir):
 
-        logging.info(f"""
-        TPRowMergerComparedColumn: Not all compared column ({', '.join(comparedList)}) are in input table.
-        """)
-        self.code = 10008
-        sys.exit(self.code)
+        self.code = 10010
+        self.msg = f"TPRowMergerComparedColumn: Missing compared column ({', '.join(missingCol)}) in {fullName}"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
 
 
-class TPRowMergerConservedColumn(Exception):
+class TPRowMergerConservedColumn(Exception, TPErrorClassBase):
     """
     Error raised when compared column is not in table
     """
 
-    def __init__(self, conservedList, columnsList, logging):
+    def __init__(self, missingCol, columnsList, fullName, workdir):
 
-        logging.info(f"""
-        TPRowMergerConservedColumn: Not all conserved column ({', '.join(conservedList)}) are in input table.
-        """)
-        self.code = 10008
-        sys.exit(self.code)
+        self.code = 10011
+        self.msg = f"TPRowMergerConservedColumn: Missing conserved column ({', '.join(missingCol)}) in {fullName}"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()

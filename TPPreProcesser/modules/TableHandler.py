@@ -30,7 +30,11 @@ class TPTable:
         self.tableColumnsLow = None
         self.tableFormat = None
         self.tableName = None
+        self.fullName = None
         self.tablePath = infilePath
+
+        # get working directory (used by exceptions)
+        self.workdir = os.path.dirname(infilePath)
 
         # parse name
         self.parseName()
@@ -45,7 +49,7 @@ class TPTable:
         self.tableFormat = os.path.splitext(self.fullName)[1]
 
         if self.tableFormat not in self.acceptedFormat:
-            raise TPExc.TPFormatError(self.tableFormat, self.acceptedFormat, logging)
+            raise TPExc.TPFormatError(self.tableFormat, self.acceptedFormat, self.workdir)
 
 
     def openTable(self, headerRow):
@@ -65,12 +69,16 @@ class TPTable:
                 self.table = pd.read_csv(self.tablePath, sep="\t", header=headerRow)
         
         except:
-            logging.exception(f"TPOpenError: An error occurred when openning {self.tableName}. Traceback:")
-            raise TPExc.TPOpenError()
+            logging.exception(f"TPOpenError: An error occurred when openning {self.fullName}. Traceback:")
+            raise TPExc.TPOpenError(self.fullName, self.workdir)
 
         # Remove rows and columns containing NA only
         self.table.dropna(axis=0, how="all", inplace=True)
         self.table.dropna(axis=1, how="all", inplace=True)
+
+        # check that table does not exceed maximum number of rows and columns
+        if self.table.shape[0] > constants.MAX_ROWS or self.table.shape[1] > constants.MAX_COLS:
+            raise TPExc.TPSizeTableError(self.table.shape, self.fullName, self.workdir)
 
 
     def removeLineFall(self):
@@ -127,7 +135,7 @@ class TPTable:
         
         except:
             logging.exception(f"TPWriteError: An error occurred when writing {fullPath}. Traceback:")
-            raise TPExc.TPWriteError(fullPath, logging)
+            raise TPExc.TPWriteError(outName, self.workdir)
         
         logging.info(f"{outName} was written successfully: {fullPath}")
 
@@ -171,7 +179,7 @@ class MSTable(TPTable):
             
         # if header was not found in different tries, raise error. Else, log it
         if not headerFound:
-            raise TPExc.TPHeaderError(self.requiredColumns, self.maxRowsToFindHeader, self.tableName, logging)
+            raise TPExc.TPHeaderError(self.fullName, self.workdir)
         else:
             logging.info(f"MSTable was read successfully: {self.tablePath}")
 
@@ -209,7 +217,7 @@ class TMTable(TPTable):
         
             # if number of columns is not 3, raise error
             if self.table.shape[1] != 3:
-                raise TPExc.TPAdditionalInfoTableError(self.table.shape[1], logging)
+                raise TPExc.TPAdditionalInfoTableError(self.fullName, self.workdir)
 
             # set column names
             self.table.columns = ['Feature', 'Experimental mass', 'RT [min]']
@@ -221,7 +229,7 @@ class TMTable(TPTable):
         massColumnBool = [i.lower().strip() in massPossibleNames for i in self.table.columns]
 
         if not any(massColumnBool):
-            raise TPExc.TMTableColumnError(constants.COLUMN_NAMES["mass"], logging)
+            raise TPExc.TMTableColumnError(constants.COLUMN_NAMES["mass"], self.fullName, self.workdir)
 
         self.massColName = self.table.columns[massColumnBool][:1] # Take only the first column
 
@@ -231,11 +239,9 @@ class TMTable(TPTable):
 
         except:
             logging.exception(f"""
-            TPDataTypeError: TableMerger table with additional information has no header. Despite having three
-            columns, the second one could not be converted to float64 data type. Please, check table format and
-            column names. Traceback:
+            TPDataTypeError: Experimental mass column in TMTable could not be converted to float64 data type. Traceback:
             """)
-            raise TPExc.TPDataTypeError()
+            raise TPExc.TPDataTypeError(self.fullName, self.workdir)
         
         logging.info(f"TMTable was read successfully: {self.tablePath}")
 

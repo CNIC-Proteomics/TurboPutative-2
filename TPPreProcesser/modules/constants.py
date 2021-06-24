@@ -18,6 +18,10 @@ OUTNAME_TMTABLE = "TM_table.tsv"
 # Format accepted by TurboPutative
 ACCEPTED_FORMAT = [".xls", ".xlsx", ".tsv"]
 
+# Maximum accepted number of rows and columns
+MAX_ROWS = 50000
+MAX_COLS = 100
+
 # Possible names in different columns (all in lower case)
 COLUMN_NAMES = {
     "name": ["name"], 

@@ -23,7 +23,6 @@ import pandas as pd
 from configparser import ConfigParser
 
 # Import project modules
-#import modules.TPExceptions as TPExc
 import modules.TPExceptions as TPExc
 from modules.TableHandler import MSTable, TMTable
 from modules.INIHandler import ModuleInfo, InputINI
@@ -46,11 +45,8 @@ def main(args, logging):
     # read table
     msTable.readTable()
 
-    # Replace \n by \s
-    # msTable.removeLineFall()
-
     # test input table
-    msTableTester = MSTableTester(args.workflow)
+    msTableTester = MSTableTester(args)
 
     # test column names
     msTableTester.testColumns(msTable.tableColumnsLow)
@@ -95,7 +91,7 @@ def main(args, logging):
         tmTable.writeTable(args.workdir, constants.OUTNAME_TMTABLE)
 
     # read user ini file and transfer parts of its content to c++ ini file
-    userINI = InputINI(args.workdir)
+    userINI = InputINI(args)
     moduleInfo = userINI.transferToModuleInfo(moduleInfo, msTable.table.columns.to_list())
 
     # Write info file

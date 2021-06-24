@@ -10,10 +10,15 @@ import modules.constants as constants
 
 class MSTableTester:
 
-    def __init__(self, workflow):
+    def __init__(self, args):
         
-        self.workflow = list(workflow)
+        self.workflow = list(args.workflow)
         self.columns = constants.COLUMN_NAMES
+
+        # Variables used if exception raised
+        self.fullName = args.infile
+        self.workdir = args.workdir
+
     
     def testColumns(self, tableColumnsLower):
         """
@@ -27,16 +32,16 @@ class MSTableTester:
 
                 testingColumn = "name"
                 if not any([i.lower() in tableColumnsLower for i in self.columns[testingColumn]]):
-                    raise TPExc.TPColumnError(testingColumn, self.columns[testingColumn], logging)
+                    raise TPExc.TPColumnError(testingColumn, self.columns[testingColumn], self.fullName, self.workdir)
             
             elif module in ['2', '3', '4']: # REname, RowMerger --> name and mass // TableMerger --> mass (put together)
 
                 testingColumn = "name"
                 if not any([i.lower() in tableColumnsLower for i in self.columns[testingColumn]]):
-                    raise TPExc.TPColumnError(testingColumn, self.columns[testingColumn], logging)
+                    raise TPExc.TPColumnError(testingColumn, self.columns[testingColumn], self.fullName, self.workdir)
 
                 testingColumn = "mass"
                 if not any([i.lower() in tableColumnsLower for i in self.columns[testingColumn]]):
-                    raise TPExc.TPColumnError(testingColumn, self.columns[testingColumn], logging)
+                    raise TPExc.TPColumnError(testingColumn, self.columns[testingColumn], self.fullName, self.workdir)
         
         logging.info("MSTable columns checked successfully")

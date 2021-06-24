@@ -7,6 +7,7 @@ import os
 import logging
 from configparser import ConfigParser
 
+import modules.TPExceptions as TPExc
 import modules.constants as constants
 
 
@@ -141,10 +142,14 @@ class InputINI:
     Class to open and handle input ini file with user information
     """
 
-    def __init__(self, workdir):
+    def __init__(self, args):
         
-        self.fullPath = os.path.join(workdir, constants.INPUT_INI_FILENAME)
+        self.fullPath = os.path.join(args.workdir, constants.INPUT_INI_FILENAME)
         self.config = self.readINI()
+
+        # Attributes used of exception raised
+        self.workdir = args.workdir
+        self.fullName = args.infile
     
     def readINI(self):
         """
@@ -205,10 +210,13 @@ class InputINI:
         # if nothing is added to compare, add by default (default in JavaScript will overwrite this default...)
         if len(comparedList)==1 and comparedList[0]=='':
             comparedList = [
-                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mass"]][0],
-                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["adduct"]][0],
-                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mzError"]][0]
+                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mass"]],
+                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["adduct"]],
+                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mzError"]]
             ]
+
+            # comparedList will not be empty (in TableTester we check that mass is present if RowMerger is selected)
+            comparedList = [i[0] for i in comparedList if len(i)>0]
 
         # if conserved is empty, add all columns (excluding compared)
         if len(conservedList)==1 and conservedList[0]=='':
@@ -216,11 +224,13 @@ class InputINI:
 
 
         # check that all columns are in the table
-        if any([i not in columnsList for i in comparedList]):
-            TPExc.TPRowMergerComparedColumn(comparedList, columnsList, logging)
+        missingComparedCol = [i for i in comparedList if i not in columnsList]
+        if len(missingComparedCol)>0: #any([i not in columnsList for i in comparedList]):
+            TPExc.TPRowMergerComparedColumn(missingComparedCol, columnsList, self.fullName, self.workdir)
         
-        if any([i not in columnsList for i in conservedList]):
-            TPExc.TPRowMergerConservedColumn(conservedList, columnsList, logging)
+        missingConservedCol = [i for i in conservedList if i not in columnsList]
+        if len(missingConservedCol)>0: #any([i not in columnsList for i in conservedList]):
+            TPExc.TPRowMergerConservedColumn(missingConservedCol, columnsList, self.fullName, self.workdir)
         
         # add to compare tag columns
         if "Tagger" in moduleInfo.iniDict.keys():

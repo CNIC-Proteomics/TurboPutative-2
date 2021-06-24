@@ -54,6 +54,7 @@ def main(args):
     logging.info(f"{ti()} - Start PreProcesser")
     PreProcesser(args, logging)
     logging.info(f"{ti()} - End PreProcesser")
+    # sys.exit(0)
 
     #
     # TurboPutative Processing (C++)
