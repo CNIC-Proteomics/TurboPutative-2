@@ -43,3 +43,4 @@ TPProcesser/Tagger/Tagger
 
 # Ignore tests
 /test/*
+/TPProcesser/REname/data/TPMapTable_valid/*

@@ -14,8 +14,6 @@
 #include "../lib/ConfigReader.hpp"
 #include "../lib/GenericTableHandler.hpp"
 
-// #include "./lib/SynonymsReader.hpp"
-#include "./lib/LipidList_and_PreProcess.hpp"
 #include "./lib/RegexObject.hpp"
 #include "./lib/SortPeptide.hpp"
 
@@ -115,15 +113,7 @@ int main(int argc, char *argv[])
     //
     SortPeptide sortPeptideObject(config.getValue("aminoacid_separator"));
     sortPeptideObject.sortAA(compoundNamesColumn, mappedIndex);
-
-    /*
-    //
-    // APPLY SYNONYMS
-    //
-    // std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
-    SynonymsReader synonymsReader;
-    synonymsReader.replace(compoundNamesColumn);
-    */
+    
 
     //
     // FUSE ROWS WITH SAME NAME AND EXPERIMENTAL MASS PRESERVING THE REST

@@ -9,7 +9,7 @@
 
 #include "../TPProcesser/REname/lib/RegexObject.hpp"
 #include "../TPProcesser/REname/lib/SortPeptide.hpp"
-#include "../TPProcesser/REname/lib/SynonymsReader.hpp"
+// #include "../TPProcesser/REname/lib/SynonymsReader.hpp"
 
 // Use Loguru (https://github.com/emilk/loguru) for logging
 #include "../TPProcesser/lib/logging/loguru.hpp"
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     // Read original compounds processed by dbGenerator1
     std::cout << "** Reading " << INFILE_ORIGINAL << std::endl;
     std::vector<std::string> compoundNames = {};
-    std::ifstream originalFile(workDirPath + "\\" + INFILE_ORIGINAL);
+    std::ifstream originalFile(workDirPath + "/" + INFILE_ORIGINAL);
 
     std::string line;
     while (std::getline(originalFile, line))
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
     // READ COMPOUND NAMES
     std::cout << "** Reading " << INFILE_NAME << std::endl;
-    std::ifstream parsedCompoundFile(workDirPath + "\\" + INFILE_NAME);
+    std::ifstream parsedCompoundFile(workDirPath + "/" + INFILE_NAME);
     line = "";
     while(std::getline(parsedCompoundFile, line))
     {
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 
     // READ INDEX
     std::cout << "** Reading " << INFILE_IDX << std::endl;
-    std::ifstream compoundIdxFile(workDirPath + "\\" + INFILE_IDX);
+    std::ifstream compoundIdxFile(workDirPath + "/" + INFILE_IDX);
     line = "";
     while(std::getline(compoundIdxFile, line))
     {
@@ -63,36 +63,40 @@ int main(int argc, char *argv[])
 
     // REPLACE
     std::cout << "** Introduce lipids processed by Goslin" << std::endl;
-    std::regex re1("^###"), re2("###$");
     for (int i=0; i<goslinLipidsIdx.size(); i++)
     {
         int idx = goslinLipidsIdx[i];
-        std::string name = std::regex_replace(parsedCompounds[i], re1, "");
-        name = std::regex_replace(name, re2, "");
-        compoundNames[idx] = name;
+        compoundNames[idx] = parsedCompounds[i];
+    }
+
+    //
+    // READ INDEX OF COMPOUNDS THAT WERE PREPROCESSED
+    //
+    std::vector<int> mappedIndex;
+    std::ifstream mappedIndexFile (workDirPath + "/mappedIndex.txt");
+
+    line = "";
+    while(std::getline(mappedIndexFile, line))
+    {
+        mappedIndex.push_back(std::stoi(line));
     }
     
     // APPLY REGULAR EXPRESSIONS
     std::cout << "** Applying regular expressions" << std::endl;
     RegexObject REObject;
     REObject.readRegexINI();
-    REObject.applyRegex(compoundNames);
+    REObject.applyRegex(compoundNames, mappedIndex);
 
     
     // SORT PEPTIDES
     std::cout << "** Sorting peptides" << std::endl;
     SortPeptide sortPeptideObject("\\s");
-    sortPeptideObject.sortAA(compoundNames);
+    sortPeptideObject.sortAA(compoundNames, mappedIndex);
 
-    
-    // APPLY SYNONYMS
-    std::cout << "** Applying synonyms substitution" << std::endl;
-    SynonymsReader synonymsReader;
-    synonymsReader.replace(compoundNames);
 
     // Write parsed compounds
     std::cout << "** Writing " << OUTFILE_NAME << std::endl;
-    std::ofstream outFile (workDirPath + "\\" + OUTFILE_NAME);
+    std::ofstream outFile (workDirPath + "/" + OUTFILE_NAME);
 
     for (std::string& name : compoundNames)
     {

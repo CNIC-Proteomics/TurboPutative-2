@@ -74,6 +74,9 @@ def main(args, logging):
     # write table
     msTable.writeTable(args.workdir, constants.OUTNAME)
 
+    # extract name of the compounds to be added to TPMapTable
+    msTable.extractCompoundNames(args.workdir)
+
     # process TableMerger table with additional information
     if ('4' in args.workflow) and (args.tmfile):
         tmTable = TMTable(os.path.join(args.workdir, args.tmfile))

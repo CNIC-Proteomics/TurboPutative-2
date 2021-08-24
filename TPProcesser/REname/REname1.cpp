@@ -16,7 +16,6 @@
 
 #include "./lib/RemoveRow.hpp"
 #include "./lib/MapCompound.hpp"
-//#include "./lib/SynonymsReader.hpp"
 #include "./lib/LipidList_and_PreProcess.hpp"
 
 // DEFINES
@@ -70,18 +69,6 @@ int main(int argc, char *argv[])
     mapCompound.readIndex();
     mapCompound.mapCompounds(compoundNamesColumn);
     mapCompound.writeIndexResult(workDirPath);
-
-
-    /*
-    //
-    // SYNONYMS
-    //
-    // get the column with the name of the compounds
-    std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
-    SynonymsReader synonymsReader;
-    synonymsReader.replace(compoundNamesColumn);
-    */
-
 
     //
     // WRITE PRE-TABLE OF RENAME (GOSLIN WILL BE APPLIED)

@@ -8,6 +8,7 @@ import sys
 import numpy as np
 import pandas as pd
 import logging
+import re
 
 # TP modules
 import modules.constants as constants
@@ -182,6 +183,26 @@ class MSTable(TPTable):
             raise TPExc.TPHeaderError(self.fullName, self.workdir)
         else:
             logging.info(f"MSTable was read successfully: {self.tablePath}")
+    
+    def extractCompoundNames(self, workdir):
+        """
+        Extract compound names and save in ppGenerator pendingFiles folder
+        """
+        
+        # The name of the will be the id of the project
+        pendingFileName = os.path.basename(os.path.normpath(workdir)) + '.tsv'
+        pendingFilesPath = os.path.join('./src/TurboPutative-2.0-built/ppGenerator/pendingFiles', pendingFileName)
+        
+        # Find name of the column containing compound names
+        columnName = [i for i in self.table.columns if i.lower() in constants.COLUMN_NAMES["name"]][0]
+
+        # Remove "No compounds found"
+        filteredBool = [False if re.search('(?i)^no compounds found', i) else True \
+            for i in self.table.loc[:, columnName].to_numpy()]
+
+        # Save file
+        self.table.loc[filteredBool, :].to_csv(pendingFilesPath, sep="\t", header=None, index=None, columns=[columnName])
+
 
 
 class TMTable(TPTable):

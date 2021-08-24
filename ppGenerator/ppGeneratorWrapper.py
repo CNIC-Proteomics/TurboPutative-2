@@ -13,20 +13,40 @@ Execution: python ppGenerator\ppGeneratorWrapper.py
 #
 # Import modules
 #
+import argparse
 import os
 import sys
 import subprocess
-import pandas as pd
 import numpy as np
+import pandas as pd
+from zipfile import ZipFile
 
 import time; start_time = time.time(); getTime = lambda : round(time.time() - start_time,3)
+
 
 #
 # Constants
 #
-scriptPath = os.path.dirname(__file__)
-processedCompoundsFile = "pre_processed_compound.txt"
 
+# Script path used as path reference
+scriptPath = os.path.dirname(__file__)
+
+# Path to REname data folder where MapTable is located (file where output files will be saved)
+REnameDataPath = os.path.join(scriptPath, '../TPProcesser/REname/data')
+
+# Name of the file with the table with all assignations (input and output)
+TPMapTable = "preProcessedNames.tsv"
+
+# Name of the file with the index (output)
+TPMapTableIndex = "preProcessedNamesIndex.tsv"
+
+# Name of the file with mapping generated in the execution. User can check this table (output)
+lastExecutionMap = "lastExecutionMap.tsv"
+
+# Path to public folder where zip files with results will be copied
+publicPath = os.path.join(scriptPath, '../../public/REnameMapTables')
+
+# Characters replaced in processCompounds function
 characterToReplace = {
     '±': '+/-',
     'α': 'alpha',
@@ -36,68 +56,154 @@ characterToReplace = {
     'ω': 'omega'
 }
 
+
 #
-# Parameters
+# Function definition
 #
-workDirPath = scriptPath # Path to working directory (in principle, script path)
-inFile = "compoundList.xlsx" # File with the list of compounds
 
-destinyFilePath = r"D:\CNIC\Metabolomica\TurboPutative-2.0\TPProcesser\REname\data\preProcessedNames.tsv"
-destinyIndexPath = r"D:\CNIC\Metabolomica\TurboPutative-2.0\TPProcesser\REname\data\preProcessedNamesIndex.tsv"
+def readFiles (directory):
+    """
+    Description: Build a pandas dataframe with multiple files contained in a given directory
+    """
 
-if __name__ == "__main__":
+    files = [i for i in os.listdir(directory) if os.path.isfile(os.path.join(directory, i))]
+    
+    if len(files) == 0:
+        print(f"** {getTime()}s - Given directory has no file")
+        sys.exit()
+    
+    # read and concatenate all files
+    df = pd.concat([pd.read_csv(os.path.join(directory, i), sep="\t", header=None) for i in files])
 
-    print(f"** {getTime()}s - Start processing")
+    return df
 
-    inFilePath = os.path.join(workDirPath, inFile)
 
-    # Preprocess name of the compounds emulating PreProcesser
-    preProcessedFile = "compoundList.txt"
+def processCompounds (df):
+    """
+    Description: Process name of compounds using ppGenerator1, TPGoslin and ppGenerator2
 
-    df = pd.read_excel(inFilePath, header=None, engine="openpyxl") 
-    df.rename(columns={0:'name'}, inplace=True)
+    Input:
+        - df: Pandas dataframe (with one column) containing compounds that must be processed
+    
+    Output:
+        - Pandas dataframe (with two columns) containing mapped compounds
+    """
 
-    df['name'] = df['name'].str.replace(r"(;|\s/\s|\n)(\n|.)*$", "", regex=True)  # Remove multiple compounds in a single field
+    # Set column name
+    df.columns = ["original"]
+
+    # Preprocess name of the compounds (remove some characters and replace others)
+    df['original'] = df['original'].str.replace(r"(;|\s/\s|\n)(\n|.)*$", "", regex=True)  # Remove multiple compounds in a single field
     
     for i in characterToReplace:
-        df['name'] = df['name'].str.replace(i, characterToReplace[i])
+        df['original'] = df['original'].str.replace(i, characterToReplace[i])
 
-    df['name'] = df['name'].str.strip() # strip names of the compounds
+    df['original'] = df['original'].str.strip() # strip names of the compounds
 
-    df.to_csv(os.path.join(workDirPath, preProcessedFile), header=None, index=None, sep="\t")  
+    # Save file with compounds after a brief preprocessing
+    preProcessedFile = "compoundList.txt"
+    df.to_csv(os.path.join(scriptPath, preProcessedFile), header=None, index=None, sep="\t")  
 
     # Execute first part of name processing
-    print(f"** {getTime()}s - Execute ppGenerator1.exe")
-    dbGenerator1Path = os.path.join(scriptPath, "ppGenerator1.exe")
-    subprocess.run([dbGenerator1Path, workDirPath, preProcessedFile], shell=True, check=True)
+    print(f"** {getTime()}s - Execute ppGenerator1")
+    dbGenerator1Path = os.path.join(scriptPath, "ppGenerator1")
+    subprocess.run([dbGenerator1Path, scriptPath, preProcessedFile], check=True)
 
     # Execute TPGoslin
-    print(f"** {getTime()}s - Execute TPGoslin.exe")
-    TPGoslinPath = r"D:\CNIC\Metabolomica\TurboPutative-2.0\TPProcesser\REname\lib\cppgoslin-1.1.2\TPGoslin.exe"
-    subprocess.run([TPGoslinPath, workDirPath], shell=True, check=True)
+    print(f"** {getTime()}s - Execute TPGoslin")
+    TPGoslinPath = os.path.join(scriptPath, "../TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin")
+    subprocess.run([TPGoslinPath, scriptPath], check=True)
 
     # Execute second part of name processing
-    print(f"** {getTime()}s - Execute ppGenerator2.exe")
-    dbGenerator2Path = os.path.join(scriptPath, "ppGenerator2.exe")
-    subprocess.run([dbGenerator2Path, workDirPath], shell=True, check=True)
+    print(f"** {getTime()}s - Execute ppGenerator2")
+    dbGenerator2Path = os.path.join(scriptPath, "ppGenerator2")
+    subprocess.run([dbGenerator2Path, scriptPath], check=True)
 
-    # Read .tsv with initial and final names
-    print(f"** {getTime()}s - Reading original compounds")
-    originalCompounds = pd.read_csv(os.path.join(workDirPath, preProcessedFile), sep="\t", header=None)
-    originalCompounds.rename(columns={0:'original'}, inplace=True)
-    originalCompounds['original'] = originalCompounds['original'].str.lower()
-
+    # Read .tsv with processed names
     print(f"** {getTime()}s - Reading preProcessed compounds")
-    processedCompounds = pd.read_csv(os.path.join(workDirPath, processedCompoundsFile), sep="\t", header=None)
+    processedCompoundsFile = "pre_processed_compound.txt" # Name of the output file generated by ppGenerator2
+    processedCompounds = pd.read_csv(os.path.join(scriptPath, processedCompoundsFile), sep="\t", header=None)
     processedCompounds.rename(columns={0:'preProcessed'}, inplace=True)
 
+    # Convert original compounds to lower
+    df['original'] = df['original'].str.lower()
+
+    
+
+    # build map table with original and processed compounds
     print(f"** {getTime()}s - Build map table")
-    mapTable = pd.concat([originalCompounds, processedCompounds], axis=1)
+
+    df.reset_index(drop=True, inplace=True)
+    processedCompounds.reset_index(drop=True, inplace=True)
+    mapTable = pd.concat([df, processedCompounds], axis=1)
+    mapTable.to_csv(os.path.join(REnameDataPath, lastExecutionMap), sep="\t", header=None, index=None)
+
+    # remove files generated in the execution
+    os.remove(os.path.join(scriptPath, preProcessedFile)) # infile of ppGenerator1
+    os.remove(os.path.join(scriptPath, "compound_original.txt")) # outfile of ppGenerator1 for ppGenerator2 (name of compounds)
+    os.remove(os.path.join(scriptPath, "compound_index.txt")) # outfile of ppGenerator1 for ppGenerator2 (index of goslin compounds)
+    os.remove(os.path.join(scriptPath, "compound.txt")) # outfile of ppGenerator1 for TPGoslin
+    os.remove(os.path.join(scriptPath, "parsed_compound.txt")) # outfile of TPGoslin
+    os.remove(os.path.join(scriptPath, "TPGoslin.log")) # outfile of TPGoslin
+    os.remove(os.path.join(scriptPath, "mappedIndex.txt")) # outfile of TPGoslin
+    os.remove(os.path.join(scriptPath, processedCompoundsFile)) # outfile of ppGenerator2
+    
+    return mapTable
+
+
+def preMappedTable (df):
+    """
+    Description: If ppGenerator receives table with some assignations,
+    split it, and process compounds that are not assigned
+
+    Input:
+        - df: Pandas dataframe with two columns
+    
+    Output:
+        - df: Pandas dataframe with two columns
+    """
+
+    df.columns = ['original', 'preProcessed']
+
+    # Bool with True in unmapped compounds
+    unMappedBool = pd.isna(df['preProcessed']).to_numpy()
+    
+    # Table containing compounds that were not mapped
+    unMappedOnly = pd.DataFrame(df.iloc[unMappedBool, 0])
+
+    # Table containing premapped compounds
+    MappedOnly = pd.DataFrame(df.iloc[~unMappedBool, :])
+
+    # Process compounds that were not mapped
+    unMappedOnly_mapped = processCompounds(unMappedOnly)
+
+    # return concat premapped and mapped
+    return pd.concat([MappedOnly, unMappedOnly_mapped])
+
+
+def updateTPMapTable (mapTable):
+    """
+    Description: Update TPMapTable used by TurboPutative
+
+    Input:
+        - mapTable: Pandas dataframe with two columns (original and preProcessed)
+    
+    Output:
+        - Write the TPMapTable
+    """
 
     # Read destiny file
     print(f"** {getTime()}s - Read old map table")
-    mapTableOld = pd.read_csv(destinyFilePath, sep="\t", header=None)
+    mapTableOld = pd.read_csv(os.path.join(REnameDataPath, TPMapTable), sep="\t", header=None)
     mapTableOld.rename(columns={0:'original', 1:'preProcessed'}, inplace=True)
+    
+    # Convert original compounds to lower in both cases
+    mapTableOld['original'] = mapTableOld['original'].str.lower()
+    mapTable['original'] = mapTable['original'].str.lower()
+
+    # Remove duplicates from old table
+    selectedRows = ~np.isin(mapTableOld['original'].to_numpy(), mapTable['original'].to_numpy())
+    mapTableOld = mapTableOld.loc[selectedRows, :]
 
     # Combine both .tsv and remove repetitions
     print(f"** {getTime()}s - Update map table")
@@ -107,7 +213,7 @@ if __name__ == "__main__":
 
     # Save map table
     print(f"** {getTime()}s - Writing map table")
-    mapTableUpdated.to_csv(destinyFilePath, sep="\t", header=None, index=None)
+    mapTableUpdated.to_csv(os.path.join(REnameDataPath, TPMapTable), sep="\t", header=None, index=None)
 
     # Build index
     print(f"** {getTime()}s - Building index")
@@ -116,12 +222,81 @@ if __name__ == "__main__":
 
     index = [[i, n] for n,i in enumerate(originalArr) if n%lenIdx==0]
     indexTable = pd.DataFrame(index)
-    indexTable.to_csv(destinyIndexPath, header=None, index=None, sep="\t")
+    indexTable.to_csv(os.path.join(REnameDataPath, TPMapTableIndex), header=None, index=None, sep="\t")
 
-    # Remove intermediate files
-    os.remove(os.path.join(workDirPath, preProcessedFile)) # File with original compounds but with first pre processing
-    os.remove(os.path.join(workDirPath, "compound.txt")) # File generated by ppGenerator1.exe with compounds that will be processed by TPGoslin
-    os.remove(os.path.join(workDirPath, "parsed_compound.txt")) # File generated by TPGoslin.exe with processed compounds
-    os.remove(os.path.join(workDirPath, "compound_original.txt")) # File with compounds processed by ppGenerator.exe
-    os.remove(os.path.join(workDirPath, "compound_index.txt")) # File with index of compounds
-    os.remove(os.path.join(workDirPath, processedCompoundsFile)) # File with processed compounds generated by ppGenerator2.exe
+
+def copyToPublic():
+    """
+    Description: Create a zip containing TPMapTable, its index, and compounds processed.
+    Zip file will be saved in TPMapTables public folder using date as name. 
+    Doing this, different versions of TPMapTable and compounds added can be checked
+    """
+
+    with ZipFile(os.path.join(publicPath, time.strftime("%Y%m%d-%H%M%S.zip")), 'w') as zipObj:
+
+        zipObj.write(os.path.join(REnameDataPath, TPMapTable), TPMapTable)
+        zipObj.write(os.path.join(REnameDataPath, TPMapTableIndex), TPMapTableIndex)
+        zipObj.write(os.path.join(REnameDataPath, lastExecutionMap), lastExecutionMap)
+
+
+#
+# Main function
+#
+
+def main(args):
+    """
+    Main function
+    """
+
+    # Build pandas dataframe with compounds
+
+    if args.dir != None:
+        df = readFiles(args.dir)
+    
+    elif args.infile != None:
+        if not os.path.isfile(args.infile):
+            print(f"** {getTime()}s - Given file does not exist")
+            sys.exit()
+
+        df = pd.read_csv(args.infile, sep="\t", header=None)
+    
+
+    # Build mapTable that has to be added 
+
+    if df.shape[1] == 1:
+        mapTable = processCompounds(df)
+    
+    elif df.shape[1] == 2:
+        mapTable = preMappedTable(df)
+    
+
+    # Update TPMapTable
+    updateTPMapTable(mapTable)
+
+    # Generate Zip file with results (TPMapTable, index and lastExecutionResult) in public folder to it can be accessed programatically
+    if os.path.isdir(publicPath):
+        copyToPublic()
+
+
+
+#
+# Execution
+#
+
+if __name__ == "__main__":
+
+    print(f"** {getTime()}s - Start processing")
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--infile', help="Path to file with list of compounds", type=str)
+    parser.add_argument('--dir', help="Path to directory containing files with list of compounds", type=str)
+
+    args = parser.parse_args()
+
+    if args.infile==None and args.dir==None:
+        parser.print_help()
+        sys.exit()
+
+    main(args)
+    print(f"** {getTime()}s - End processing")

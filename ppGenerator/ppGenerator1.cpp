@@ -6,7 +6,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "../TPProcesser/REname/lib/SynonymsReader.hpp"
+// #include "../TPProcesser/REname/lib/SynonymsReader.hpp"
 #include "../TPProcesser/REname/lib/LipidList_and_PreProcess.hpp"
 
 // Use Loguru (https://github.com/emilk/loguru) for logging
@@ -26,7 +26,7 @@
 int main(int argc, char *argv[])
 {
     std::string workDirPath = argv[1];
-    std::string inFilePath = workDirPath + "\\" + argv[2];
+    std::string inFilePath = workDirPath + "/" + argv[2];
 
     // Read infile and name of the compounds
     std::cout << "** Reading list with compound name" << std::endl;
@@ -41,18 +41,15 @@ int main(int argc, char *argv[])
     }
 
     //
-    // Apply processing to the name of the compounds
+    // GET COMPOUNDS THAT CAN BE PROCESSED BY GOSLIN
     //
-
-    // Synonyms
-    std::cout << "** Applying synonyms substitution" << std::endl;
-    SynonymsReader synonymsReader;
-    synonymsReader.replace(compoundNames);
 
     // Boolean vector with true in lipids processable by goslin
     std::cout << "** Finding compounds processable by Goslin" << std::endl;
     LipidList lipidListObject;
-    std::vector<bool> isGoslinLipidVector = lipidListObject.findLipids(compoundNames);
+
+    std::vector <int> mappedCompounds = {}; // We need this variable for some functions.
+    std::vector<bool> isGoslinLipidVector = lipidListObject.findLipids(compoundNames, mappedCompounds);
 
     // Get lipids with true (and their index)
     std::vector<std::string> goslinLipids;
@@ -73,7 +70,7 @@ int main(int argc, char *argv[])
 
     // Write compound.txt
     std::cout << "** Writing " << OUTFILE_NAME << std::endl;
-    std::string outFilePath = workDirPath + "\\" + OUTFILE_NAME;
+    std::string outFilePath = workDirPath + "/" + OUTFILE_NAME;
     
     std::ofstream outFile(outFilePath);
 
@@ -84,7 +81,7 @@ int main(int argc, char *argv[])
 
     // Write compound_index.txt
     std::cout << "** Writing " << OUTFILE_INDEX << std::endl;
-    std::string outFileIndexPath = workDirPath + "\\" + OUTFILE_INDEX;
+    std::string outFileIndexPath = workDirPath + "/" + OUTFILE_INDEX;
     std::ofstream outFileIndex(outFileIndexPath);
 
     for (int& idx : goslinLipidsIdx)
@@ -94,7 +91,7 @@ int main(int argc, char *argv[])
 
     // Write all list of compounds
     std::cout << "** Writing " << OUTFILE_ORIGINAL << std::endl;
-    std::string outFileOriginalPath = workDirPath + "\\" + OUTFILE_ORIGINAL;
+    std::string outFileOriginalPath = workDirPath + "/" + OUTFILE_ORIGINAL;
     std::ofstream outFileOriginal(outFileOriginalPath);
 
     for (std::string& name : compoundNames)

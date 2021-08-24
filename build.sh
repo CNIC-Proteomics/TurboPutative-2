@@ -10,6 +10,11 @@ mkdir $BUILD_DIR_NAME
 cp TPWrapper.py $BUILD_DIR_NAME/
 cp errorCode.json $BUILD_DIR_NAME/
 
+# Copy ppGenerator
+mkdir -p $BUILD_DIR_NAME/ppGenerator/pendingFiles
+cp ./ppGenerator/ppGeneratorWrapper.py $BUILD_DIR_NAME/ppGenerator/ppGeneratorWrapper.py
+cp ./ppGenerator/ppGenerator1 $BUILD_DIR_NAME/ppGenerator/ppGenerator1
+cp ./ppGenerator/ppGenerator2 $BUILD_DIR_NAME/ppGenerator/ppGenerator2
 
 # Copy TPPreProcesser
 mkdir $BUILD_DIR_NAME/TPPreProcesser 
