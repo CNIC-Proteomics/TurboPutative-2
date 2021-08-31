@@ -66,3 +66,10 @@ TAGS_DICT = {
 # Default regex used by Tagger (when configUser is empty for these parameters)
 DEFAULT_HALOGENATED_REGEX = "([Ff]luor(?!ene)|[Cc]hlor(?!ophyl)|[Bb]rom|[Ii]od)"
 DEFAULT_PEPTIDE_REGEX = "^(Ala|Arg|Asn|Asp|Cys|Gln|Glu|Gly|His|Ile|Leu|Lys|Met|Phe|Pro|Ser|Thr|Trp|Tyr|Val|[-\s,]){3,}$"
+
+# Default REname (when configUser is empty)
+DEFAULT_REMOVE_ROW_REGEX = "No compounds found for experimental mass"
+DEFAULT_AA_SEPARATOR = "\s"
+
+# Default TableMerger
+DEFAULT_N_DIGITS = "4"

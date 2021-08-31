@@ -5,6 +5,7 @@
 # Import modules
 import os
 import logging
+import re
 from configparser import ConfigParser
 
 import modules.TPExceptions as TPExc
@@ -182,9 +183,15 @@ class InputINI:
                 moduleInfo.iniDict[module]["peptide_regex"] = peptideRegex
             
             if module == "REname":
-                # moduleInfo.iniDict[module]["separator"] = self.config[module]["separator"]
-                moduleInfo.iniDict[module]["aminoacid_separator"] = self.config[module]["aminoacid_separator"]
-                moduleInfo.iniDict[module]["remove_row"] = self.config[module]["remove_row"]
+                
+                user_aa_separator = self.config[module]["aminoacid_separator"]
+                aa_separator = user_aa_separator if len(user_aa_separator) != 0 else constants.DEFAULT_AA_SEPARATOR
+                moduleInfo.iniDict[module]["aminoacid_separator"] = aa_separator
+
+                user_remove_row_regex = self.config[module]["remove_row"]
+                remove_row_regex = user_remove_row_regex if len(user_remove_row_regex) != 0 else constants.DEFAULT_REMOVE_ROW_REGEX
+                moduleInfo.iniDict[module]["remove_row"] = remove_row_regex
+
             
             if module == "RowMerger":
                 # check compared and conserved columns
@@ -194,7 +201,11 @@ class InputINI:
                 moduleInfo.iniDict[module]["compared_name"] = nameCompare
             
             if module == "TableMerger":
-                moduleInfo.iniDict[module]["n_digits"] = self.config[module]["n_digits"]
+
+                user_n_digits = self.config[module]["n_digits"]
+                n_digits = user_n_digits if re.match('^[0-9]+$', user_n_digits) else constants.DEFAULT_N_DIGITS
+                moduleInfo.iniDict[module]["n_digits"] = n_digits
+
         
         return moduleInfo
 
