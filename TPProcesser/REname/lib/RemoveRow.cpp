@@ -1,9 +1,10 @@
+#include <iostream>
 #include <vector>
 #include <string>
 #include <regex>
 #include <sstream>
 
-#include "../../lib/logging/loguru.hpp"
+// #include "../../lib/logging/loguru.hpp"
 #include "RemoveRow.hpp"
 
 RemoveRow::RemoveRow(std::string regexStr)
@@ -16,8 +17,10 @@ std::vector<int> RemoveRow::getIndexes(std::vector<std::string> &compoundNamesCo
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Analysing rows to be removed";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
     
     std::vector<int> removeIndexes;
     removeIndexes.reserve(compoundNamesColumn.size());

@@ -140,6 +140,31 @@ class TPTable:
         
         logging.info(f"{outName} was written successfully: {fullPath}")
 
+    
+    def writeHTMLTable(self):
+        """
+        Write table in HTML format
+        """
+
+        exportColumns = self.table.columns if len(self.table.columns)<6  \
+            else [k for k in self.table.columns for i in constants.COLUMN_NAMES for j in constants.COLUMN_NAMES[i] if k.lower() == j and i != 'inchi_key']
+
+        outName = self.tableName
+
+        fullPath = os.path.join(self.workdir, outName)
+
+        try:
+            falseArr = np.zeros(self.table.shape[0], dtype='bool')
+            self.table.loc[falseArr, :].to_html(fullPath+'.html', index=False, na_rep='-', columns=exportColumns)
+            self.table.to_csv(fullPath+'.row', sep="\t", index=False, header=False, na_rep='-', columns=exportColumns)
+        
+        except:
+            logging.exception(f"TPWriteHTMLError: An error occurred when writing {fullPath}. Traceback:")
+            raise TPExc.TPWriteHTMLError(outName, self.workdir)
+        
+        logging.info(f"{outName} was written successfully: {fullPath}")
+
+
 
 class MSTable(TPTable):
     """

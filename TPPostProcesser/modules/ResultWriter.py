@@ -5,10 +5,15 @@
 # Import modules
 import os
 import pandas as pd
+import numpy as np
 import logging
 import zipfile
 import configparser
 import re
+import sys
+
+#sys.path.append(os.path.join('./../../TPPreProcesser/'))
+import modules.constants as constants
 
 # Class and function definitions
 
@@ -103,6 +108,18 @@ class ResultWriter:
             # Execute this if output table is in .tsv format
             #outFileName = f"{os.path.splitext(fileName)[0]}_{os.path.splitext(self.infile)[0]}.tsv"
             df.to_csv(os.path.join(self.workDir, outFileName), index=False, sep="\t", columns=outColumnNames)
+
+
+        # write HTML tables
+        exportColumns = df.columns if len(df.columns)<6  \
+            else [k for k in df.columns for i in constants.COLUMN_NAMES for j in constants.COLUMN_NAMES[i] if k.lower() == j and i != 'inchi_key']
+        
+        fullPath = os.path.join(self.workDir, outFileName_noExt)
+
+        falseArr = np.zeros(df.shape[0], dtype='bool')  #header
+        df.loc[falseArr, :].to_html(fullPath+'.html', index=False, na_rep='-', columns=exportColumns)
+
+        df.to_csv(fullPath+'.row', sep="\t", index=False, header=False, na_rep='-', columns=exportColumns) #rows
 
         self.finalFileNames.append(outFileName)
         

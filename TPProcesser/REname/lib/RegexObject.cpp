@@ -1,4 +1,4 @@
-//#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -6,7 +6,7 @@
 // #include <filesystem>
 #include "boost/regex.hpp"
 #include "RegexObject.hpp"
-#include "../../lib/logging/loguru.hpp"
+//#include "../../lib/logging/loguru.hpp"
 
 
 #define REGEX_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regex.ini"
@@ -15,8 +15,10 @@ void RegexObject::readRegexINI()
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Reading regex.ini";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
     std::string regexINIPath = REGEX_INI_PATH;
 
@@ -67,8 +69,10 @@ void RegexObject::applyRegex(std::vector<std::string>& compoundNamesColumn, std:
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Applying regular expressions";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    // LOG_F(INFO, &(log.str()[0]));
 
     int index = -1;
     for (std::string& compound : compoundNamesColumn)
@@ -88,7 +92,9 @@ void RegexObject::applyRegex(std::vector<std::string>& compoundNamesColumn, std:
     }
 
     log.str("");
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Regular expressions were applied";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    // LOG_F(INFO, &(log.str()[0]));
 
 }

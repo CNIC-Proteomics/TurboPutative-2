@@ -73,6 +73,7 @@ def main(args, logging):
 
     # write table
     msTable.writeTable(args.workdir, constants.OUTNAME)
+    msTable.writeHTMLTable()
 
     # extract name of the compounds to be added to TPMapTable
     msTable.extractCompoundNames(args.workdir)
@@ -92,6 +93,7 @@ def main(args, logging):
         tmTable.removeLineFall()
 
         tmTable.writeTable(args.workdir, constants.OUTNAME_TMTABLE)
+        tmTable.writeHTMLTable()
 
     # read user ini file and transfer parts of its content to c++ ini file
     userINI = InputINI(args)

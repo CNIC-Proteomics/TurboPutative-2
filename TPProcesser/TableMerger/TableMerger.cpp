@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -8,8 +9,8 @@
 #include <cmath>
 
 // Use Loguru (https://github.com/emilk/loguru) for logging
-#include "../lib/logging/loguru.hpp"
-#include "../lib/logging/loguru.cpp"
+//#include "../lib/logging/loguru.hpp"
+//#include "../lib/logging/loguru.cpp"
 
 // IMPORT TurboPutative LIBRARIES
 #include "../lib/ConfigReader.hpp"
@@ -31,11 +32,11 @@ int main(int argc, char *argv[])
     std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru
-    std::string logFilePath = workDirPath + "/TableMerger.log";    // Add file and convert to string
+    /*std::string logFilePath = workDirPath + "/TableMerger.log";    // Add file and convert to string
     char* logFilePathPtr = &logFilePath[0]; // Get pointer to first character (received by loguru)
 
     loguru::init(argc, argv);
-    loguru::add_file(logFilePathPtr, loguru::Append, loguru::Verbosity_MAX);
+    loguru::add_file(logFilePathPtr, loguru::Append, loguru::Verbosity_MAX);*/
     
     // read config file
     ConfigReader config(workDirPath);
@@ -261,8 +262,10 @@ std::vector<int> findMatch(double& window, std::string msEMi, std::vector<std::s
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
+        log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
         log << "Error when converting string to double: " << msEMi;
-        LOG_F(INFO, &(log.str()[0]));
+        std::cout << log.str();
+        //LOG_F(INFO, &(log.str()[0]));
     }
     
     
@@ -279,8 +282,10 @@ std::vector<int> findMatch(double& window, std::string msEMi, std::vector<std::s
         catch(const std::exception& e)
         {
             std::cerr << e.what() << '\n';
+            log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
             log << "Error when converting string to double: " << tmEM[i];
-            LOG_F(INFO, &(log.str()[0]));
+            std::cout << log.str();
+            ///LOG_F(INFO, &(log.str()[0]));
         }
 
         if (diff < window) 

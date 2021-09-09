@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fstream>
 #include <sstream>
 // #include <filesystem>
@@ -6,7 +7,7 @@
 #include <algorithm>
 
 #include "MapCompound.hpp"
-#include "../../lib/logging/loguru.hpp"
+// #include "../../lib/logging/loguru.hpp"
 
 // Constants
 #define MAP_RESERVE 50000
@@ -17,8 +18,10 @@ void MapCompound::readMapFile (std::string path)
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Reading Map File";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    // LOG_F(INFO, &(log.str()[0]));
 
     original.reserve(MAP_RESERVE);
     preProcessed.reserve(MAP_RESERVE);
@@ -34,31 +37,6 @@ void MapCompound::readMapFile (std::string path)
     }
 }
 
-void MapCompound::readIndex (std::string path)
-{
-    // logging
-    std::stringstream log;
-    log << "Reading Map File Index";
-    LOG_F(INFO, &(log.str()[0]));
-
-    indexKey.reserve(INDEX_RESERVE);
-    indexValue.reserve(INDEX_RESERVE);
-
-    std::ifstream myFile (path);
-
-    std::string line="";
-    while (std::getline(myFile, line))
-    {
-        std::vector <std::string> tokens = parseBiTSV(line);
-        indexKey.push_back(tokens[0]);
-        
-        int indexValue_tmp = std::stoi(tokens[1]);
-        indexValue.push_back(indexValue_tmp);
-    }
-
-    // Add to indexValue a last element with size of the vector. This makes easier the search
-    indexValue.push_back(original.size());
-}
 
 std::vector<std::string> MapCompound::parseBiTSV (std::string line)
 {
@@ -75,70 +53,74 @@ void MapCompound::mapCompounds (std::vector <std::string>& compoundList)
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Mapping compounds";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    // LOG_F(INFO, &(log.str()[0]));
 
     positionResult = {};
     positionResult.reserve(compoundList.size());
 
     for (int i=0; i<compoundList.size(); i++)
     {
-        std::string resultName = compoundList[i];
-        int sortedPos = getSortedPos (compoundList[i]);
+        std::string compoundLower = compoundList[i];
+        std::transform(compoundList[i].begin(), compoundList[i].end(), compoundLower.begin(), [](unsigned char c) {
+            return std::tolower(c);
+        });
 
-        if (sortedPos != 0) 
+        std::string binaryResult = binarySearch(0, original.size()-1, compoundLower);
+
+        if (binaryResult != compoundLower)
         {
-            int startIndex = indexValue[sortedPos-1], endIndex = indexValue[sortedPos];
-            int posInMap = getPosInMap(compoundList[i], startIndex, endIndex);
-            if (posInMap != -1) 
-            {
-                resultName = preProcessed[posInMap];
-                positionResult.push_back(i);
-            }
+            compoundList[i] = binaryResult;
+            positionResult.push_back(i);
         }
-
-        compoundList[i] = resultName;
+    
     }
+    
 
     log.str("");
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Compounds were mapped";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 }
 
-int MapCompound::getSortedPos (std::string compound)
+
+std::string MapCompound::binarySearch(int l, int r, std::string& x) 
 {
-    std::string compoundLower = compound;
-    std::transform(compound.begin(), compound.end(), compoundLower.begin(), [](unsigned char c){return std::tolower(c);});
-
-    // Initialize vector with all names
-    std::vector <std::string> compoundNames = indexKey;
-    compoundNames.push_back(compoundLower);
-
-    // Sort and find position
-    std::sort(compoundNames.begin(), compoundNames.end());
-    std::vector <std::string>::iterator it = std::find(compoundNames.begin(), compoundNames.end(), compoundLower);
-    int sortedPos = it - compoundNames.begin();
-
-    return sortedPos;
+    if (r >= l) {
+        int mid = l + (r - l) / 2;
+  
+        // If the element is present at the middle
+        // itself
+        if (original[mid] == x)
+            return preProcessed[mid];
+  
+        // If element is smaller than mid, then
+        // it can only be present in left subarray
+        if (original[mid] > x)
+            return binarySearch(l, mid - 1, x);
+  
+        // Else the element can only be present
+        // in right subarray
+        return binarySearch(mid + 1, r, x);
+    }
+  
+    // We reach here when element is not
+    // present in array
+    return x;
 }
 
-int MapCompound::getPosInMap (std::string compound, int startIndex, int endIndex)
-{
-    std::string compoundLower = compound;
-    std::transform(compound.begin(), compound.end(), compoundLower.begin(), [](unsigned char c){ return std::tolower(c); });
-
-    std::vector <std::string>::iterator it = std::find(original.begin()+startIndex, original.begin()+endIndex, compoundLower);
-    int posInMap = it == original.begin()+endIndex ? -1 : it - original.begin();
-
-    return posInMap;
-}
 
 void MapCompound::writeIndexResult (std::string path)
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Write index of mapped compounds";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
     std::ofstream myFile (path + "/" + OUTFILE_NAME);
 

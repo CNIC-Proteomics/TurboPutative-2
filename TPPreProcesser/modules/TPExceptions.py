@@ -146,6 +146,23 @@ class TPWriteError(Exception, TPErrorClassBase):
         self.exitProgram()
 
 
+class TPWriteHTMLError(Exception, TPErrorClassBase):
+    """
+    Error raised when exception during HTML file writing 
+    """
+
+    def __init__(self, outName, workdir):
+
+        # logging.info(f"TPWriteError: An error occurred when writing {fullPath}")
+        self.code = 100061
+        self.msg = f"TPWriteHTMLError: An error occurred when writing {outName}"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
 class TPAdditionalInfoTableError(Exception, TPErrorClassBase):
     """
     Error raised when Table Merger table with additional information has 

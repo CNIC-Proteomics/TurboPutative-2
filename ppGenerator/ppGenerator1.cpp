@@ -10,8 +10,8 @@
 #include "../TPProcesser/REname/lib/LipidList_and_PreProcess.hpp"
 
 // Use Loguru (https://github.com/emilk/loguru) for logging
-#include "../TPProcesser/lib/logging/loguru.hpp"
-#include "../TPProcesser/lib/logging/loguru.cpp"
+//#include "../TPProcesser/lib/logging/loguru.hpp"
+//#include "../TPProcesser/lib/logging/loguru.cpp"
 
 //
 // Constants

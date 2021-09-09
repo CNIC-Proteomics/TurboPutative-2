@@ -58,7 +58,7 @@ def main(args, logging):
 
 
     # --> Save xlsx file with all tables
-    logging.info("Generating combined table")
+    #logging.info("Generating combined table")
     #resultWriter.saveCombinedTable()
 
     logging.info("Final tables were generated")

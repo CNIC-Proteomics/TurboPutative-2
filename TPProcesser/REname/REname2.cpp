@@ -7,8 +7,8 @@
 #include <fstream>
 
 // Use Loguru (https://github.com/emilk/loguru) for logging
-#include "../lib/logging/loguru.hpp"
-#include "../lib/logging/loguru.cpp"
+//#include "../lib/logging/loguru.hpp"
+//#include "../lib/logging/loguru.cpp"
 
 // IMPORT TurboPutative LIBRARIES
 #include "../lib/ConfigReader.hpp"
@@ -33,11 +33,11 @@ int main(int argc, char *argv[])
     std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru
-    std::string logFilePath = workDirPath + "/REname2.log";    // Add file and convert to string
+    /*std::string logFilePath = workDirPath + "/REname2.log";    // Add file and convert to string
     char* logFilePathPtr = &logFilePath[0]; // Get pointer to first character (received by loguru)
 
     loguru::init(argc, argv);
-    loguru::add_file(logFilePathPtr, loguru::Append, loguru::Verbosity_MAX);
+    loguru::add_file(logFilePathPtr, loguru::Append, loguru::Verbosity_MAX);*/
     
     // read config file
     ConfigReader config(workDirPath);

@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -5,7 +6,7 @@
 //#include <filesystem>
 
 #include "ConfigReader.hpp"
-#include "logging/loguru.hpp"
+//#include "logging/loguru.hpp"
 
 ConfigReader::ConfigReader(std::string& workDirPathArg)
 {
@@ -20,8 +21,10 @@ void ConfigReader::readConfigFile(std::string module)
 {
     // logging
     std::ostringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Reading " << module << " config file: " << pathToConfig;
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
     
     // open file
     std::ifstream configFile(pathToConfig);
@@ -62,15 +65,17 @@ void ConfigReader::readConfigFile(std::string module)
             // logging parameters
             log.str("");
             log << matchObject[1] << ": " << matchObject[2];
-            LOG_F(INFO, &(log.str()[0]));
+            //LOG_F(INFO, &(log.str()[0]));
 
             continue;
         }
     }
 
     log.str("");
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
+    std::cout << log.str();
     log << "Config file was read";
-    LOG_F(INFO, &(log.str()[0]));
+    //LOG_F(INFO, &(log.str()[0]));
 }
 
 std::string ConfigReader::getValue(std::string key)

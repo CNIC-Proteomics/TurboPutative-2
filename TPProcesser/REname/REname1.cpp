@@ -7,8 +7,8 @@
 #include <fstream>
 
 // Use Loguru (https://github.com/emilk/loguru) for logging
-#include "../lib/logging/loguru.hpp"
-#include "../lib/logging/loguru.cpp"
+// #include "../lib/logging/loguru.hpp"
+// #include "../lib/logging/loguru.cpp"
 
 // IMPORT TurboPutative LIBRARIES
 #include "../lib/ConfigReader.hpp"
@@ -31,11 +31,12 @@ int main(int argc, char *argv[])
     std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru
-    std::string logFilePath = workDirPath + "/REname1.log";    // Add file and convert to string
+    /*std::string logFilePath = workDirPath + "/REname1.log";    // Add file and convert to string
     char* logFilePathPtr = &logFilePath[0]; // Get pointer to first character (received by loguru)
 
+
     loguru::init(argc, argv);
-    loguru::add_file(logFilePathPtr, loguru::Append, loguru::Verbosity_MAX);
+    loguru::add_file(logFilePathPtr, loguru::Append, loguru::Verbosity_MAX);*/
     
     // read config file
     ConfigReader config(workDirPath);
@@ -65,8 +66,8 @@ int main(int argc, char *argv[])
     //
     std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
     MapCompound mapCompound;
-    mapCompound.readMapFile();
-    mapCompound.readIndex();
+    mapCompound.readMapFile(); // TPMapTable must have the first column in lower case and sorted
+    // mapCompound.readIndex();
     mapCompound.mapCompounds(compoundNamesColumn);
     mapCompound.writeIndexResult(workDirPath);
 

@@ -175,10 +175,12 @@ def preMappedTable (df):
     MappedOnly = pd.DataFrame(df.iloc[~unMappedBool, :])
 
     # Process compounds that were not mapped
-    unMappedOnly_mapped = processCompounds(unMappedOnly)
+    if np.any(unMappedBool):
+        unMappedOnly_mapped = processCompounds(unMappedOnly)
+        MappedOnly = pd.concat([MappedOnly, unMappedOnly_mapped])
 
     # return concat premapped and mapped
-    return pd.concat([MappedOnly, unMappedOnly_mapped])
+    return MappedOnly
 
 
 def updateTPMapTable (mapTable):
@@ -262,12 +264,12 @@ def main(args):
     
 
     # Build mapTable that has to be added 
-
     if df.shape[1] == 1:
         mapTable = processCompounds(df)
     
     elif df.shape[1] == 2:
         mapTable = preMappedTable(df)
+        
     
 
     # Update TPMapTable

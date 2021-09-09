@@ -1,13 +1,12 @@
 #include <iostream>
 #include <sstream>
-//#include <filesystem>
 #include <string>
 #include <vector>
 #include <regex>
 
 // Use Loguru (https://github.com/emilk/loguru) for logging
-#include "../lib/logging/loguru.hpp"
-#include "../lib/logging/loguru.cpp"
+//#include "../lib/logging/loguru.hpp"
+//#include "../lib/logging/loguru.cpp"
 
 // IMPORT TurboPutative LIBRARIES
 #include "../lib/ConfigReader.hpp"
@@ -40,11 +39,11 @@ int main(int argc, char *argv[])
     std::string workDirPath = argv[1];
 
     // configure logging using loguru --> https://github.com/emilk/loguru
-    std::string logFilePath = workDirPath + "/Tagger.log";    // Add file and convert to string
+    /*std::string logFilePath = workDirPath + "/Tagger.log";    // Add file and convert to string
     char* logFilePathPtr = &logFilePath[0]; // Get pointer to first character (received by loguru)
 
     loguru::init(argc, argv);
-    loguru::add_file(logFilePathPtr, loguru::Append, loguru::Verbosity_MAX);
+    loguru::add_file(logFilePathPtr, loguru::Append, loguru::Verbosity_MAX);*/
     
     // read config file
     ConfigReader config(workDirPath);
@@ -150,24 +149,18 @@ std::vector<std::string> taggerFromList(std::string listFileName, std::string ta
 {
     // logging
     std::stringstream log;
-    log << "Add " << tag << " tagging from list";
-    LOG_F(INFO, &(log.str()[0]));
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
+    log << "** Add " << tag << " tagging from list";
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
     // read file with list of compounds
     std::string fullListPath = LIST_FOLDER;
     fullListPath += "/" + listFileName;
     TagList tagList(fullListPath);
 
-    
-    // build index in this object
-    tagList.buildIndex();
-
     // add tags
     std::vector<std::string> tagColumn = tagList.addTag(compoundNamesColumn, tag);
-    
-    /*
-    std::vector<std::string> tagColumn = tagList.addTagNoIndex(compoundNamesColumn, tag);
-    */
 
     return tagColumn;
 }
@@ -175,9 +168,12 @@ std::vector<std::string> taggerFromList(std::string listFileName, std::string ta
 std::vector<std::string> taggerFromRegex(std::string regexStr, std::string tag, std::vector<std::string>& compoundNamesColumn, bool icase)
 {
     // logging
-    std::stringstream log;
+    std::stringstream log ;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Add " << tag << " tagging from regular expression";
-    LOG_F(INFO, &(log.str()[0]));
+    std::string logo = log.str();
+    std::cout << logo;
+    //LOG_F(INFO, &(log.str()[0]));
 
     // instantiate TagRegex class
     TagRegex tagRegex(regexStr, tag, icase);

@@ -12,14 +12,17 @@ class ExtensionMover():
     Class used to move of files of an extension to a particular folder
     """
 
-    def __init__(self, extension, workDir, logging):
+    def __init__(self, extension, workDir, logging, exclude=[]):
 
         self.extension = extension
         self.workDir = workDir
         self.logging = logging
 
-        self.excludeFiles = []
+        self.excludeFiles = exclude
         self.files = []
+
+        self.makeDir()
+        self.moveFiles()
     
     def makeDir(self):
         """

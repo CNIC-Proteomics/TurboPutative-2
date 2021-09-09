@@ -10,7 +10,7 @@
 
 #include "LipidList_and_PreProcess.hpp"
 #include "boost/regex.hpp"
-#include "../../lib/logging/loguru.hpp"
+// #include "../../lib/logging/loguru.hpp"
 
 //
 // LIPID LIST
@@ -31,8 +31,10 @@ LipidList::LipidList()
 std::vector<bool> LipidList::findLipids(std::vector<std::string>& compoundNames, std::vector<int>& mappedLipids)
 {
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Find Goslin lipids";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
     std::vector<bool> isGoslinLipidVector;
 
@@ -71,8 +73,10 @@ std::vector<bool> LipidList::findLipids(std::vector<std::string>& compoundNames,
 void PreProcessLipids::preProcessLipids(std::vector<std::string>& compoundNames)
 {
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Pre-process Goslin Lipids";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
     for (std::string& compound : compoundNames)
     {

@@ -20,8 +20,6 @@ class MapCompound
     //
 
     std::vector <std::string> original, preProcessed; // Vectors with Original and PreProcessed
-    std::vector <std::string> indexKey; // Vector with Compounds used as index
-    std::vector <int> indexValue; // Vector with position associated to that compound
 
     // std::vector <std::string> compoundResult; // Vector with mapped compounds
     std::vector <int> positionResult; // Vector with position of compounds that could be mapped
@@ -34,11 +32,8 @@ class MapCompound
     // Method that receives line read, and returns both tokens
     std::vector<std::string> parseBiTSV (std::string line);
 
-    // Method that get position of the compound in saved indexes
-    int getSortedPos (std::string compound);
-
-    // Method to find the position of the compound in preProcessed list. If it is not found -1 is returned
-    int getPosInMap (std::string compound, int startIndex, int endIndex);
+    // Method to perform binary search
+    std::string binarySearch(int l, int r, std::string& x);
 
 
     public:
@@ -49,9 +44,6 @@ class MapCompound
 
     // Method to read list that maps original to preprocessed name
     void readMapFile (std::string path=MAP_FILE_PATH);
-
-    // Method to file with index
-    void readIndex (std::string path=INDEX_FILE_PATH);
 
     // Method to replace compounds of compound list with the preProcessed
     void mapCompounds (std::vector <std::string>& compoundList);

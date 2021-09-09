@@ -12,8 +12,8 @@
 // #include "../TPProcesser/REname/lib/SynonymsReader.hpp"
 
 // Use Loguru (https://github.com/emilk/loguru) for logging
-#include "../TPProcesser/lib/logging/loguru.hpp"
-#include "../TPProcesser/lib/logging/loguru.cpp"
+//#include "../TPProcesser/lib/logging/loguru.hpp"
+//#include "../TPProcesser/lib/logging/loguru.cpp"
 
 // Constants
 #define INFILE_ORIGINAL "compound_original.txt"

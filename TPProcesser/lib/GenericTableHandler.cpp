@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -6,7 +7,7 @@
 // #include <filesystem>
 #include <regex> // boost regex is no necessary; We should apply boost only to regexObject
 
-#include "logging/loguru.hpp"
+//#include "logging/loguru.hpp"
 
 #include "GenericTableHandler.hpp"
 #include "Tokenizer.hpp"
@@ -26,8 +27,10 @@ void GenericTableHandler::readTable(std::string workDirPath, std::string inFileN
 
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Reading " << inFileName << " table: " << fullPath;
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
     // open file
     std::ifstream tableFile(fullPath);
@@ -61,8 +64,10 @@ void GenericTableHandler::readTable(std::string workDirPath, std::string inFileN
     }
 
     log.str("");
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Table read successfully";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
 }
 
@@ -139,8 +144,10 @@ void GenericTableHandler::removeIndexes(std::vector<int>& indexes)
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Removing indexes";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
     std::string rmTag = "###RM###";
     
@@ -164,16 +171,20 @@ void GenericTableHandler::removeIndexes(std::vector<int>& indexes)
     nrows -= indexes.size();
 
     log.str("");
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Indexes removed";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 }
 
 void GenericTableHandler::writeTable(std::string outfilePath)
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Start writing table";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
     std::ofstream myFile(outfilePath);
 
@@ -202,16 +213,20 @@ void GenericTableHandler::writeTable(std::string outfilePath)
     }
 
     log.str("");
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Table was written";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 }
 
 void GenericTableHandler::fuseRows(std::vector<std::string> compareCol, std::vector<std::string> conserveCol, std::string name)
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Start row fusion";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 
     // Extract index of comparing and conserving columns
     std::vector<int> compareIdx={}, conserveIdx={};
@@ -348,8 +363,10 @@ void GenericTableHandler::fuseRows(std::vector<std::string> compareCol, std::vec
 
     // logging
     log.str("");
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "End row fusion";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    //LOG_F(INFO, &(log.str()[0]));
 }
 
 bool GenericTableHandler::compareNames(std::string& name1, std::string& name2)

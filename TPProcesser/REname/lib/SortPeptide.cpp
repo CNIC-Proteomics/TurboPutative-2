@@ -1,11 +1,12 @@
 #include "SortPeptide.hpp"
+#include <iostream>
 #include <vector>
 #include <string>
 #include <sstream>
 #include "boost/regex.hpp"
 #include <algorithm>
 
-#include "../../lib/logging/loguru.hpp"
+// #include "../../lib/logging/loguru.hpp"
 
 
 SortPeptide::SortPeptide(std::string sep)
@@ -17,8 +18,10 @@ void SortPeptide::sortAA(std::vector<std::string>& compoundNamesColumn, std::vec
 {
     // logging
     std::stringstream log;
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Sorting peptides";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    // LOG_F(INFO, &(log.str()[0]));
 
     int index=-1;
     for (std::string& compound : compoundNamesColumn)   
@@ -72,8 +75,10 @@ void SortPeptide::sortAA(std::vector<std::string>& compoundNamesColumn, std::vec
 
     // logging
     log.str("");
+    log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
     log << "Finish sorting peptides";
-    LOG_F(INFO, &(log.str()[0]));
+    std::cout << log.str();
+    // LOG_F(INFO, &(log.str()[0]));
 }
 
 bool SortPeptide::isPeptide(std::vector<std::string> tokens)

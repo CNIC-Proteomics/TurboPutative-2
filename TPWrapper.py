@@ -160,25 +160,14 @@ def main(args):
     # Sort .log, .ini and .tsv files
     #
 
-    # --> ini files
-    extension = "ini"
-    iniMover = ExtensionMover(extension, args.workdir, logging)
-    iniMover.makeDir()
-    iniMover.moveFiles()
+    extensions = ['ini', 'tsv', 'html', 'row']
+    
+    # Create folder and move files of that extension there
+    _ = [ExtensionMover(i, args.workdir, logging) for i in extensions]
 
-    # --> log files
-    extension = "log"
-    logMover = ExtensionMover(extension, args.workdir, logging)
-    logMover.excludeFiles.append(log_file_base_name)
-    logMover.makeDir()
-    logMover.moveFiles()
-
-    # --> tsv files
-    extension = "tsv"
-    tsvMover = ExtensionMover(extension, args.workdir, logging)
-    tsvMover.makeDir()
-    tsvMover.moveFiles()
-
+    # In case of log the 'TPWrapper.log' must be excluded
+    _ = ExtensionMover('log', args.workdir, logging, [log_file_base_name])
+    
 
 
 
