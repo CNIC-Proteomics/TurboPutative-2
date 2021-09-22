@@ -297,6 +297,10 @@ void GenericTableHandler::fuseRows(std::vector<std::string> compareCol, std::vec
     processedRows.reserve(nrows);
     for (int i=0; i<sortedRowIdx.size(); i++)
     {
+        if (sortedRowIdx[i] == 205)
+        {
+            std::cout << "Prueba";
+        }
         
         // if this row has been processed, continue, pleeeease...
         std::vector<int>::iterator it = std::find(processedRows.begin(), processedRows.end(), sortedRowIdx[i]);

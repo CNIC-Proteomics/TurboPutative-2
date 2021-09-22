@@ -9,18 +9,18 @@
 //#include "../../lib/logging/loguru.hpp"
 
 
-#define REGEX_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regex.ini"
+// #define REGEX_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regex.ini"
 
-void RegexObject::readRegexINI()
+void RegexObject::readRegexINI(std::string regex_ini_path)
 {
     // logging
     std::stringstream log;
     log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
-    log << "Reading regex.ini";
+    log << "Reading " << regex_ini_path;
     std::cout << log.str();
     //LOG_F(INFO, &(log.str()[0]));
 
-    std::string regexINIPath = REGEX_INI_PATH;
+    std::string regexINIPath = regex_ini_path;
 
     // open regex.ini file and extract information
     std::ifstream regexFile(regexINIPath);
@@ -30,6 +30,7 @@ void RegexObject::readRegexINI()
 
     while(std::getline(regexFile, line))
     {
+
         //std::cout << line << std::endl;
         boost::smatch matchObject;
 
@@ -77,6 +78,8 @@ void RegexObject::applyRegex(std::vector<std::string>& compoundNamesColumn, std:
     int index = -1;
     for (std::string& compound : compoundNamesColumn)
     {
+        std::string compoundOriginal = compound;
+
         // Apply regular expression to compounds that were not mapped nor processed by Goslin
         index++;
         if (std::find(mappedIndex.begin(), mappedIndex.end(), index) != mappedIndex.end()) continue;
@@ -85,6 +88,9 @@ void RegexObject::applyRegex(std::vector<std::string>& compoundNamesColumn, std:
         {
             compound = boost::regex_replace(compound, REs[i], replaces[i], boost::format_perl);
         }
+
+        // if regex was applied to compound, add to map index to avoid future regex set
+        if (compound != compoundOriginal) mappedIndex.push_back(index);
 
         // Strip compound name to remove whitespace
         compound = boost::regex_replace(compound, boost::regex("^\\s+"), "", boost::format_perl);

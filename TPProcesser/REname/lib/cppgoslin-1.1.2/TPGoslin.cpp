@@ -73,9 +73,10 @@ int  main(int argc, char *argv[])
     std::vector<int> parsedCompoundIndexes;
 
     LipidParser lipid_parser;
-    int count = 0;
+    int count = -1;
     for (std::string& compound : compoundNames)
     {
+        count++;
         try
         {
             LipidAdduct* lipid = lipid_parser.parse(compound);
@@ -119,8 +120,8 @@ int  main(int argc, char *argv[])
             std::string hydroxyl = getHydroxyl(compound);
             std::string methyl = getMethyl(compound);
 
-            std::string parsedCompound = header_group + "(" + bond_type + std::to_string(carbon_atoms) + 
-                                         ":" + std::to_string(double_bonds) + methyl + hydroxyl + ")";
+            std::string parsedCompound = header_group + " " + bond_type + std::to_string(carbon_atoms) + 
+                                         ":" + std::to_string(double_bonds) + methyl + hydroxyl;
         
             parsedCompoundNames.push_back(parsedCompound);
             parsedCompoundIndexes.push_back(compoundIndexes[count]);
@@ -146,7 +147,6 @@ int  main(int argc, char *argv[])
                 parsedCompoundNames.push_back(compound);
             }
         }
-        count++;
     }
 
     //

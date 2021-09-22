@@ -38,7 +38,10 @@ REnameDataPath = os.path.join(scriptPath, '../TPProcesser/REname/data')
 TPMapTable = "preProcessedNames.tsv"
 
 # Name of the file with the index (output)
-TPMapTableIndex = "preProcessedNamesIndex.tsv"
+# TPMapTableIndex = "preProcessedNamesIndex.tsv"
+
+# Name of the file containing original compounds (without any lower modification)
+TPOriginalTable = "originalNames.tsv"
 
 # Name of the file with mapping generated in the execution. User can check this table (output)
 lastExecutionMap = "lastExecutionMap.tsv"
@@ -217,14 +220,16 @@ def updateTPMapTable (mapTable):
     print(f"** {getTime()}s - Writing map table")
     mapTableUpdated.to_csv(os.path.join(REnameDataPath, TPMapTable), sep="\t", header=None, index=None)
 
-    # Build index
-    print(f"** {getTime()}s - Building index")
-    originalArr = mapTableUpdated.iloc[:, 0].to_numpy()
-    lenIdx = int(np.sqrt(len(originalArr)))
+    # We do not need index, as REname1 performs binary search
 
-    index = [[i, n] for n,i in enumerate(originalArr) if n%lenIdx==0]
-    indexTable = pd.DataFrame(index)
-    indexTable.to_csv(os.path.join(REnameDataPath, TPMapTableIndex), header=None, index=None, sep="\t")
+    # Build index
+    #print(f"** {getTime()}s - Building index")
+    #originalArr = mapTableUpdated.iloc[:, 0].to_numpy()
+    #lenIdx = int(np.sqrt(len(originalArr)))
+
+    #index = [[i, n] for n,i in enumerate(originalArr) if n%lenIdx==0]
+    #indexTable = pd.DataFrame(index)
+    #indexTable.to_csv(os.path.join(REnameDataPath, TPMapTableIndex), header=None, index=None, sep="\t")
 
 
 def copyToPublic():
@@ -237,7 +242,7 @@ def copyToPublic():
     with ZipFile(os.path.join(publicPath, time.strftime("%Y%m%d-%H%M%S.zip")), 'w') as zipObj:
 
         zipObj.write(os.path.join(REnameDataPath, TPMapTable), TPMapTable)
-        zipObj.write(os.path.join(REnameDataPath, TPMapTableIndex), TPMapTableIndex)
+        # zipObj.write(os.path.join(REnameDataPath, TPMapTableIndex), TPMapTableIndex)
         zipObj.write(os.path.join(REnameDataPath, lastExecutionMap), lastExecutionMap)
 
 
@@ -261,6 +266,13 @@ def main(args):
             sys.exit()
 
         df = pd.read_csv(args.infile, sep="\t", header=None)
+
+    
+    # Update file containing original compounds
+    origTable = pd.read_csv(os.path.join(REnameDataPath, TPOriginalTable), sep="\t", header=None)
+    pd.concat([origTable[0], df[0]])\
+        .drop_duplicates()\
+        .to_csv(os.path.join(REnameDataPath, TPOriginalTable), sep="\t", header=False, index=False)
     
 
     # Build mapTable that has to be added 

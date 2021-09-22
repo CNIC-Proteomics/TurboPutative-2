@@ -21,6 +21,10 @@
 #define MODULE "REname"
 #define RENAME1_OUT_TABLE "Pre_REname_Table.tsv"
 
+#define REGEX_FA_PN_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regexFAPN.ini"
+#define REGEX_FA_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regexFA.ini"
+#define REGEX_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regex.ini"
+
 // 
 
 // DECLARE FUNCTIONS AND CLASSES
@@ -104,8 +108,23 @@ int main(int argc, char *argv[])
     //
     // APPLY REGULAR EXPRESSIONS
     //
+
+    // Regular expressions used to translate fatty acids
+    // appyRegex must receive a mappedIndex, but in this case we do not want to 
+    // save processed compounds. They have to processed in the next regex-
+    std::vector <int> mappedIndexUnsaved = {}; 
+    RegexObject RE_FA_PN_Object;
+    RE_FA_PN_Object.readRegexINI(REGEX_FA_PN_INI_PATH);
+    RE_FA_PN_Object.applyRegex(compoundNamesColumn, mappedIndexUnsaved);
+
+    // Fatty acid oriented set of regular expressions
+    RegexObject RE_FA_Object;
+    RE_FA_Object.readRegexINI(REGEX_FA_INI_PATH);
+    RE_FA_Object.applyRegex(compoundNamesColumn, mappedIndex);
+
+    // 'Classical' set of regular expressions
     RegexObject REObject;
-    REObject.readRegexINI();
+    REObject.readRegexINI(REGEX_INI_PATH);
     REObject.applyRegex(compoundNamesColumn, mappedIndex);
 
     //
