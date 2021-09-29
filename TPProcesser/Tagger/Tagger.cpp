@@ -95,8 +95,8 @@ int main(int argc, char *argv[])
     if (config.getValue("microbial_compound") == "true")
     {
         std::vector<std::string> tagColumn;
-        tagColumn = taggerFromList(MICROBIAL_LIST_FILENAME, "MC", compoundNamesColumn);
-        msTable.addColumn(tagColumn, compoundColumnNameIdx+1, "Microbial");
+        tagColumn = taggerFromList(MICROBIAL_LIST_FILENAME, "MDM", compoundNamesColumn);
+        msTable.addColumn(tagColumn, compoundColumnNameIdx+1, "MDM");
     }
 
     if (config.getValue("natural_product") == "true")

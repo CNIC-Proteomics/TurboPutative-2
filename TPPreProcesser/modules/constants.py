@@ -58,7 +58,7 @@ TAGS_DICT = {
     "food": "Food",
     "drug": "Drug",
     "natural_product": "NaturalProduct",
-    "microbial_compound": "Microbial",
+    "microbial_compound": "MDM",
     "halogenated": "Halogenated",
     "peptide": "Peptide",
     "plant": "Plant"

@@ -214,7 +214,7 @@ void GenericTableHandler::writeTable(std::string outfilePath)
 
     log.str("");
     log << "\n** " <<  __DATE__ << " | " << __TIME__ << " | " << __FILE__ << "[" << __func__ << "]" << ":" << __LINE__ << " | ";
-    log << "Table was written";
+    log << "Table was written\n";
     std::cout << log.str();
     //LOG_F(INFO, &(log.str()[0]));
 }
@@ -254,7 +254,7 @@ void GenericTableHandler::fuseRows(std::vector<std::string> compareCol, std::vec
         nameIdx = it-columns.begin();
     }
 
-    // Sort rows by sorting first conserving column (only if there is a conserving column)
+    // Sort rows by sorting first comparing column (only if there is a comparing column)
     std::vector<int> sortedRowIdx;
     sortedRowIdx.reserve(nrows);
     if (compareIdx.size() > 0)
@@ -296,12 +296,7 @@ void GenericTableHandler::fuseRows(std::vector<std::string> compareCol, std::vec
     std::vector<int> processedRows;
     processedRows.reserve(nrows);
     for (int i=0; i<sortedRowIdx.size(); i++)
-    {
-        if (sortedRowIdx[i] == 205)
-        {
-            std::cout << "Prueba";
-        }
-        
+    {       
         // if this row has been processed, continue, pleeeease...
         std::vector<int>::iterator it = std::find(processedRows.begin(), processedRows.end(), sortedRowIdx[i]);
         if (it != processedRows.end()) continue;

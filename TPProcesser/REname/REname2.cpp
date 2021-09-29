@@ -13,7 +13,7 @@
 // IMPORT TurboPutative LIBRARIES
 #include "../lib/ConfigReader.hpp"
 #include "../lib/GenericTableHandler.hpp"
-
+#include "./lib/LipidMapsAbb.hpp"
 #include "./lib/RegexObject.hpp"
 #include "./lib/SortPeptide.hpp"
 
@@ -25,6 +25,7 @@
 #define REGEX_FA_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regexFA.ini"
 #define REGEX_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regex.ini"
 
+#define LMSD_TABLE_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/LMSD_abbreviation.tsv"
 // 
 
 // DECLARE FUNCTIONS AND CLASSES
@@ -57,7 +58,7 @@ int main(int argc, char *argv[])
     // get the name of the column containing compound names and its index
     std::string compoundColumnName = config.getValue("column_name");
     std::vector<std::string>& compoundNamesColumn = msTable.getColumn(compoundColumnName);
-
+    std::vector<std::string> compoundNamesOriginal = compoundNamesColumn;
 
     //
     // READ PARSED COMPOUND NAMES AND THEIR INDEX. THEN, REPLACE COMPOUNDS IN THE TABLE (USING THAT INDEX)
@@ -121,6 +122,11 @@ int main(int argc, char *argv[])
     RegexObject RE_FA_Object;
     RE_FA_Object.readRegexINI(REGEX_FA_INI_PATH);
     RE_FA_Object.applyRegex(compoundNamesColumn, mappedIndex);
+
+    // Search in LipidMaps
+    LipidMapsAbb lipidMapsAbb;
+    lipidMapsAbb.readLMSDTable(LMSD_TABLE_PATH);
+    lipidMapsAbb.findCompounds(compoundNamesColumn, compoundNamesOriginal, mappedIndex);
 
     // 'Classical' set of regular expressions
     RegexObject REObject;
