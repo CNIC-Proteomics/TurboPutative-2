@@ -132,8 +132,10 @@ class ResultWriter:
         considering configUser.ini
         """
 
-        # Get default and user names (then, we select one)
-        outFileName_default = f"{os.path.splitext(fileName)[0]}_{os.path.splitext(self.infile)[0]}.tsv"
+        # Get default and user names (then, we select one). Take default extension from output_format
+        outFileName_default = f"{os.path.splitext(fileName)[0]}_{os.path.splitext(self.infile)[0]}." + \
+                                self.configUser[module]['output_format'].strip()
+
         outFileName_user = self.configUser[module]['output_name'].strip()
 
         # If user name match regex, discard default
