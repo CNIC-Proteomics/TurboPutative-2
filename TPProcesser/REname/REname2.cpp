@@ -23,6 +23,7 @@
 
 #define REGEX_FA_PN_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regexFAPN.ini"
 #define REGEX_FA_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regexFA.ini"
+#define REGEX_BA_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regexBA.ini"
 #define REGEX_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regex.ini"
 
 #define LMSD_TABLE_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/LMSD_abbreviation.tsv"
@@ -123,6 +124,11 @@ int main(int argc, char *argv[])
     RE_FA_Object.readRegexINI(REGEX_FA_INI_PATH);
     RE_FA_Object.applyRegex(compoundNamesColumn, mappedIndex);
 
+    // Fatty acid oriented set of regular expressions
+    RegexObject RE_BA_Object;
+    RE_BA_Object.readRegexINI(REGEX_BA_INI_PATH);
+    RE_BA_Object.applyRegex(compoundNamesColumn, mappedIndex);
+
     // Search in LipidMaps
     LipidMapsAbb lipidMapsAbb;
     lipidMapsAbb.readLMSDTable(LMSD_TABLE_PATH);
@@ -158,7 +164,9 @@ int main(int argc, char *argv[])
     // FUSE ROWS WITH SAME INCHI-KEY (14CHARS) AND EXPERIMENTAL MASS PRESERVING THE REST BUT THE NAME
     //
 
-    // if inChiKey column is present, appy this fusion
+    /* DEACTIVATE INCHIKEY FUSION
+
+    // if inChiKey column is present, apply this fusion
     std::string inChiKeyColName = config.getValue("column_inchi_key");
 
     if (inChiKeyColName != "None")
@@ -190,6 +198,8 @@ int main(int argc, char *argv[])
 
         msTable.removeColumn(inChiKey_14_ColName);
     }
+
+    */
 
 
     //

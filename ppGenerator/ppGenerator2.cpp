@@ -23,6 +23,7 @@
 
 #define REGEX_FA_PN_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regexFAPN.ini"
 #define REGEX_FA_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regexFA.ini"
+#define REGEX_BA_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regexBA.ini"
 #define REGEX_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regex.ini"
 
 
@@ -99,6 +100,11 @@ int main(int argc, char *argv[])
     RegexObject RE_FA_Object;
     RE_FA_Object.readRegexINI(REGEX_FA_INI_PATH);
     RE_FA_Object.applyRegex(compoundNames, mappedIndex);
+
+    // Fatty acid oriented set of regular expressions
+    RegexObject RE_BA_Object;
+    RE_BA_Object.readRegexINI(REGEX_BA_INI_PATH);
+    RE_BA_Object.applyRegex(compoundNames, mappedIndex);
 
     // 'Classical' set of regular expressions
     RegexObject REObject;

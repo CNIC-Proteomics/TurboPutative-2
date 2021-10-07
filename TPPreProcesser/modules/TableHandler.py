@@ -109,6 +109,7 @@ class TPTable:
             '±': '+/-',
             'α': 'alpha',
             'β': 'beta',
+            'ß': 'beta',
             'γ': 'gamma',
             'δ': 'delta',
             'ω': 'omega'
