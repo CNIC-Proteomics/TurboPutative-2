@@ -60,7 +60,7 @@ def main(args, logging):
 
         # Remove fields with more than one compound
     colNameCompounds = moduleInfo.getColumnNameFromType(msTable.table.columns, "name")
-    msTable.table[colNameCompounds] = msTable.table[colNameCompounds].str.replace(r"(;|\s/\s|\n)(\n|.)*$", "", regex=True)
+    msTable.table[colNameCompounds] = msTable.table[colNameCompounds].str.replace(r"(;(\n|\s)|\s/\s\n?|\n).*$", "", regex=True)
 
         # Replace \n by \s
     msTable.removeLineFall()
