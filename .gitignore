@@ -35,6 +35,7 @@ TPProcesser/Tagger/Tagger
 /TPProcesser/lib/boost_1_76_0/*
 /TPProcesser/lib/boost_1_76_0.zip
 /TPProcesser/lib/boost_1_61_0/*
+/TPProcesser/lib/boost_1_78_0/*
 
 # goslin
 /TPProcesser/REname/lib/cppgoslin-1.1.2/examples

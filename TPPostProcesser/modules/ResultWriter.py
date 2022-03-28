@@ -11,6 +11,7 @@ import zipfile
 import configparser
 import re
 import sys
+import json
 
 #sys.path.append(os.path.join('./../../TPPreProcesser/'))
 import modules.constants as constants
@@ -38,6 +39,16 @@ class ResultWriter:
         self.tableFileNames = [] # list with the name of tables added (.tsv here)
         self.finalFileNames = [] # list with name of final files (.xlsx here)
 
+        # Link type of file with its basename (display plots needs to know this)
+        self.type2basename = {
+            'MS_experiment': "",
+            'FeatureInfo': "",
+            'Tagger': "",
+            'REname': "",
+            'RowMerger': "",
+            'TableMerger': ""
+        }
+
 
     def addTable(self, fileName, module=None):
         """
@@ -57,7 +68,11 @@ class ResultWriter:
 
 
         # write apart if selected
-        self.writeTable(fileName, df, module) if module else self.finalFileNames.append(fileName)
+        if module in ['MS_experiment', 'FeatureInfo']:
+            self.finalFileNames.append(fileName)
+            self.type2basename[module] = os.path.splitext(fileName)[0]
+        else:
+            self.writeTable(fileName, df, module)
         
         # add to combined results
         # self.addSheet(fileName, df)
@@ -95,6 +110,8 @@ class ResultWriter:
         # Set output name of the table (select between user and default)
         outFileName_noExt, outFileName_ext = self.getOutFileName(fileName, module)
         outFileName = outFileName_noExt + outFileName_ext
+
+        self.type2basename[module] = outFileName_noExt
 
         # Get output columns
         outColumnNames = self.getOutColumnNames(df.columns, module)
@@ -193,7 +210,7 @@ class ResultWriter:
 
     def zipResults(self):
         """
-        Make a zip with result tables
+        Make a zip with result tables and write type2basename.json
         """
         self.logging.info("Make a zip with all result files")
 
@@ -206,5 +223,10 @@ class ResultWriter:
         
         # remove files added to zip
         _ = [os.remove(os.path.join(self.workDir, i)) for i in self.finalFileNames]
+
+
+        # Save type2basename.json file
+        with open(os.path.join(self.workDir, "type2basename.json"), 'w') as f:
+            json.dump(self.type2basename, f)
         
         self.logging.info(f"Zip was created: {zipName}")

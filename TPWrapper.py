@@ -160,7 +160,7 @@ def main(args):
     # Sort .log, .ini and .tsv files
     #
 
-    extensions = ['ini', 'tsv', 'html', 'row']
+    extensions = ['ini', 'tsv', 'html', 'row', 'json']
     
     # Create folder and move files of that extension there
     _ = [ExtensionMover(i, args.workdir, logging) for i in extensions]

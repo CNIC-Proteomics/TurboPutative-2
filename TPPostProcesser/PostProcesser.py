@@ -47,9 +47,9 @@ def main(args, logging):
     resultWriter = ResultWriter(args.workdir, args.infile, logging)
 
     # --> Add input tables tables
-    resultWriter.addTable(args.infile, None) # add infile
+    resultWriter.addTable(args.infile, 'MS_experiment') # add infile
     
-    if "4" in args.workflow: resultWriter.addTable(args.tmfile, None) # add tmTable if module 4
+    if "4" in args.workflow: resultWriter.addTable(args.tmfile, 'FeatureInfo') # add tmTable if module 4
 
     # --> Add and write output tables
     for i, mod in enumerate(args.workflow):
