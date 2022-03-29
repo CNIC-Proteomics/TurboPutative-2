@@ -40,14 +40,14 @@ class ResultWriter:
         self.finalFileNames = [] # list with name of final files (.xlsx here)
 
         # Link type of file with its basename (display plots needs to know this)
-        self.type2basename = {
-            'MS_experiment': "",
-            'FeatureInfo': "",
-            'Tagger': "",
-            'REname': "",
-            'RowMerger': "",
-            'TableMerger': ""
-        }
+        self.type2basename = {}
+        #     'MS_experiment': "",
+        #     'FeatureInfo': "",
+        #     'Tagger': "",
+        #     'REname': "",
+        #     'RowMerger': "",
+        #     'TableMerger': ""
+        # }
 
 
     def addTable(self, fileName, module=None):
