@@ -27,7 +27,7 @@ COLUMN_NAMES = {
     "name": ["name"], 
     "mass": ["experimental mass", "apex m/z", "mz", "m/z"],
     "rt": ["rt [min]", "rt[s]", "rt[sec]", "rt", "retention time"],
-    "tags": ["food", "drug", "mdm", "nalogenated", "peptide", "plant", "naturalproduct"],
+    "tags": ["food", "drug", "mdm", "halogenated", "peptide", "plant", "naturalproduct"],
     "chemical_formula": ["chemical Formula", "formula"],
     "inchi_key": ["inchikey"],
     "adduct": ["adduct"],
