@@ -1,8 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2020 Dominik Kopczynski   -   dominik.kopczynski {at} isas.de
-                   Nils Hoffmann  -  nils.hoffmann {at} isas.de
+Copyright (c) the authors (listed in global LICENSE file)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,14 +26,17 @@ SOFTWARE.
 #ifndef GOSLIN_PARSER_EVENT_HANDLER_H
 #define GOSLIN_PARSER_EVENT_HANDLER_H
 
-#include "../domain/LipidEnums.h"
-#include "../domain/Adduct.h"
-#include "../domain/LipidAdduct.h"
-#include "../domain/LipidStructuralSubspecies.h"
-#include "../domain/LipidIsomericSubspecies.h"
-#include "../domain/FattyAcid.h"
-#include "BaseParserEventHandler.h"
+#include "cppgoslin/domain/LipidEnums.h"
+#include "cppgoslin/domain/Adduct.h"
+#include "cppgoslin/domain/LipidAdduct.h"
+#include "cppgoslin/domain/LipidCompleteStructure.h"
+#include "cppgoslin/domain/FattyAcid.h"
+#include "cppgoslin/domain/Headgroup.h"
+#include "cppgoslin/domain/Cycle.h"
+#include "cppgoslin/domain/FunctionalGroup.h"
+#include "cppgoslin/parser/LipidBaseParserEventHandler.h"
 #include <string>
+#include <math.h>
 #include <set>
 #include <map>
 #include <vector>
@@ -44,17 +46,19 @@ SOFTWARE.
 using namespace std;
 using namespace goslin;
 
-class GoslinParserEventHandler : public BaseParserEventHandler<LipidAdduct*> {
+class GoslinParserEventHandler : public LipidBaseParserEventHandler {
 public:
-    LipidLevel level;
-    LipidAdduct *lipid;
-    string head_group;
-    FattyAcid *lcb;
-    vector<FattyAcid*> *fa_list;
-    FattyAcid *current_fa;
-    Adduct *adduct;
     int db_position;
     string db_cistrans;
+    bool unspecified_ether;
+    char plasmalogen;
+    string mediator_function;
+    vector<int> mediator_function_positions;
+    bool mediator_suffix;
+    
+    static const map<string, int> mediator_FA;
+    static const map<string, int> mediator_DB;
+    static const map<string, int> mediator_trivial;
         
     GoslinParserEventHandler();
     ~GoslinParserEventHandler();
@@ -76,11 +80,25 @@ public:
     void add_adduct(TreeNode *node);
     void add_charge(TreeNode *node);
     void add_charge_sign(TreeNode *node);
+    void set_unspecified_ether(TreeNode *node);
+    void set_plasmalogen(TreeNode *node);
     
     void set_isomeric_level(TreeNode* node);
     void add_db_position(TreeNode* node);
     void add_db_position_number(TreeNode* node);
     void add_cistrans(TreeNode* node);
+    
+    void set_mediator(TreeNode *node);
+    void set_unstructured_mediator(TreeNode *node);
+    void set_trivial_mediator(TreeNode *node);
+    void set_mediator_carbon(TreeNode *node);
+    void set_mediator_db(TreeNode *node);
+    void set_mediator_function(TreeNode *node);
+    void set_mediator_function_position(TreeNode *node);
+    void add_mediator_function(TreeNode *node);
+    void add_mediator_suffix(TreeNode *node);
+    void add_mediator(TreeNode *node);
+    void set_mediator_tetranor(TreeNode *node);
 };
 
 

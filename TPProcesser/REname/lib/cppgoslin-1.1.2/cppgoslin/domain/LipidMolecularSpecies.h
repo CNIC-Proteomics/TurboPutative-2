@@ -23,32 +23,28 @@ SOFTWARE.
 */
 
 
-#ifndef SUM_FORMULA_PARSER_EVENT_HANDLER_H
-#define SUM_FORMULA_PARSER_EVENT_HANDLER_H
+#ifndef LIPID_MOLECULAR_SPECIES_H
+#define LIPID_MOLECULAR_SPECIES_H
 
-#include "cppgoslin/domain/Element.h"
-#include "cppgoslin/parser/BaseParserEventHandler.h"
+#include "cppgoslin/domain/FattyAcid.h"
 #include <string>
-#include <set>
-#include <map>
-#include <vector>
+#include "cppgoslin/domain/LipidExceptions.h"
+#include "cppgoslin/domain/LipidSpecies.h"
+#include "cppgoslin/domain/LipidEnums.h"
+#include <sstream>
+#include <typeinfo> 
 
 using namespace std;
 using namespace goslin;
 
-class SumFormulaParserEventHandler : public BaseParserEventHandler<ElementTable*> {
+class LipidMolecularSpecies : public LipidSpecies {
 public:
-    Element element;
-    int count;
-    
-    SumFormulaParserEventHandler();
-    void reset_parser(TreeNode *node);
-    void element_group_post_event(TreeNode *node);
-    void element_pre_event(TreeNode *node);
-    void single_element_group_pre_event(TreeNode *node);
-    void count_pre_event(TreeNode *node);
+    LipidMolecularSpecies (Headgroup* _headgroup, vector<FattyAcid*> *_fa);
+    string build_lipid_subspecies_name(LipidLevel level = NO_LEVEL);
+    string get_lipid_string(LipidLevel level = NO_LEVEL);
+    LipidLevel get_lipid_level();
+    ElementTable* get_elements();
+    void sort_fatty_acyl_chains();
 };
 
-
-#endif /* SUM_FORMULA_PARSER_EVENT_HANDLER_H */
-        
+#endif /* LIPID_MOLECULAR_SPECIES_H */

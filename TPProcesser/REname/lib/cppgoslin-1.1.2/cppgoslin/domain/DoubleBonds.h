@@ -23,32 +23,24 @@ SOFTWARE.
 */
 
 
-#ifndef SUM_FORMULA_PARSER_EVENT_HANDLER_H
-#define SUM_FORMULA_PARSER_EVENT_HANDLER_H
+#ifndef DOUBLEBONDS_H
+#define DOUBLEBONDS_H
 
-#include "cppgoslin/domain/Element.h"
-#include "cppgoslin/parser/BaseParserEventHandler.h"
 #include <string>
-#include <set>
 #include <map>
-#include <vector>
+#include "cppgoslin/domain/LipidExceptions.h"
 
 using namespace std;
-using namespace goslin;
 
-class SumFormulaParserEventHandler : public BaseParserEventHandler<ElementTable*> {
+class DoubleBonds {
 public:
-    Element element;
-    int count;
+    int num_double_bonds;
+    map<int, string> double_bond_positions;
     
-    SumFormulaParserEventHandler();
-    void reset_parser(TreeNode *node);
-    void element_group_post_event(TreeNode *node);
-    void element_pre_event(TreeNode *node);
-    void single_element_group_pre_event(TreeNode *node);
-    void count_pre_event(TreeNode *node);
+    DoubleBonds(int num = 0);
+    DoubleBonds(map<int, string> pos);
+    int get_num();
+    DoubleBonds* copy();
 };
 
-
-#endif /* SUM_FORMULA_PARSER_EVENT_HANDLER_H */
-        
+#endif /* DOUBLEBONDS_H */

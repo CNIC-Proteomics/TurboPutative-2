@@ -23,32 +23,49 @@ SOFTWARE.
 */
 
 
-#ifndef SUM_FORMULA_PARSER_EVENT_HANDLER_H
-#define SUM_FORMULA_PARSER_EVENT_HANDLER_H
+#ifndef LIPID_BASE_PARSER_EVENT_HANDLER_H
+#define LIPID_BASE_PARSER_EVENT_HANDLER_H
 
-#include "cppgoslin/domain/Element.h"
+#include "cppgoslin/domain/LipidEnums.h"
+#include "cppgoslin/domain/Adduct.h"
+#include "cppgoslin/domain/LipidAdduct.h"
+#include "cppgoslin/domain/LipidCompleteStructure.h"
+#include "cppgoslin/domain/FattyAcid.h"
+#include "cppgoslin/domain/Headgroup.h"
+#include "cppgoslin/domain/FunctionalGroup.h"
 #include "cppgoslin/parser/BaseParserEventHandler.h"
+#include "cppgoslin/parser/Parser.h"
 #include <string>
+#include <math.h>
 #include <set>
 #include <map>
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 using namespace goslin;
 
-class SumFormulaParserEventHandler : public BaseParserEventHandler<ElementTable*> {
+class LipidBaseParserEventHandler : public BaseParserEventHandler<LipidAdduct*> {
 public:
-    Element element;
-    int count;
-    
-    SumFormulaParserEventHandler();
-    void reset_parser(TreeNode *node);
-    void element_group_post_event(TreeNode *node);
-    void element_pre_event(TreeNode *node);
-    void single_element_group_pre_event(TreeNode *node);
-    void count_pre_event(TreeNode *node);
+    LipidLevel level;
+    string head_group;
+    FattyAcid *lcb;
+    vector<FattyAcid*> *fa_list;
+    FattyAcid *current_fa;
+    vector<HeadgroupDecorator*> *headgroup_decorators;
+    bool use_head_group;
+    static const set<string> SP_EXCEPTION_CLASSES;
+    Adduct* adduct;
+        
+    LipidBaseParserEventHandler();
+    ~LipidBaseParserEventHandler();
+    void set_lipid_level(LipidLevel _level);
+    bool sp_regular_lcb();
+    Headgroup* prepare_headgroup_and_checks();
+    LipidSpecies *assemble_lipid(Headgroup *headgroup);
 };
 
 
-#endif /* SUM_FORMULA_PARSER_EVENT_HANDLER_H */
+#endif /* LIPID_BASE_PARSER_EVENT_HANDLER_H */
         

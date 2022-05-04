@@ -1,8 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2020 Dominik Kopczynski   -   dominik.kopczynski {at} isas.de
-                   Nils Hoffmann  -  nils.hoffmann {at} isas.de
+Copyright (c) the authors (listed in global LICENSE file)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +26,9 @@ SOFTWARE.
 #ifndef SUM_FORMULA_PARSER_H
 #define SUM_FORMULA_PARSER_H
 
-#include "SumFormulaParserEventHandler.h"
-#include "Parser.h"
-#include "KnownGrammars.h"
+#include "cppgoslin/parser/SumFormulaParserEventHandler.h"
+#include "cppgoslin/parser/Parser.h"
+#include "cppgoslin/parser/KnownGrammars.h"
 using namespace std;
 
 
@@ -47,8 +46,8 @@ class SumFormulaParser : public Parser<ElementTable*> {
         ~SumFormulaParser();
         
     public:
-        SumFormulaParser(SumFormulaParser const&)               = delete;
-        void operator=(SumFormulaParser const&)  = delete;
+        SumFormulaParser(SumFormulaParser const&) = delete;
+        void operator=(SumFormulaParser const&) = delete;
 };
 
 

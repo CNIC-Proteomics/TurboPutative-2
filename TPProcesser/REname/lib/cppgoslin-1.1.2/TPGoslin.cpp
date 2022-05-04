@@ -103,9 +103,13 @@ int  main(int argc, char *argv[])
             for (FattyAcid* fa : fa_list)
             {
                 carbon_atoms += (*fa).num_carbon;
-                double_bonds += (*fa).num_double_bonds;
+                double_bonds += (*fa).double_bonds->num_double_bonds;
+                //double_bonds += (*fa).double_bonds.num_double_bonds;
                 // hydroxyl += (*fa).num_hydroxyl;
                 
+    
+
+                /* old goslin
                 std::string fa_bond_type = FattyAcid::suffix((*fa).lipid_FA_bond_type);
                 if (fa_bond_type == "a")
                 {
@@ -114,6 +118,17 @@ int  main(int argc, char *argv[])
                 {
                     bond_type = "P-";
                     double_bonds--;
+                }
+                */
+                std::string fa_bond_type = FattyAcid::get_prefix((*fa).lipid_FA_bond_type);
+                //std::string fa_bond_type = FattyAcid::suffix((*fa).lipid_FA_bond_type);
+                if (fa_bond_type == "O-")
+                {
+                    bond_type = "O-";
+                } else if (fa_bond_type == "P-")
+                {
+                    bond_type = "P-";
+                    //double_bonds--;
                 }
             }
 
@@ -138,7 +153,7 @@ int  main(int argc, char *argv[])
                 int Catoms = std::stoi(matchObject.str(2)) + std::stoi(matchObject.str(4));
                 int dBonds = std::stoi(matchObject.str(3)) + std::stoi(matchObject.str(5));
                 
-                std::string parsedCompound = matchObject.str(1) + "(" + std::to_string(Catoms) + ":" + std::to_string(dBonds) + ")";
+                std::string parsedCompound = matchObject.str(1) + " " + std::to_string(Catoms) + ":" + std::to_string(dBonds);
                 parsedCompoundNames.push_back(parsedCompound);
                 parsedCompoundIndexes.push_back(compoundIndexes[count]);
                 logFile << "** " << compound << "was manually parsed to " << parsedCompound << std::endl;

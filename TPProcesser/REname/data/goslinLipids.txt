@@ -13,9 +13,7 @@
 11-HDoHE
 11-HETE
 11,12-DHET
-11,12-DiHETrE
 11(12)-EET
-11,12-EpETrE
 12-HEPE
 12-HETE
 12-HHTrE
@@ -24,10 +22,8 @@
 13-HODE
 13-HOTrE
 14,15-DHET
-14,15-DiHETrE
 14(15)-EET
 14(15)-EpETE
-14,15-EpETrE
 15-HEPE
 15-HETE
 15d-PGJ2
@@ -42,63 +38,54 @@
 5,6-DiHETE
 5,6,15-LXA4
 5(6)-EET
-5,6-EpETrE
 6-Ac-Glc-GP
 8-HDoHE
 8-HETE
 8,9-DHET
-8,9-DiHETrE
 8(9)-EET
-8,9-EpETrE
 9-HEPE
 9-HETE
 9-HODE
 9-HOTrE
 9(10)-EpOME
 AA
-Arachidonic acid
-Arachidonic Acid
 Ac-O-9-GD1a
 Ac-O-9-GT1b
 Ac-O-9-GT3
 AC2SGL
+ACer
 alpha-LA
-ALA
 ANACARD
+ASG
+BA
 BMP
 Branched-Forssman
 CAR
 CATECHOL
 CDPDAG
-CDPDG
-CDP-DG
-CDP-DAG
 Cer
-Ceramide
 CerP
-C1P
 CL
 CoA
 CPA
-DAG
-DG
 DAT
+DG
 DGCC
 DGDG
+DGMG
 DHA
-Docosapentaenoic acid
 DHDG
 DLCL
 DMPE
 DSGG
 EPA
-Eicosapentaenoic acid
 EPC
-PE-Cer
 FA
 FAHFA
+FAL
 FMC-5
 FMC-6
+FOH
 Forssman
 Fuc-Branched-Forssman
 Fuc-GA1
@@ -130,13 +117,7 @@ GalNAc-GM1b
 GalNAc-GM1b(NeuGc)
 GalNAcGal(Fuc)-GA1
 GalNAcGalGb3Cer
-GB3Cer
-Gb3Cer
 GB4
-Gb4
-GB4Cer
-Tetrahexosylceramide
-Gb4Cer
 GD1
 GD1a
 GD1a alpha
@@ -182,52 +163,32 @@ GT1b alpha(NeuGc)
 GT1c
 GT2
 GT3
-Hex2Cer
+HC
 LacCer
+Hex2Cer
 Hex3Cer
 GB3
-Gb3
 HexCer
 GalCer
 GlcCer
-Glucosylceramide
 i-Forssman
 iGb3Cer
 iGb4Cer
 IPC
-PI-Cer
-LBPA
-LCB
-Sphingosine
-So
-Sphinganine
-Sa
-SPH
-Sph
-LCBP
-Sphingosine-1-phosphate
-S1P
-SPH-P
-SIP
-Sa1P
-Sphinganine-1-phosphate
 LCDPDAG
+LCL
 LDMPE
 Lex-GM1
 LHexCer
-HexSph
 Linoleic acid
+LIPC
 LMMPE
 LPA
-LysoPA
 LPC
-LysoPC
 LPE
-LysoPE
+LPE-N
 LPG
-LysoPG
 LPI
-LysoPI
 LPIM1
 LPIM2
 LPIM3
@@ -237,25 +198,23 @@ LPIM6
 LPIMIP
 LPIN
 LPS
-LysoPS
 LSM
-LysoSM
-SPC
 LTB4
 LTC4
 LTD4
 M(IP)2C
-MAG
-MG
 Maresin 1
+MG
 MGDG
+MGMG
 MHDG
 MIPC
-MLCL
 MMPE
 MSGG
+""
 NAE
 NAPE
+NAT
 NeuAc(alpha2-6)-MSGG
 NeuAc(alpha2-8)-MSGG
 NeuAcGal-iGb4Cer
@@ -273,6 +232,7 @@ PAT18
 PC
 PE
 PE-GlcDG
+PE-N
 PE-NMe
 PE-NMe2
 PEt
@@ -293,26 +253,20 @@ PIM5
 PIM6
 PIMIP
 PIP
-PIP[3']
-PIP[3]
-PIP[4']
-PIP[4]
-PIP[5']
-PIP[5]
+PIP(3')
+PIP(4')
+PIP(5')
 PIP2
-PIP2[3',4']
-PIP2[3,4]
-PIP2[3',5']
-PIP2[3,5]
-PIP2[4',5']
-PIP2[4,5]
+PIP2(3',4')
+PIP2(3',5')
+PIP2(4',5')
 PIP3
-PIP3[3',4',5']
-PIP3[3,4,5]
+PIP3(3',4',5')
 PnC
 PnE
 PPA
 PS
+PS-N
 PS-NAc
 PT
 Resolvin D1
@@ -322,28 +276,14 @@ Resolvin D5
 RESORCINOL
 SB1a
 SE 27:1
-ChE
-CE
-SE
-Cholesteryl ester
-Cholesterol ester
-Sterol ester
 SE 27:2
-Desmosterol ester
 SE 28:2
-Ergostadienol ester
 SE 28:3
-Ergosterol ester
 SE 29:2
-Stigmasterol ester
 SE 30:2
-Lanosterol ester
+SG
 SHex2Cer
-SulfoHex2Cer
 SHexCer
-SulfoHexCer
-(3'-sulfo)Galbeta-Cer
-(3'-sulfo)GalCer
 SLBPA
 SM
 SM1a
@@ -353,30 +293,24 @@ SO3-GalGb4Cer
 SO3-Gb4Cer
 SO3-GM1(NeuGc)
 SO3-iGb4Cer
+SPB
+SPBP
 SQDG
 SQMG
-ST 27:1;1
-CH
-FC
-Cholesterol
-Ch
-ST
-ST 27:2;1
-Desmosterol
-ST 28:2;1
-Ergostadienol
-ST 28:3;1
-Ergosterol
-ST 29:2;1
-Stigmasterol
-ST 30:2;1
-Lanosterol
+ST 27:1;O
+ST 27:2;O
+ST 28:2;O
+ST 28:3;O
+ST 29:2;O
+ST 30:2;O
+ST 28:1;O
+ST 29:1;O
 SulfoGalCer
-TAG
-TG
 tetranor-12-HETE
+TG
 TXB1
 TXB2
 TXB3
 UNDEFINED
+WD
 WE

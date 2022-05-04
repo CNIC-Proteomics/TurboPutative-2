@@ -1,8 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2020 Dominik Kopczynski   -   dominik.kopczynski {at} isas.de
-                   Nils Hoffmann  -  nils.hoffmann {at} isas.de
+Copyright (c) the authors (listed in global LICENSE file)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,9 +30,9 @@ SOFTWARE.
 #include <map>
 #include <string>
 #include <functional>
-#include "../domain/LipidExceptions.h"
-#include "../domain/StringFunctions.h"
-#include "ParserClasses.h"
+#include "cppgoslin/domain/LipidExceptions.h"
+#include "cppgoslin/domain/StringFunctions.h"
+#include "cppgoslin/parser/ParserClasses.h"
 
 template<class T>
 class Parser;
@@ -49,15 +48,17 @@ public:
     map<string, function<void(TreeNode *)>>* registered_events;
     set<string> rule_names;
     T content;
+    string debug;
+    string error_message;
+    bool word_in_grammar;
     
     BaseParserEventHandler();
     virtual ~BaseParserEventHandler();
     void sanity_check();
     void handle_event(string event_name, TreeNode *node);
-    static bool endswith(const string &main_str, const string &to_match);
 };
 
-#include "BaseParserEventHandler_impl.h"
+#include "cppgoslin/parser/BaseParserEventHandler_impl.h"
             
 #endif /*  BASE_PARSER_EVENT_HANDLER_H */
             

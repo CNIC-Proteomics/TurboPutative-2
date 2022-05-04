@@ -23,32 +23,28 @@ SOFTWARE.
 */
 
 
-#ifndef SUM_FORMULA_PARSER_EVENT_HANDLER_H
-#define SUM_FORMULA_PARSER_EVENT_HANDLER_H
+#ifndef LIPID_SN_POSITION_H
+#define LIPID_SN_POSITION_H
 
-#include "cppgoslin/domain/Element.h"
-#include "cppgoslin/parser/BaseParserEventHandler.h"
 #include <string>
-#include <set>
-#include <map>
+#include "cppgoslin/domain/LipidExceptions.h"
+#include "cppgoslin/domain/LipidEnums.h"
+#include "cppgoslin/domain/Headgroup.h"
+#include "cppgoslin/domain/LipidMolecularSpecies.h"
+#include <sstream>
 #include <vector>
+#include "cppgoslin/domain/FattyAcid.h"
+#include <map>
 
 using namespace std;
 using namespace goslin;
 
-class SumFormulaParserEventHandler : public BaseParserEventHandler<ElementTable*> {
+class LipidSnPosition : public LipidMolecularSpecies {
 public:
-    Element element;
-    int count;
     
-    SumFormulaParserEventHandler();
-    void reset_parser(TreeNode *node);
-    void element_group_post_event(TreeNode *node);
-    void element_pre_event(TreeNode *node);
-    void single_element_group_pre_event(TreeNode *node);
-    void count_pre_event(TreeNode *node);
+    LipidSnPosition(Headgroup* _headgroup, vector<FattyAcid*> *_fa = NULL);
+    string get_lipid_string(LipidLevel level = NO_LEVEL);
+    LipidLevel get_lipid_level();
 };
 
-
-#endif /* SUM_FORMULA_PARSER_EVENT_HANDLER_H */
-        
+#endif /* LIPID_SN_POSITION_H */

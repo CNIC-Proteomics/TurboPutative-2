@@ -1,8 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2020 Dominik Kopczynski   -   dominik.kopczynski {at} isas.de
-                   Nils Hoffmann  -  nils.hoffmann {at} isas.de
+Copyright (c) the authors (listed in global LICENSE file)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,15 +26,14 @@ SOFTWARE.
 #ifndef LIPID_ADDUCT_H
 #define LIPID_ADDUCT_H
 
-#include "FattyAcid.h"
+#include "cppgoslin/domain/FattyAcid.h"
 #include <string>
 #include <math.h>
-#include "LipidExceptions.h"
-#include "LipidEnums.h"
-#include "Element.h"
-#include "LipidSpecies.h"
-#include "Adduct.h"
-#include "Fragment.h"
+#include "cppgoslin/domain/LipidExceptions.h"
+#include "cppgoslin/domain/LipidEnums.h"
+#include "cppgoslin/domain/Element.h"
+#include "cppgoslin/domain/LipidSpecies.h"
+#include "cppgoslin/domain/Adduct.h"
 #include <sstream>
 
 using namespace std;
@@ -45,7 +43,6 @@ class LipidAdduct {
 public:
     LipidSpecies *lipid;
     Adduct *adduct;
-    Fragment *fragment;
     string sum_formula;
     
     LipidAdduct();
@@ -53,9 +50,12 @@ public:
     string get_lipid_string(LipidLevel level = NO_LEVEL);
     string get_lipid_fragment_string(LipidLevel level = NO_LEVEL);
     string get_class_name();
+    string get_extended_class();
     double get_mass();
     string get_sum_formula();
+    LipidLevel get_lipid_level();
     ElementTable* get_elements();
+    void sort_fatty_acyl_chains();
 };
 
 #endif /* LIPID_ADDUCT_H */

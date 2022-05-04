@@ -23,32 +23,41 @@ SOFTWARE.
 */
 
 
-#ifndef SUM_FORMULA_PARSER_EVENT_HANDLER_H
-#define SUM_FORMULA_PARSER_EVENT_HANDLER_H
+#ifndef CYCLE_H
+#define CYCLE_H
 
+#include "cppgoslin/domain/FunctionalGroup.h"
+#include "cppgoslin/domain/LipidExceptions.h"
 #include "cppgoslin/domain/Element.h"
-#include "cppgoslin/parser/BaseParserEventHandler.h"
-#include <string>
-#include <set>
-#include <map>
+#include "cppgoslin/domain/LipidEnums.h"
+#include "cppgoslin/domain/DoubleBonds.h"
+#include "cppgoslin/domain/StringFunctions.h"
 #include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <cctype>
+#include <string>
 
 using namespace std;
 using namespace goslin;
 
-class SumFormulaParserEventHandler : public BaseParserEventHandler<ElementTable*> {
+class Cycle : public FunctionalGroup {
 public:
-    Element element;
-    int count;
+    int cycle;
+    int start;
+    int end;
+    vector<Element>* bridge_chain;
     
-    SumFormulaParserEventHandler();
-    void reset_parser(TreeNode *node);
-    void element_group_post_event(TreeNode *node);
-    void element_pre_event(TreeNode *node);
-    void single_element_group_pre_event(TreeNode *node);
-    void count_pre_event(TreeNode *node);
+    Cycle(int _cycle, int _start = -1, int _end = -1, DoubleBonds* _double_bonds = 0, map<string, vector<FunctionalGroup*> >* _functional_groups = 0, vector<Element>* _bridgeChain = 0);
+    ~Cycle();
+    Cycle* copy();
+    int get_double_bonds();
+    void rearrange_functional_groups(FunctionalGroup *parent, int shift);
+    void shift_positions(int shift);
+    void compute_elements();
+    void add_position(int pos);
+    string to_string(LipidLevel level);
 };
 
-
-#endif /* SUM_FORMULA_PARSER_EVENT_HANDLER_H */
-        
+#endif /* CYCLE_H */
