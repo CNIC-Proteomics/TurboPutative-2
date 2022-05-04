@@ -1,0 +1,10 @@
+1) make install in Goslin
+    - Generate .so
+    - Generate includes (.hpp) of parser and domain
+    - Complete src with all .cpp (parser and domain)
+
+2) Copy .hpp (includes) and .cpp. Ignore .so.
+    - We are interested in the .cpp of the src and in includes generated after installing
+    - Compile all these .cpp indicating the path to includes (-I)
+
+3) Some files are generated during installation so be careful...

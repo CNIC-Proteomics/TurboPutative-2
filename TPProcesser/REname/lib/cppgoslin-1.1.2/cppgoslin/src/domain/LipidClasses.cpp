@@ -1,0 +1,936 @@
+/* DO NOT CHANGE THE FILE, IT IS AUTOMATICALLY GENERATED */
+
+/*
+MIT License
+
+Copyright (c) the authors (listed in global LICENSE file)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+#include "cppgoslin/domain/LipidEnums.h"
+#include "cppgoslin/domain/FunctionalGroup.h"
+
+using namespace std;
+using namespace goslin;
+
+
+LipidClasses::LipidClasses(){
+    lipid_classes = {
+    {AA, {FA, "AA", "Unsaturated fatty acids [FA0103]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"AA", "Arachidonic acid", "Arachidonic Acid"} } },
+
+    {AC2SGL, {SL, "AC2SGL", "Acyltrehaloses [SL03]", 2, 2, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 36}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 14}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"AC2SGL"} } },
+
+    {ACER, {SP, "ACer", "Ceramide [SP0204]", 2, 2, {"SP_Exception"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ACer"} } },
+
+    {AC_O_9_GD1A, {SP, "Ac-O-9-GD1a", "Globoside", 2, 2, {}, {{ELEMENT_C, 50}, {ELEMENT_C13, 0}, {ELEMENT_H, 78}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 37}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Ac-O-9-GD1a"} } },
+
+    {AC_O_9_GT1B, {SP, "Ac-O-9-GT1b", "Globoside", 2, 2, {}, {{ELEMENT_C, 61}, {ELEMENT_C13, 0}, {ELEMENT_H, 94}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 45}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Ac-O-9-GT1b"} } },
+
+    {AC_O_9_GT3, {SP, "Ac-O-9-GT3", "Globoside", 2, 2, {}, {{ELEMENT_C, 47}, {ELEMENT_C13, 0}, {ELEMENT_H, 71}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 35}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Ac-O-9-GT3"} } },
+
+    {ALPHA_LA, {FA, "alpha-LA", "Fatty acids and conjugates [FA01]", 0, 0, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"alpha-LA", "ALA"} } },
+
+    {ANACARD, {PK, "ANACARD", "Anacardic acids and derivatives [PK1504]", 2, 2, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ANACARD"} } },
+
+    {ASG, {ST, "ASG", "Monoradylglycosterols", 1, 1, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ASG"} } },
+
+    {BA, {ST, "BA", "Bile acids and derivatives [ST04]", 1, 1, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"BA"} } },
+
+    {BMP, {GP, "BMP", "Monoacylglycerophosphomonoradylglycerols [GP0410]", 4, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"BMP", "LBPA"} } },
+
+    {BRANCHED_FORSSMAN, {SP, "Branched-Forssman", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 80}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 35}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Branched-Forssman"} } },
+
+    {CAR, {FA, "CAR", "Fatty acyl carnitines [FA0707]", 1, 1, {}, {{ELEMENT_C, 7}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"CAR"} } },
+
+    {CATECHOL, {PK, "CATECHOL", "Alkyl catechols and derivatives [PK1502]", 2, 2, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"CATECHOL"} } },
+
+    {CDPDAG, {GP, "CDPDAG", "CDP-diacylglycerols [GP1301]", 2, 2, {}, {{ELEMENT_C, 12}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"CDPDAG", "CDPDG", "CDP-DG", "CDP-DAG"} } },
+
+    {CER, {SP, "Cer", "Ceramides [SP02]", 2, 2, {"SP_Exception"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Cer", "Ceramide"} } },
+
+    {CERP, {SP, "CerP", "Ceramide 1-phosphates [SP0205]", 2, 2, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 2}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"CerP", "C1P"} } },
+
+    {CL, {GP, "CL", "Glycerophosphoglycerophosphoglycerols [GP12]", 4, 4, {"Cardio"}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"CL"} } },
+
+    {COA, {FA, "CoA", "Fatty acyl CoAs [FA0705]", 1, 1, {}, {{ELEMENT_C, 21}, {ELEMENT_C13, 0}, {ELEMENT_H, 35}, {ELEMENT_H2, 0}, {ELEMENT_N, 7}, {ELEMENT_N15, 0}, {ELEMENT_O, 16}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 3}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"CoA"} } },
+
+    {CPA, {GP, "CPA", "Glycerophosphoinositolglycans [GP15]", 1, 1, {}, {{ELEMENT_C, 3}, {ELEMENT_C13, 0}, {ELEMENT_H, 6}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"CPA"} } },
+
+    {DAT, {SL, "DAT", "Acyltrehaloses [SL03]", 2, 2, {}, {{ELEMENT_C, 15}, {ELEMENT_C13, 0}, {ELEMENT_H, 26}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 11}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DAT"} } },
+
+    {DG, {GL, "DG", "Diacylglycerols [GL0201]", 3, 2, {}, {{ELEMENT_C, 3}, {ELEMENT_C13, 0}, {ELEMENT_H, 5}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DG", "DAG"} } },
+
+    {DGCC, {GL, "DGCC", "Other Glycerolipids [GL00]", 2, 2, {}, {{ELEMENT_C, 10}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DGCC"} } },
+
+    {DGDG, {GL, "DGDG", "Glycosyldiradylglycerols [GL05]", 2, 2, {"Sugar"}, {{ELEMENT_C, 15}, {ELEMENT_C13, 0}, {ELEMENT_H, 26}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DGDG"} } },
+
+    {DGMG, {GL, "DGMG", "Glycosyldiradylglycerols [GL05]", 2, 1, {"Sugar"}, {{ELEMENT_C, 15}, {ELEMENT_C13, 0}, {ELEMENT_H, 26}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DGMG"} } },
+
+    {DHA, {FA, "DHA", "Unsaturated fatty acids [FA0103]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DHA", "Docosapentaenoic acid"} } },
+
+    {DHDG, {GL, "DHDG", "Dihexosyldiacylglycerol", 2, 2, {}, {{ELEMENT_C, 15}, {ELEMENT_C13, 0}, {ELEMENT_H, 26}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DHDG"} } },
+
+    {DLCL, {GP, "DLCL", "Glycerophosphoglycerophosphoglycerols [GP12]", 4, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DLCL"} } },
+
+    {DMPE, {GP, "DMPE", "Dimethylphosphatidylethanolamine", 2, 2, {}, {{ELEMENT_C, 7}, {ELEMENT_C13, 0}, {ELEMENT_H, 16}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DMPE"} } },
+
+    {DSGG, {SP, "DSGG", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 54}, {ELEMENT_C13, 0}, {ELEMENT_H, 86}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 41}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"DSGG"} } },
+
+    {EPA, {FA, "EPA", "Unsaturated fatty acids [FA0103]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"EPA", "Eicosapentaenoic acid"} } },
+
+    {EPC, {SP, "EPC", "Ceramide phosphoethanolamines [SP0302]", 2, 2, {}, {{ELEMENT_C, 2}, {ELEMENT_C13, 0}, {ELEMENT_H, 7}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"EPC", "PE-Cer", "CerPE"} } },
+
+    {FAA, {FA, "FA", "Fatty acids and conjugates [FA01]", 1, 1, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"FA", "fatty acid"} } },
+
+    {FAHFA, {FA, "FAHFA", "Wax monoesters [FA0701]", 1, 1, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"FAHFA"} } },
+
+    {FAL, {FA, "FAL", "Fatty aldehydes [FA06]", 1, 1, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"FAL"} } },
+
+    {FMC_5, {SP, "FMC-5", "Simple Glc series [SP0501]", 2, 2, {}, {{ELEMENT_C, 16}, {ELEMENT_C13, 0}, {ELEMENT_H, 21}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 10}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"FMC-5"} } },
+
+    {FMC_6, {SP, "FMC-6", "Neutral glycosphingolipids [SP05]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 11}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"FMC-6"} } },
+
+    {FOH, {FA, "FOH", "Fatty alcohols [FA05]", 1, 1, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 3}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"FOH", "fatty alcohol"} } },
+
+    {FORSSMAN, {SP, "Forssman", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 34}, {ELEMENT_C13, 0}, {ELEMENT_H, 57}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 25}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Forssman"} } },
+
+    {FUCGALGB3CER, {SP, "FucGalGb3Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 30}, {ELEMENT_C13, 0}, {ELEMENT_H, 51}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 24}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"FucGalGb3Cer"} } },
+
+    {FUC_BRANCHED_FORSSMAN, {SP, "Fuc-Branched-Forssman", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 54}, {ELEMENT_C13, 0}, {ELEMENT_H, 90}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 39}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Fuc-Branched-Forssman"} } },
+
+    {FUC_GA1, {SP, "Fuc-GA1", "Globoside", 2, 2, {}, {{ELEMENT_C, 32}, {ELEMENT_C13, 0}, {ELEMENT_H, 54}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 24}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Fuc-GA1"} } },
+
+    {FUC_GAL_GAL_IGB4CER, {SP, "Fuc(Gal)Gal-iGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 44}, {ELEMENT_C13, 0}, {ELEMENT_H, 74}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 34}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Fuc(Gal)Gal-iGb4Cer"} } },
+
+    {FUC_GAL__GM1, {SP, "Fuc(Gal)-GM1", "Acidic glycosphingolipids [SP06]", 2, 2, {}, {{ELEMENT_C, 49}, {ELEMENT_C13, 0}, {ELEMENT_H, 80}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 37}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Fuc(Gal)-GM1"} } },
+
+    {FUC_GD1B, {SP, "Fuc-GD1b", "Globoside", 2, 2, {}, {{ELEMENT_C, 54}, {ELEMENT_C13, 0}, {ELEMENT_H, 86}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 40}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Fuc-GD1b"} } },
+
+    {FUC_GM1, {SP, "Fuc-GM1", "Globoside", 2, 2, {}, {{ELEMENT_C, 43}, {ELEMENT_C13, 0}, {ELEMENT_H, 70}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 32}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Fuc-GM1"} } },
+
+    {FUC_GM1_NEUGC_, {SP, "Fuc-GM1(NeuGc)", "Globoside", 2, 2, {}, {{ELEMENT_C, 43}, {ELEMENT_C13, 0}, {ELEMENT_H, 70}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 33}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Fuc-GM1(NeuGc)"} } },
+
+    {FUC_IGB3CER, {SP, "Fuc-iGb3Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 24}, {ELEMENT_C13, 0}, {ELEMENT_H, 41}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 19}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Fuc-iGb3Cer"} } },
+
+    {GA1, {SP, "GA1", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 44}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 20}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GA1"} } },
+
+    {GA2, {SP, "GA2", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 34}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 15}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GA2"} } },
+
+    {GALCER, {SP, "GalCer", "Neutral glycosphingolipids [SP05]", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalCer"} } },
+
+    {GALGALGALGB3CER, {SP, "GalGalGalGb3Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 36}, {ELEMENT_C13, 0}, {ELEMENT_H, 61}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 30}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalGalGalGb3Cer"} } },
+
+    {GALGALGB3CER, {SP, "GalGalGb3Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 30}, {ELEMENT_C13, 0}, {ELEMENT_H, 51}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 25}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalGalGb3Cer"} } },
+
+    {GALGALNAC_GM1B_NEUGC_, {SP, "GalGalNAc-GM1b(NeuGc)", "Globoside", 2, 2, {}, {{ELEMENT_C, 51}, {ELEMENT_C13, 0}, {ELEMENT_H, 83}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 39}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalGalNAc-GM1b(NeuGc)"} } },
+
+    {GALGAL_GD1B, {SP, "GalGal-GD1b", "Globoside", 2, 2, {}, {{ELEMENT_C, 60}, {ELEMENT_C13, 0}, {ELEMENT_H, 96}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 46}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalGal-GD1b"} } },
+
+    {GALGB3CER, {SP, "GalGb3Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 24}, {ELEMENT_C13, 0}, {ELEMENT_H, 41}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 20}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalGb3Cer"} } },
+
+    {GALGB4CER, {SP, "GalGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 32}, {ELEMENT_C13, 0}, {ELEMENT_H, 54}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 25}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalGb4Cer"} } },
+
+    {GALGLCNAC_GALGB4CER, {SP, "GalGlcNAc-GalGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 46}, {ELEMENT_C13, 0}, {ELEMENT_H, 77}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 35}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalGlcNAc-GalGb4Cer"} } },
+
+    {GALNACGALGB3CER, {SP, "GalNAcGalGb3Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 32}, {ELEMENT_C13, 0}, {ELEMENT_H, 54}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 25}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalNAcGalGb3Cer"} } },
+
+    {GALNACGAL_FUC__GA1, {SP, "GalNAcGal(Fuc)-GA1", "Globoside", 2, 2, {}, {{ELEMENT_C, 46}, {ELEMENT_C13, 0}, {ELEMENT_H, 77}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 34}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalNAcGal(Fuc)-GA1"} } },
+
+    {GALNAC_GD1A, {SP, "GalNAc-GD1a", "Globoside", 2, 2, {}, {{ELEMENT_C, 56}, {ELEMENT_C13, 0}, {ELEMENT_H, 89}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 41}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalNAc-GD1a"} } },
+
+    {GALNAC_GD1A_NEUAC_NEUGC_, {SP, "GalNAc-GD1a(NeuAc/NeuGc)", "Globoside", 2, 2, {}, {{ELEMENT_C, 56}, {ELEMENT_C13, 0}, {ELEMENT_H, 89}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 42}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalNAc-GD1a(NeuAc/NeuGc)"} } },
+
+    {GALNAC_GD1A_NEUGC_NEUAC_, {SP, "GalNAc-GD1a(NeuGc/NeuAc)", "Globoside", 2, 2, {}, {{ELEMENT_C, 56}, {ELEMENT_C13, 0}, {ELEMENT_H, 89}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 42}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalNAc-GD1a(NeuGc/NeuAc)"} } },
+
+    {GALNAC_GM1, {SP, "GalNAc-GM1", "Globoside", 2, 2, {}, {{ELEMENT_C, 45}, {ELEMENT_C13, 0}, {ELEMENT_H, 73}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 33}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalNAc-GM1"} } },
+
+    {GALNAC_GM1B, {SP, "GalNAc-GM1b", "Globoside", 2, 2, {}, {{ELEMENT_C, 45}, {ELEMENT_C13, 0}, {ELEMENT_H, 73}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 33}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalNAc-GM1b"} } },
+
+    {GALNAC_GM1B_NEUGC_, {SP, "GalNAc-GM1b(NeuGc)", "Globoside", 2, 2, {}, {{ELEMENT_C, 45}, {ELEMENT_C13, 0}, {ELEMENT_H, 73}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 34}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GalNAc-GM1b(NeuGc)"} } },
+
+    {GAL_FUC__GA1, {SP, "Gal(Fuc)-GA1", "Globoside", 2, 2, {}, {{ELEMENT_C, 38}, {ELEMENT_C13, 0}, {ELEMENT_H, 64}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 29}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Gal(Fuc)-GA1"} } },
+
+    {GAL_FUC__GD1B, {SP, "Gal(Fuc)-GD1b", "Globoside", 2, 2, {}, {{ELEMENT_C, 60}, {ELEMENT_C13, 0}, {ELEMENT_H, 96}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 45}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Gal(Fuc)-GD1b"} } },
+
+    {GAL_GD1B, {SP, "Gal-GD1b", "Globoside", 2, 2, {}, {{ELEMENT_C, 54}, {ELEMENT_C13, 0}, {ELEMENT_H, 86}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 41}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Gal-GD1b"} } },
+
+    {GAL_IGB4CER, {SP, "Gal-iGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 32}, {ELEMENT_C13, 0}, {ELEMENT_H, 54}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 25}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Gal-iGb4Cer"} } },
+
+    {GB3, {SP, "GB3", "Neutral glycosphingolipids [SP05]", 2, 2, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 31}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 15}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GB3", "Gb3", "GB3Cer", "Gb3Cer"} } },
+
+    {GB4, {SP, "GB4", "Neutral glycosphingolipids [SP05]", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 44}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 20}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GB4", "Gb4", "Tetrahexosylceramide", "Gb4Cer", "GB4Cer"} } },
+
+    {GD1, {SP, "GD1", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 76}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 36}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD1"} } },
+
+    {GD1A, {SP, "GD1a", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 76}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 36}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD1a"} } },
+
+    {GD1A_ALPHA, {SP, "GD1a alpha", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 76}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 36}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD1a alpha"} } },
+
+    {GD1A_NEUAC_NEUGC_, {SP, "GD1a(NeuAc/NeuGc)", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 76}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 36}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD1a(NeuAc/NeuGc)"} } },
+
+    {GD1A_NEUGC_NEUAC_, {SP, "GD1a(NeuGc/NeuAc)", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 76}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 37}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD1a(NeuGc/NeuAc)"} } },
+
+    {GD1A_NEUGC_NEUGC_, {SP, "GD1a(NeuGc/NeuGc)", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 76}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 38}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD1a(NeuGc/NeuGc)"} } },
+
+    {GD1B, {SP, "GD1b", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 76}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 36}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD1b"} } },
+
+    {GD1C, {SP, "GD1c", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 76}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 36}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD1c"} } },
+
+    {GD1C_NEUGC_NEUGC_, {SP, "GD1c(NeuGc/NeuGc)", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 48}, {ELEMENT_C13, 0}, {ELEMENT_H, 76}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 38}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD1c(NeuGc/NeuGc)"} } },
+
+    {GD2, {SP, "GD2", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 42}, {ELEMENT_C13, 0}, {ELEMENT_H, 66}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 31}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD2"} } },
+
+    {GD3, {SP, "GD3", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 34}, {ELEMENT_C13, 0}, {ELEMENT_H, 55}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 26}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GD3"} } },
+
+    {GLCCER, {SP, "GlcCer", "Neutral glycosphingolipids [SP05]", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GlcCer"} } },
+
+    {GLCNACGB3CER, {SP, "GlcNAcGb3Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 44}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 20}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GlcNAcGb3Cer"} } },
+
+    {GLCNAC_GALGB4CER, {SP, "GlcNAc-GalGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 40}, {ELEMENT_C13, 0}, {ELEMENT_H, 67}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 30}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GlcNAc-GalGb4Cer"} } },
+
+    {GLC_DG, {GL, "Glc-DG", "Glycosyldiradylglycerols [GL05]", 2, 2, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Glc-DG"} } },
+
+    {GLC_GP, {GP, "Glc-GP", "Diacylglycosylglycerophospholipids [GP1401]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 17}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 11}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Glc-GP"} } },
+
+    {GLOBO_A, {SP, "Globo-A", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 46}, {ELEMENT_C13, 0}, {ELEMENT_H, 77}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 34}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Globo-A"} } },
+
+    {GLOBO_B, {SP, "Globo-B", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 44}, {ELEMENT_C13, 0}, {ELEMENT_H, 74}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 34}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Globo-B"} } },
+
+    {GLOBO_H, {SP, "Globo-H", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 38}, {ELEMENT_C13, 0}, {ELEMENT_H, 64}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 29}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Globo-H"} } },
+
+    {GLOBO_LEX_9, {SP, "Globo-Lex-9", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 52}, {ELEMENT_C13, 0}, {ELEMENT_H, 87}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 39}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Globo-Lex-9"} } },
+
+    {GM1, {SP, "GM1", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 37}, {ELEMENT_C13, 0}, {ELEMENT_H, 60}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 28}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GM1"} } },
+
+    {GM1B, {SP, "GM1b", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 37}, {ELEMENT_C13, 0}, {ELEMENT_H, 60}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 28}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GM1b"} } },
+
+    {GM1B_NEUGC_, {SP, "GM1b(NeuGc)", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 37}, {ELEMENT_C13, 0}, {ELEMENT_H, 60}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 29}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GM1b(NeuGc)"} } },
+
+    {GM1_ALPHA, {SP, "GM1 alpha", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 37}, {ELEMENT_C13, 0}, {ELEMENT_H, 60}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 28}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GM1 alpha"} } },
+
+    {GM1_NEUGC_, {SP, "GM1(NeuGc)", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 37}, {ELEMENT_C13, 0}, {ELEMENT_H, 60}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 28}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GM1(NeuGc)"} } },
+
+    {GM2, {SP, "GM2", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 31}, {ELEMENT_C13, 0}, {ELEMENT_H, 50}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 23}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GM2"} } },
+
+    {GM2_NEUGC_, {SP, "GM2(NeuGc)", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 31}, {ELEMENT_C13, 0}, {ELEMENT_H, 50}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 24}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GM2(NeuGc)"} } },
+
+    {GM3, {SP, "GM3", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 23}, {ELEMENT_C13, 0}, {ELEMENT_H, 38}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 18}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GM3"} } },
+
+    {GM4, {SP, "GM4", "Gangliosides [SP0601]", 2, 2, {}, {{ELEMENT_C, 17}, {ELEMENT_C13, 0}, {ELEMENT_H, 28}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GM4"} } },
+
+    {GP1, {SP, "GP1", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 81}, {ELEMENT_C13, 0}, {ELEMENT_H, 124}, {ELEMENT_H2, 0}, {ELEMENT_N, 6}, {ELEMENT_N15, 0}, {ELEMENT_O, 60}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GP1"} } },
+
+    {GP1C, {SP, "GP1c", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 81}, {ELEMENT_C13, 0}, {ELEMENT_H, 124}, {ELEMENT_H2, 0}, {ELEMENT_N, 6}, {ELEMENT_N15, 0}, {ELEMENT_O, 60}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GP1c"} } },
+
+    {GP1C_ALPHA, {SP, "GP1c alpha", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 81}, {ELEMENT_C13, 0}, {ELEMENT_H, 124}, {ELEMENT_H2, 0}, {ELEMENT_N, 6}, {ELEMENT_N15, 0}, {ELEMENT_O, 60}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GP1c alpha"} } },
+
+    {GP_NAE, {FA, "GP-NAE", "Glycerophosphoethanolamine", 1, 1, {}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 13}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GP-NAE"} } },
+
+    {GQ1, {SP, "GQ1", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 70}, {ELEMENT_C13, 0}, {ELEMENT_H, 108}, {ELEMENT_H2, 0}, {ELEMENT_N, 5}, {ELEMENT_N15, 0}, {ELEMENT_O, 52}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GQ1"} } },
+
+    {GQ1B, {SP, "GQ1b", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 70}, {ELEMENT_C13, 0}, {ELEMENT_H, 108}, {ELEMENT_H2, 0}, {ELEMENT_N, 5}, {ELEMENT_N15, 0}, {ELEMENT_O, 52}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GQ1b"} } },
+
+    {GQ1B_ALPHA, {SP, "GQ1b alpha", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 70}, {ELEMENT_C13, 0}, {ELEMENT_H, 108}, {ELEMENT_H2, 0}, {ELEMENT_N, 5}, {ELEMENT_N15, 0}, {ELEMENT_O, 52}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GQ1b alpha"} } },
+
+    {GQ1C, {SP, "GQ1c", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 70}, {ELEMENT_C13, 0}, {ELEMENT_H, 108}, {ELEMENT_H2, 0}, {ELEMENT_N, 5}, {ELEMENT_N15, 0}, {ELEMENT_O, 52}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GQ1c"} } },
+
+    {GT1, {SP, "GT1", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 59}, {ELEMENT_C13, 0}, {ELEMENT_H, 92}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 44}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GT1"} } },
+
+    {GT1A, {SP, "GT1a", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 59}, {ELEMENT_C13, 0}, {ELEMENT_H, 92}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 44}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GT1a"} } },
+
+    {GT1A_ALPHA, {SP, "GT1a alpha", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 59}, {ELEMENT_C13, 0}, {ELEMENT_H, 92}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 44}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GT1a alpha"} } },
+
+    {GT1B, {SP, "GT1b", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 59}, {ELEMENT_C13, 0}, {ELEMENT_H, 92}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 44}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GT1b"} } },
+
+    {GT1B_ALPHA, {SP, "GT1b alpha", "Globoside", 2, 2, {}, {{ELEMENT_C, 59}, {ELEMENT_C13, 0}, {ELEMENT_H, 92}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 44}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GT1b alpha"} } },
+
+    {GT1B_ALPHA_NEUGC_, {SP, "GT1b alpha(NeuGc)", "Globoside", 2, 2, {}, {{ELEMENT_C, 59}, {ELEMENT_C13, 0}, {ELEMENT_H, 92}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 45}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GT1b alpha(NeuGc)"} } },
+
+    {GT1C, {SP, "GT1c", "Ganglioside", 2, 2, {}, {{ELEMENT_C, 59}, {ELEMENT_C13, 0}, {ELEMENT_H, 92}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 44}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GT1c"} } },
+
+    {GT2, {SP, "GT2", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 53}, {ELEMENT_C13, 0}, {ELEMENT_H, 82}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 39}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GT2"} } },
+
+    {GT3, {SP, "GT3", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 45}, {ELEMENT_C13, 0}, {ELEMENT_H, 69}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 34}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"GT3"} } },
+
+    {HC, {FA, "HC", "Hydrocarbons [FA11]", 1, 1, {"HC"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"HC"} } },
+
+    {HEX2CER, {SP, "Hex2Cer", "Neutral glycosphingolipids [SP05]", 2, 2, {}, {{ELEMENT_C, 12}, {ELEMENT_C13, 0}, {ELEMENT_H, 21}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 10}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Hex2Cer"} } },
+
+    {HEX3CER, {SP, "Hex3Cer", "Neutral glycosphingolipids [SP05]", 2, 2, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 31}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 15}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Hex3Cer"} } },
+
+    {HEXCER, {SP, "HexCer", "Neutral glycosphingolipids [SP05]", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"HexCer", "Glucosylceramide"} } },
+
+    {IGB3CER, {SP, "iGb3Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 31}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 15}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"iGb3Cer"} } },
+
+    {IGB4CER, {SP, "iGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 44}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 20}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"iGb4Cer"} } },
+
+    {IPC, {SP, "IPC", "Ceramide phosphoinositols [SP0303]", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 12}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"IPC", "PI-Cer"} } },
+
+    {I_FORSSMAN, {SP, "i-Forssman", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 34}, {ELEMENT_C13, 0}, {ELEMENT_H, 57}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 25}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"i-Forssman"} } },
+
+    {L10_HDOHE, {FA, "10-HDoHE", "Other Docosanoids [FA0400]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"10-HDoHE"} } },
+
+    {L11_12_DHET, {FA, "11,12-DHET", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 34}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"11,12-DHET", "11,12-DiHETrE"} } },
+
+    {L11_12__EET, {FA, "11(12)-EET", "Epoxyeicosatrienoic acids [FA0308]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"11(12)-EET", "11,12-EpETrE"} } },
+
+    {L11_HDOHE, {FA, "11-HDoHE", "Other Docosanoids [FA0400]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"11-HDoHE"} } },
+
+    {L11_HETE, {FA, "11-HETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"11-HETE"} } },
+
+    {L12_13__EPOME, {FA, "12(13)-EpOME", "Other Octadecanoids [FA0200]", 0, 0, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"12(13)-EpOME"} } },
+
+    {L12_HEPE, {FA, "12-HEPE", "Hydroxy/hydroperoxyeicosapentaenoic acids [FA0307]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"12-HEPE"} } },
+
+    {L12_HETE, {FA, "12-HETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"12-HETE"} } },
+
+    {L12_HHTRE, {FA, "12-HHTrE", "Hydroxy/hydroperoxyeicosatrienoic acids [FA0305]", 0, 0, {}, {{ELEMENT_C, 17}, {ELEMENT_C13, 0}, {ELEMENT_H, 28}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"12-HHTrE"} } },
+
+    {L12_OXOETE, {FA, "12-OxoETE", "Fatty acids and conjugates [FA01]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"12-OxoETE"} } },
+
+    {L13_HODE, {FA, "13-HODE", "Other Octadecanoids [FA0200]", 0, 0, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"13-HODE", "13R-HODE"} } },
+
+    {L13_HOTRE, {FA, "13-HOTrE", "Other Octadecanoids [FA0200]", 0, 0, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"13-HOTrE"} } },
+
+    {L14_15_DHET, {FA, "14,15-DHET", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 34}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"14,15-DHET", "14,15-DiHETrE"} } },
+
+    {L14_15__EET, {FA, "14(15)-EET", "Epoxyeicosatrienoic acids [FA0308]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"14(15)-EET", "14,15-EpETrE"} } },
+
+    {L14_15__EPETE, {FA, "14(15)-EpETE", "Other Eicosanoids [FA0300]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"14(15)-EpETE"} } },
+
+    {L15D_PGJ2, {FA, "15d-PGJ2", "Prostaglandins [FA0301]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 28}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"15d-PGJ2"} } },
+
+    {L15_HEPE, {FA, "15-HEPE", "Hydroxy/hydroperoxyeicosapentaenoic acids [FA0307]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"15-HEPE"} } },
+
+    {L15_HETE, {FA, "15-HETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"15-HETE"} } },
+
+    {L16_HDOHE, {FA, "16-HDoHE", "Other Docosanoids [FA0400]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"16-HDoHE"} } },
+
+    {L16_HETE, {FA, "16-HETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"16-HETE"} } },
+
+    {L18_HEPE, {FA, "18-HEPE", "Hydroxy/hydroperoxyeicosapentaenoic acids [FA0307]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"18-HEPE"} } },
+
+    {L1_O_BEHENOYL_CER, {SP, "1-O-behenoyl-Cer", "Acylceramides [SP0204]", 2, 2, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 43}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"1-O-behenoyl-Cer"} } },
+
+    {L1_O_CARBOCEROYL_CER, {SP, "1-O-carboceroyl-Cer", "Acylceramides [SP0204]", 2, 2, {}, {{ELEMENT_C, 28}, {ELEMENT_C13, 0}, {ELEMENT_H, 55}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"1-O-carboceroyl-Cer"} } },
+
+    {L1_O_CEROTOYL_CER, {SP, "1-O-cerotoyl-Cer", "Acylceramides [SP0204]", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 51}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"1-O-cerotoyl-Cer"} } },
+
+    {L1_O_EICOSANOYL_CER, {SP, "1-O-eicosanoyl-Cer", "Acylceramides [SP0204]", 2, 2, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 39}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"1-O-eicosanoyl-Cer"} } },
+
+    {L1_O_LIGNOCEROYL_CER, {SP, "1-O-lignoceroyl-Cer", "Acylceramides [SP0204]", 2, 2, {}, {{ELEMENT_C, 24}, {ELEMENT_C13, 0}, {ELEMENT_H, 47}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"1-O-lignoceroyl-Cer"} } },
+
+    {L1_O_MYRISTOYL_CER, {SP, "1-O-myristoyl-Cer", "Acylceramides [SP0204]", 2, 2, {}, {{ELEMENT_C, 14}, {ELEMENT_C13, 0}, {ELEMENT_H, 27}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"1-O-myristoyl-Cer"} } },
+
+    {L1_O_PALMITOYL_CER, {SP, "1-O-palmitoyl-Cer", "Acylceramides [SP0204]", 2, 2, {}, {{ELEMENT_C, 16}, {ELEMENT_C13, 0}, {ELEMENT_H, 31}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"1-O-palmitoyl-Cer"} } },
+
+    {L1_O_STEAROYL_CER, {SP, "1-O-stearoyl-Cer", "Acylceramides [SP0204]", 2, 2, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 35}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"1-O-stearoyl-Cer"} } },
+
+    {L1_O_TRICOSANOYL_CER, {SP, "1-O-tricosanoyl-Cer", "Acylceramides [SP0204]", 2, 2, {}, {{ELEMENT_C, 70}, {ELEMENT_C13, 0}, {ELEMENT_H, 59}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"1-O-tricosanoyl-Cer"} } },
+
+    {L5_12_DIHETE, {FA, "5,12-DiHETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"5,12-DiHETE"} } },
+
+    {L5_6_15_LXA4, {FA, "5,6,15-LXA4", "Lipoxins [FA0304]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"5,6,15-LXA4"} } },
+
+    {L5_6_DIHETE, {FA, "5,6-DiHETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"5,6-DiHETE"} } },
+
+    {L5_6__EET, {FA, "5(6)-EET", "Epoxyeicosatrienoic acids [FA0308]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"5(6)-EET", "5,6-EpETrE"} } },
+
+    {L5_HEPE, {FA, "5-HEPE", "Hydroxy/hydroperoxyeicosapentaenoic acids [FA0307]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"5-HEPE"} } },
+
+    {L5_HETE, {FA, "5-HETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"5-HETE"} } },
+
+    {L5_HPETE, {FA, "5-HpETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"5-HpETE"} } },
+
+    {L5_OXOETE, {FA, "5-OxoETE", "Fatty acids and conjugates [FA01]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"5-OxoETE"} } },
+
+    {L6_AC_GLC_GP, {GP, "6-Ac-Glc-GP", "Glycosylglycerophospholipids [GP14]", 2, 2, {}, {{ELEMENT_C, 11}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 12}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"6-Ac-Glc-GP"} } },
+
+    {L8_9_DHET, {FA, "8,9-DHET", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 34}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"8,9-DHET", "8,9-DiHETrE"} } },
+
+    {L8_9__EET, {FA, "8(9)-EET", "Epoxyeicosatrienoic acids [FA0308]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"8(9)-EET", "8,9-EpETrE"} } },
+
+    {L8_HDOHE, {FA, "8-HDoHE", "Other Docosanoids [FA0400]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"8-HDoHE"} } },
+
+    {L8_HETE, {FA, "8-HETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"8-HETE"} } },
+
+    {L9_10__EPOME, {FA, "9(10)-EpOME", "Other Octadecanoids [FA0200]", 0, 0, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"9(10)-EpOME"} } },
+
+    {L9_HEPE, {FA, "9-HEPE", "Hydroxy/hydroperoxyeicosapentaenoic acids [FA0307]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"9-HEPE"} } },
+
+    {L9_HETE, {FA, "9-HETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"9-HETE"} } },
+
+    {L9_HODE, {FA, "9-HODE", "Other Octadecanoids [FA0200]", 0, 0, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"9-HODE"} } },
+
+    {L9_HOTRE, {FA, "9-HOTrE", "Other Octadecanoids [FA0200]", 0, 0, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"9-HOTrE"} } },
+
+    {LACCER, {SP, "LacCer", "Neutral glycosphingolipids [SP05]", 2, 2, {}, {{ELEMENT_C, 12}, {ELEMENT_C13, 0}, {ELEMENT_H, 21}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 10}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LacCer"} } },
+
+    {LCDPDAG, {GP, "LCDPDAG", "Lyso-CDP-diacylglycerol", 2, 1, {"Lyso"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LCDPDAG"} } },
+
+    {LCL, {GP, "LCL", "Glycerophosphoglycerophosphoglycerols [GP12]", 4, 3, {"Lyso", "Cardio"}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LCL", "MLCL"} } },
+
+    {LDMPE, {GP, "LDMPE", "Lysodimethylphosphatidylethanolamine", 2, 1, {"Lyso"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LDMPE"} } },
+
+    {LEX_GM1, {SP, "Lex-GM1", "Globoside", 2, 2, {}, {{ELEMENT_C, 57}, {ELEMENT_C13, 0}, {ELEMENT_H, 93}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 42}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Lex-GM1"} } },
+
+    {LHEXCER, {SP, "LHexCer", "Hexosylsphingosine", 2, 1, {"Lyso"}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LHexCer", "HexSph"} } },
+
+    {LINOLEIC_ACID, {FA, "Linoleic acid", "Unsaturated fatty acids [FA0103]", 0, 0, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Linoleic acid"} } },
+
+    {LIPC, {SP, "LIPC", "", 1, 1, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LIPC"} } },
+
+    {LMMPE, {GP, "LMMPE", "Lysomonomethylphosphatidylethanolamine", 2, 1, {"Lyso"}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 15}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LMMPE"} } },
+
+    {LPA, {GP, "LPA", "Monoacylglycerophosphates [GP1005]", 2, 1, {"Lyso"}, {{ELEMENT_C, 3}, {ELEMENT_C13, 0}, {ELEMENT_H, 7}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPA", "LysoPA", "lysoPA"} } },
+
+    {LPC, {GP, "LPC", "Monoacylglycerophosphocholines [GP0105]", 2, 1, {"Lyso", "Ether"}, {{ELEMENT_C, 8}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPC", "LysoPC", "lysoPC"} } },
+
+    {LPE, {GP, "LPE", "Monoacylglycerophosphoethanolamines [GP0205]", 2, 1, {"Lyso", "Ether"}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 12}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPE", "LysoPE", "lysoPE"} } },
+
+    {LPE_N, {GP, "LPE-N", "N-acyl/alkyl PE", 2, 1, {"Lyso"}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPE-N", "LPE-N(Alk)", "LPE-N(FA)"} } },
+
+    {LPG, {GP, "LPG", "Monoacylglycerophosphoglycerols [GP0405]", 2, 1, {"Lyso"}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 13}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPG", "LysoPG", "lysoPG"} } },
+
+    {LPI, {GP, "LPI", "Monoacylglycerophosphoinositols [GP0605]", 2, 1, {"Lyso"}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 17}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 11}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPI", "LysoPI", "lysoPI"} } },
+
+    {LPIM1, {GP, "LPIM1", "Monoacylglycerophosphoinositolglycans [GP1504]", 2, 1, {"Lyso"}, {{ELEMENT_C, 15}, {ELEMENT_C13, 0}, {ELEMENT_H, 27}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 16}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPIM1"} } },
+
+    {LPIM2, {GP, "LPIM2", "Monoacylglycerophosphoinositolglycans [GP1504]", 2, 1, {"Lyso"}, {{ELEMENT_C, 21}, {ELEMENT_C13, 0}, {ELEMENT_H, 37}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 21}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPIM2"} } },
+
+    {LPIM3, {GP, "LPIM3", "Monoacylglycerophosphoinositolglycans [GP1504]", 2, 1, {"Lyso"}, {{ELEMENT_C, 27}, {ELEMENT_C13, 0}, {ELEMENT_H, 47}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 26}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPIM3"} } },
+
+    {LPIM4, {GP, "LPIM4", "Monoacylglycerophosphoinositolglycans [GP1504]", 2, 1, {"Lyso"}, {{ELEMENT_C, 34}, {ELEMENT_C13, 0}, {ELEMENT_H, 59}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 30}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPIM4"} } },
+
+    {LPIM5, {GP, "LPIM5", "Monoacylglycerophosphoinositolglycans [GP1504]", 2, 1, {"Lyso"}, {{ELEMENT_C, 39}, {ELEMENT_C13, 0}, {ELEMENT_H, 67}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 36}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPIM5"} } },
+
+    {LPIM6, {GP, "LPIM6", "Monoacylglycerophosphoinositolglycans [GP1504]", 2, 1, {"Lyso"}, {{ELEMENT_C, 45}, {ELEMENT_C13, 0}, {ELEMENT_H, 77}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 41}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPIM6"} } },
+
+    {LPIMIP, {GP, "LPIMIP", "Lysophosphatidylinositol- mannosideinositolphosphate", 2, 1, {"Lyso"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPIMIP"} } },
+
+    {LPIN, {GP, "LPIN", "Lysophosphatidylinositol-glucosamine", 2, 1, {"Lyso"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPIN"} } },
+
+    {LPS, {GP, "LPS", "Monoacylglycerophosphoserines [GP0305]", 2, 1, {"Lyso"}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 12}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LPS", "LysoPS", "lysoPS"} } },
+
+    {LSM, {SP, "LSM", "Ceramides [SP02]", 1, 1, {"Lyso"}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LSM", "SPC", "LysoSM"} } },
+
+    {LTB4, {FA, "LTB4", "Leukotrienes [FA0302]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LTB4"} } },
+
+    {LTC4, {FA, "LTC4", "Eicosanoid derivatives", 0, 0, {}, {{ELEMENT_C, 30}, {ELEMENT_C13, 0}, {ELEMENT_H, 47}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 9}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LTC4"} } },
+
+    {LTD4, {FA, "LTD4", "Leukotrienes [FA0302]", 0, 0, {}, {{ELEMENT_C, 25}, {ELEMENT_C13, 0}, {ELEMENT_H, 40}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"LTD4"} } },
+
+    {L_3__SULFO_LACCER, {SP, "(3'-sulfo)LacCer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 12}, {ELEMENT_C13, 0}, {ELEMENT_H, 20}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"(3'-sulfo)LacCer"} } },
+
+    {L_FUC_IGB3CER, {SP, "(Fuc)iGb3Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 24}, {ELEMENT_C13, 0}, {ELEMENT_H, 41}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 19}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"(Fuc)iGb3Cer"} } },
+
+    {MARESIN_1, {FA, "Maresin 1", "Maresins [FA0405]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Maresin 1"} } },
+
+    {MG, {GL, "MG", "Monoacylglycerols [GL0101]", 3, 1, {}, {{ELEMENT_C, 3}, {ELEMENT_C13, 0}, {ELEMENT_H, 5}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"MG", "MAG"} } },
+
+    {MGDG, {GL, "MGDG", "Glycosyldiacylglycerols [GL0501]", 2, 2, {"Sugar"}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 16}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"MGDG"} } },
+
+    {MGMG, {GL, "MGMG", "Glycosyldiacylglycerols [GL0501]", 2, 1, {"Sugar"}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 16}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"MGMG"} } },
+
+    {MHDG, {GL, "MHDG", "Monohexosyldiacylglycerol", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 16}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"MHDG"} } },
+
+    {MIPC, {SP, "MIPC", "Phosphosphingolipids [SP03]", 2, 2, {}, {{ELEMENT_C, 12}, {ELEMENT_C13, 0}, {ELEMENT_H, 22}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 13}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"MIPC"} } },
+
+    {MMPE, {GP, "MMPE", "Monomethylphosphatidylethanolamine", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"MMPE"} } },
+
+    {MSGG, {SP, "MSGG", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 43}, {ELEMENT_C13, 0}, {ELEMENT_H, 70}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 33}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"MSGG"} } },
+
+    {M_IP_2C, {SP, "M(IP)2C", "Phosphosphingolipids [SP03]", 2, 2, {}, {{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 33}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 21}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"M(IP)2C", "MIP2C"} } },
+
+    {NA, {FA, "NA", "Fatty amides", 2, 2, {"Amide"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NA"} } },
+
+    {NAE, {FA, "NAE", "Fatty amides", 1, 1, {}, {{ELEMENT_C, 2}, {ELEMENT_C13, 0}, {ELEMENT_H, 6}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NAE"} } },
+
+    {NAPE, {GP, "NAPE", "Diacylglycerophosphoethanolamines [GP0201]", 3, 3, {}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NAPE"} } },
+
+    {NAT, {FA, "NAT", "N-acyl amines [FA0802]", 1, 1, {}, {{ELEMENT_C, 2}, {ELEMENT_C13, 0}, {ELEMENT_H, 6}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NAT"} } },
+
+    {NEUACGAL_IGB4CER, {SP, "NeuAcGal-iGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 43}, {ELEMENT_C13, 0}, {ELEMENT_H, 70}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 33}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NeuAcGal-iGb4Cer"} } },
+
+    {NEUAC_ALPHA2_6__MSGG, {SP, "NeuAc(alpha2-6)-MSGG", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 54}, {ELEMENT_C13, 0}, {ELEMENT_H, 86}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 41}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NeuAc(alpha2-6)-MSGG"} } },
+
+    {NEUAC_ALPHA2_8__MSGG, {SP, "NeuAc(alpha2-8)-MSGG", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 54}, {ELEMENT_C13, 0}, {ELEMENT_H, 86}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 41}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NeuAc(alpha2-8)-MSGG"} } },
+
+    {NEUGCNEUGC_GALGB4CER, {SP, "NeuGcNeuGc-GalGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 54}, {ELEMENT_C13, 0}, {ELEMENT_H, 86}, {ELEMENT_H2, 0}, {ELEMENT_N, 3}, {ELEMENT_N15, 0}, {ELEMENT_O, 43}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NeuGcNeuGc-GalGb4Cer"} } },
+
+    {NEUGC_GALGB4CER, {SP, "NeuGc-GalGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 43}, {ELEMENT_C13, 0}, {ELEMENT_H, 70}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 34}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NeuGc-GalGb4Cer"} } },
+
+    {NEUGC_LACNAC_GM1_NEUGC_, {SP, "NeuGc-LacNAc-GM1(NeuGc)", "Globoside", 2, 2, {}, {{ELEMENT_C, 62}, {ELEMENT_C13, 0}, {ELEMENT_H, 99}, {ELEMENT_H2, 0}, {ELEMENT_N, 4}, {ELEMENT_N15, 0}, {ELEMENT_O, 48}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NeuGc-LacNAc-GM1(NeuGc)"} } },
+
+    {NOR1, {SP, "NOR1", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 32}, {ELEMENT_C13, 0}, {ELEMENT_H, 54}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 25}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NOR1"} } },
+
+    {NOR2, {SP, "NOR2", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 46}, {ELEMENT_C13, 0}, {ELEMENT_H, 77}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 35}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NOR2"} } },
+
+    {NORINT, {SP, "NORint", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 40}, {ELEMENT_C13, 0}, {ELEMENT_H, 67}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 30}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"NORint"} } },
+
+    {PA, {GP, "PA", "Glycerophosphates [GP10]", 2, 2, {}, {{ELEMENT_C, 3}, {ELEMENT_C13, 0}, {ELEMENT_H, 7}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PA", "GPA", "PlsA"} } },
+
+    {PALMITIC_ACID, {FA, "Palmitic acid", "Straight chain fatty acids [FA0101]", 0, 0, {}, {{ELEMENT_C, 16}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Palmitic acid"} } },
+
+    {PARA_FORSSMAN, {SP, "Para-Forssman", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 34}, {ELEMENT_C13, 0}, {ELEMENT_H, 57}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 25}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Para-Forssman"} } },
+
+    {PAT16, {SL, "PAT16", "Acyltrehaloses [SL03]", 4, 4, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PAT16"} } },
+
+    {PAT18, {SL, "PAT18", "Acyltrehaloses [SL03]", 4, 4, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PAT18"} } },
+
+    {PC, {GP, "PC", "Glycerophosphocholines [GP01]", 2, 2, {"Ether"}, {{ELEMENT_C, 8}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PC", "GPC", "GPCho", "PlsCho"} } },
+
+    {PE, {GP, "PE", "Glycerophosphoethanolamines [GP02]", 2, 2, {"Ether"}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 12}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PE", "GPE", "GPEtn", "PlsEtn"} } },
+
+    {PET, {GP, "PEt", "Glycerophosphoethanolamines [GP02]", 2, 2, {}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PEt"} } },
+
+    {PE_GLCDG, {GL, "PE-GlcDG", "Glycosylalkylacylglycerols [GL0502]", 2, 2, {}, {{ELEMENT_C, 11}, {ELEMENT_C13, 0}, {ELEMENT_H, 22}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 11}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PE-GlcDG"} } },
+
+    {PE_N, {GP, "PE-N", "N-acyl/alkyl PE", 2, 2, {}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PE-N", "PE-N(Alk)", "PE-N(FA)"} } },
+
+    {PE_NME, {GP, "PE-NMe", "Diacylglycerophosphoethanolamines [GP0201]", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PE-NMe"} } },
+
+    {PE_NME2, {GP, "PE-NMe2", "Diacylglycerophosphoethanolamines [GP0201]", 2, 2, {}, {{ELEMENT_C, 7}, {ELEMENT_C13, 0}, {ELEMENT_H, 16}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PE-NMe2"} } },
+
+    {PG, {GP, "PG", "Glycerophosphoglycerols [GP04]", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 13}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PG", "GPG", "GPGro", "PlsGro"} } },
+
+    {PGB2, {FA, "PGB2", "Prostaglandins [FA0301]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PGB2"} } },
+
+    {PGD2, {FA, "PGD2", "Prostaglandins [FA0301]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PGD2"} } },
+
+    {PGE2, {FA, "PGE2", "Prostaglandins [FA0301]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PGE2"} } },
+
+    {PGF2ALPHA, {FA, "PGF2alpha", "Prostaglandins [FA0301]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 34}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PGF2alpha"} } },
+
+    {PGI2, {FA, "PGI2", "Prostaglandins [FA0301]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PGI2"} } },
+
+    {PGP, {GP, "PGP", "Glycerophosphoglycerophosphates [GP05]", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 11}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PGP"} } },
+
+    {PHENOL, {PK, "PHENOL", "Alkyl phenols and derivatives [PK1501]", 2, 2, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PHENOL"} } },
+
+    {PI, {GP, "PI", "Glycerophosphoinositols [GP06]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 17}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 11}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PI", "GPI", "GPIns", "PlsIns"} } },
+
+    {PIM1, {GP, "PIM1", "Glycerophosphoinositolglycans [GP15]", 2, 2, {}, {{ELEMENT_C, 15}, {ELEMENT_C13, 0}, {ELEMENT_H, 27}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 16}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIM1"} } },
+
+    {PIM2, {GP, "PIM2", "Glycerophosphoinositolglycans [GP15]", 2, 2, {}, {{ELEMENT_C, 21}, {ELEMENT_C13, 0}, {ELEMENT_H, 37}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 21}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIM2"} } },
+
+    {PIM3, {GP, "PIM3", "Glycerophosphoinositolglycans [GP15]", 2, 2, {}, {{ELEMENT_C, 27}, {ELEMENT_C13, 0}, {ELEMENT_H, 47}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 26}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIM3"} } },
+
+    {PIM4, {GP, "PIM4", "Glycerophosphoinositolglycans [GP15]", 2, 2, {}, {{ELEMENT_C, 33}, {ELEMENT_C13, 0}, {ELEMENT_H, 57}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 31}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIM4"} } },
+
+    {PIM5, {GP, "PIM5", "Glycerophosphoinositolglycans [GP15]", 2, 2, {}, {{ELEMENT_C, 39}, {ELEMENT_C13, 0}, {ELEMENT_H, 67}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 36}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIM5"} } },
+
+    {PIM6, {GP, "PIM6", "Glycerophosphoinositolglycans [GP15]", 2, 2, {}, {{ELEMENT_C, 45}, {ELEMENT_C13, 0}, {ELEMENT_H, 77}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 41}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIM6"} } },
+
+    {PIMIP, {GP, "PIMIP", "Phosphatidylinositol mannoside inositol phosphate", 2, 2, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIMIP"} } },
+
+    {PIP, {GP, "PIP", "Diacylglycerophosphoinositol monophosphates [GP0701]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 14}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP"} } },
+
+    {PIP2, {GP, "PIP2", "Diacylglycerophosphoinositol bisphosphates [GP0801]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 17}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 3}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP2"} } },
+
+    {PIP2_3__4__, {GP, "PIP2(3',4')", "Diacylglycerophosphoinositol bisphosphates [GP0801]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 17}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 3}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP2(3',4')", "PIP2[3,4]", "PIP2[3',4']"} } },
+
+    {PIP2_3__5__, {GP, "PIP2(3',5')", "Diacylglycerophosphoinositol bisphosphates [GP0801]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 17}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 3}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP2(3',5')", "PIP2[3,5]", "PIP2[3',5']"} } },
+
+    {PIP2_4__5__, {GP, "PIP2(4',5')", "Diacylglycerophosphoinositol bisphosphates [GP0801]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 17}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 3}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP2(4',5')", "PIP2[4,5]", "PIP2[4',5']"} } },
+
+    {PIP3, {GP, "PIP3", "Diacylglycerophosphoinositol trisphosphates [GP0901]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 20}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 20}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 4}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP3"} } },
+
+    {PIP3_3__4__5__, {GP, "PIP3(3',4',5')", "Diacylglycerophosphoinositol trisphosphates [GP0901]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 20}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 20}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 4}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP3(3',4',5')", "PIP3[3,4,5]", "PIP3[3',4',5']"} } },
+
+    {PIP_3__, {GP, "PIP(3')", "Diacylglycerophosphoinositol monophosphates [GP0701]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 14}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP(3')", "PIP[3]", "PIP[3']"} } },
+
+    {PIP_4__, {GP, "PIP(4')", "Diacylglycerophosphoinositol monophosphates [GP0701]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 14}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP(4')", "PIP[4]", "PIP[4']"} } },
+
+    {PIP_5__, {GP, "PIP(5')", "Diacylglycerophosphoinositol monophosphates [GP0701]", 2, 2, {}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 14}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PIP(5')", "PIP[5]", "PIP[5']"} } },
+
+    {PNC, {GP, "PnC", "Glycerophosphonocholines [GP16]", 2, 2, {}, {{ELEMENT_C, 8}, {ELEMENT_C13, 0}, {ELEMENT_H, 18}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PnC"} } },
+
+    {PNE, {GP, "PnE", "Glycerophosphoinositolglycans [GP15]", 2, 2, {}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 12}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PnE"} } },
+
+    {PPA, {GP, "PPA", "Diacylglyceropyrophosphates [GP1101]", 2, 2, {}, {{ELEMENT_C, 3}, {ELEMENT_C13, 0}, {ELEMENT_H, 8}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 9}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 2}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PPA"} } },
+
+    {PS, {GP, "PS", "Glycerophosphoserines [GP03]", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 12}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PS", "GPS", "GPSer", "PlsSer"} } },
+
+    {PS_N, {GP, "PS-N", "N-acyl/alkyl PS", 2, 2, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PS-N", "PS-N(Alk)", "PS-N(FA)"} } },
+
+    {PS_NAC, {GP, "PS-NAc", "Diacylglycerophosphoserines [GP0301]", 3, 3, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PS-NAc"} } },
+
+    {PT, {GP, "PT", "Other Glycerophospholipids [GP00]", 2, 2, {}, {{ELEMENT_C, 7}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"PT"} } },
+
+    {RESOLVIN_D1, {FA, "Resolvin D1", "Resolvin Ds [FA0403]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Resolvin D1"} } },
+
+    {RESOLVIN_D2, {FA, "Resolvin D2", "Resolvin Ds [FA0403]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Resolvin D2"} } },
+
+    {RESOLVIN_D3, {FA, "Resolvin D3", "Resolvin Ds [FA0403]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Resolvin D3"} } },
+
+    {RESOLVIN_D5, {FA, "Resolvin D5", "Resolvin Ds [FA0403]", 0, 0, {}, {{ELEMENT_C, 22}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"Resolvin D5"} } },
+
+    {RESORCINOL, {PK, "RESORCINOL", "Alkyl resorcinols and derivatives [PK1503]", 2, 2, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"RESORCINOL"} } },
+
+    {SB1A, {SP, "SB1a", "Globoside", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 42}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 26}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 2}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SB1a"} } },
+
+    {SE_27_1, {ST, "SE 27:1", "Sterol esters [ST0102]", 1, 1, {"Ester"}, {{ELEMENT_C, 27}, {ELEMENT_C13, 0}, {ELEMENT_H, 45}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SE 27:1", "ChE", "CE", "Cholesteryl ester", "Cholesterol ester", "SE", "Sterol ester", "ChoE"} } },
+
+    {SE_27_2, {ST, "SE 27:2", "Sterol esters [ST0102]", 1, 1, {"Ester"}, {{ELEMENT_C, 27}, {ELEMENT_C13, 0}, {ELEMENT_H, 43}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SE 27:2", "Desmosterol ester"} } },
+
+    {SE_28_2, {ST, "SE 28:2", "Sterol esters [ST0102]", 1, 1, {"Ester"}, {{ELEMENT_C, 28}, {ELEMENT_C13, 0}, {ELEMENT_H, 45}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SE 28:2", "Ergostadienol ester"} } },
+
+    {SE_28_3, {ST, "SE 28:3", "Sterol esters [ST0102]", 1, 1, {"Ester"}, {{ELEMENT_C, 28}, {ELEMENT_C13, 0}, {ELEMENT_H, 43}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SE 28:3", "Ergosterol ester"} } },
+
+    {SE_29_2, {ST, "SE 29:2", "Sterol esters [ST0102]", 1, 1, {"Ester"}, {{ELEMENT_C, 29}, {ELEMENT_C13, 0}, {ELEMENT_H, 47}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SE 29:2", "Stigmasterol ester"} } },
+
+    {SE_30_2, {ST, "SE 30:2", "Sterol esters [ST0102]", 1, 1, {"Ester"}, {{ELEMENT_C, 30}, {ELEMENT_C13, 0}, {ELEMENT_H, 49}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SE 30:2", "Lanosterol ester"} } },
+
+    {SG, {ST, "SG", "Sterylglycosides", 1, 1, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SG"} } },
+
+    {SHEX2CER, {SP, "SHex2Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 12}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 14}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SHex2Cer", "SulfoHex2Cer"} } },
+
+    {SHEXCER, {SP, "SHexCer", "Sulfoglycosphingolipids (sulfatides) [SP0602]", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SHexCer", "SulfoHexCer", "(3'-sulfo)Galbeta-Cer", "(3'-sulfo)GalCer"} } },
+
+    {SLBPA, {GP, "SLBPA", "Diacylglycerophosphomonoradylglycerols [GP0409]", 4, 3, {"Lyso"}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SLBPA"} } },
+
+    {SM, {SP, "SM", "Ceramide phosphocholines (sphingomyelins) [SP0301]", 2, 2, {}, {{ELEMENT_C, 5}, {ELEMENT_C13, 0}, {ELEMENT_H, 13}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SM"} } },
+
+    {SM1A, {SP, "SM1a", "Globoside", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 43}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 23}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SM1a"} } },
+
+    {SM1B, {SP, "SM1b", "Globoside", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 43}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 23}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SM1b"} } },
+
+    {SO3_GALGB4CER, {SP, "SO3-GalGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 32}, {ELEMENT_C13, 0}, {ELEMENT_H, 53}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 28}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SO3-GalGb4Cer"} } },
+
+    {SO3_GAL_IGB4CER, {SP, "SO3-Gal-iGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 34}, {ELEMENT_C13, 0}, {ELEMENT_H, 56}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 28}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SO3-Gal-iGb4Cer"} } },
+
+    {SO3_GB4CER, {SP, "SO3-Gb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 43}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 23}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SO3-Gb4Cer"} } },
+
+    {SO3_GM1_NEUGC_, {SP, "SO3-GM1(NeuGc)", "Globoside", 2, 2, {}, {{ELEMENT_C, 37}, {ELEMENT_C13, 0}, {ELEMENT_H, 59}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 32}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SO3-GM1(NeuGc)"} } },
+
+    {SO3_IGB4CER, {SP, "SO3-iGb4Cer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 26}, {ELEMENT_C13, 0}, {ELEMENT_H, 43}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 23}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SO3-iGb4Cer"} } },
+
+    {SPB, {SP, "SPB", "Sphingoid base homologs and variants [SP0104]", 1, 1, {"Lyso", "SP_Exception"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 2}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SPB", "Sphingosine", "So", "Sphinganine", "Sa", "SPH", "Sph", "LCB"} } },
+
+    {SPBP, {SP, "SPBP", "Sphingoid base 1-phosphates [SP0105]", 1, 1, {"Lyso"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 3}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SPBP", "Sphingosine-1-phosphate", "S1P", "SPH-P", "SIP", "Sphinganine-1-phosphate", "Sa1P", "LCBP"} } },
+
+    {SQDG, {GL, "SQDG", "Glycosyldiradylglycerols [GL05]", 2, 2, {"Sugar"}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 16}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 10}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SQDG"} } },
+
+    {SQMG, {GL, "SQMG", "Glycosylmonoacylglycerols [GL0401]", 2, 1, {"Sugar"}, {{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 16}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 10}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SQMG"} } },
+
+    {ST_27_1_O, {ST, "ST 27:1;O", "Cholesterol and derivatives [ST0101]", 0, 0, {}, {{ELEMENT_C, 27}, {ELEMENT_C13, 0}, {ELEMENT_H, 46}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ST 27:1;O", "CH", "FC", "Cholesterol", "Ch", "ST", "ST 27:1;1", "Chol"} } },
+
+    {ST_27_2_O, {ST, "ST 27:2;O", "Cholesterol and derivatives [ST0101]", 0, 0, {}, {{ELEMENT_C, 27}, {ELEMENT_C13, 0}, {ELEMENT_H, 44}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ST 27:2;O", "Desmosterol", "ST 27:2;1"} } },
+
+    {ST_28_1_O, {ST, "ST 28:1;O", "Cholesterol and derivatives [ST0101]", 0, 0, {}, {{ELEMENT_C, 28}, {ELEMENT_C13, 0}, {ELEMENT_H, 48}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ST 28:1;O", "Campesterol", "ST 28:1;1"} } },
+
+    {ST_28_2_O, {ST, "ST 28:2;O", "Ergosterols and C24-methyl derivatives [ST0103]", 0, 0, {}, {{ELEMENT_C, 28}, {ELEMENT_C13, 0}, {ELEMENT_H, 46}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ST 28:2;O", "Ergostadienol", "ST 28:2;1"} } },
+
+    {ST_28_3_O, {ST, "ST 28:3;O", "Ergosterols and C24-methyl derivatives [ST0103]", 0, 0, {}, {{ELEMENT_C, 28}, {ELEMENT_C13, 0}, {ELEMENT_H, 44}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ST 28:3;O", "Ergosterol", "ST 28:3;1"} } },
+
+    {ST_29_1_O, {ST, "ST 29:1;O", "Cholesterol and derivatives [ST0101]", 0, 0, {}, {{ELEMENT_C, 29}, {ELEMENT_C13, 0}, {ELEMENT_H, 50}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ST 29:1;O", "Sitosterol", "ST 29:1;1"} } },
+
+    {ST_29_2_O, {ST, "ST 29:2;O", "Stigmasterols and C24-ethyl derivatives [ST0104]", 0, 0, {}, {{ELEMENT_C, 29}, {ELEMENT_C13, 0}, {ELEMENT_H, 48}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ST 29:2;O", "Stigmasterol", "ST 29:2;1"} } },
+
+    {ST_30_2_O, {ST, "ST 30:2;O", "Cholesterol and derivatives [ST0101]", 0, 0, {}, {{ELEMENT_C, 30}, {ELEMENT_C13, 0}, {ELEMENT_H, 50}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"ST 30:2;O", "Lanosterol", "ST 30:2;1"} } },
+
+    {SULFOGALCER, {SP, "SulfoGalCer", "Glycosphingolipids", 2, 2, {}, {{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 11}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"SulfoGalCer"} } },
+
+    {TETRANOR_12_HETE, {FA, "tetranor-12-HETE", "Hydroxy/hydroperoxyeicosatetraenoic acids [FA0306]", 0, 0, {}, {{ELEMENT_C, 16}, {ELEMENT_C13, 0}, {ELEMENT_H, 26}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"tetranor-12-HETE"} } },
+
+    {TG, {GL, "TG", "Triacylglycerols [GL0301]", 3, 3, {}, {{ELEMENT_C, 3}, {ELEMENT_C13, 0}, {ELEMENT_H, 5}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"TG", "TAG"} } },
+
+    {TXB1, {FA, "TXB1", "Thromboxanes [FA0303]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 36}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"TXB1"} } },
+
+    {TXB2, {FA, "TXB2", "Thromboxanes [FA0303]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 34}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"TXB2"} } },
+
+    {TXB3, {FA, "TXB3", "Thromboxanes [FA0303]", 0, 0, {}, {{ELEMENT_C, 20}, {ELEMENT_C13, 0}, {ELEMENT_H, 32}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"TXB3"} } },
+
+    {UNDEFINEDA, {UNDEFINED, "UNDEFINED", "Undefined lipid class", 0, 0, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"UNDEFINED"} } },
+
+    {WD, {FA, "WD", "Wax diesters [FA0702]", 2, 2, {}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 2}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"WD"} } },
+
+    {WE, {FA, "WE", "Fatty esters [FA07]", 2, 2, {"HC"}, {{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, {"WE"} } }
+
+    };
+}
+
+
+
+
+KnownFunctionalGroups::KnownFunctionalGroups(){
+    // Hidden
+    known_functional_groups.insert({"X", new FunctionalGroup("X", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // Hydroxyl
+    known_functional_groups.insert({"OH", new FunctionalGroup("OH", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // Methyl
+    known_functional_groups.insert({"Me", new FunctionalGroup("Me", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 1}, {ELEMENT_C13, 0}, {ELEMENT_H, 2}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // Methylene
+    known_functional_groups.insert({"My", new FunctionalGroup("My", -1, 1, new DoubleBonds(1), 0, "", new ElementTable{{ELEMENT_C, 1}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // Methylen
+    known_functional_groups.insert({"dME", new FunctionalGroup("dME", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 1}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // Keto
+    known_functional_groups.insert({"CHO", new FunctionalGroup("oxo", -1, 1, new DoubleBonds(1), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -2}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // Keto
+    known_functional_groups.insert({"Ke", new FunctionalGroup("oxo", -1, 1, new DoubleBonds(1), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -2}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // Keto
+    known_functional_groups.insert({"oxo", new FunctionalGroup("oxo", -1, 1, new DoubleBonds(1), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -2}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // Carboxyl
+    known_functional_groups.insert({"COOH", new FunctionalGroup("COOH", -1, 1, new DoubleBonds(1), 0, "", new ElementTable{{ELEMENT_C, 1}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 5)});
+
+
+    // Epoxy
+    known_functional_groups.insert({"Ep", new FunctionalGroup("Ep", -1, 1, new DoubleBonds(1), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -2}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 3)});
+
+
+    // Peroxy
+    known_functional_groups.insert({"OO", new FunctionalGroup("OO", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 4)});
+
+
+    // Methoxy
+    known_functional_groups.insert({"OMe", new FunctionalGroup("OMe", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 1}, {ELEMENT_C13, 0}, {ELEMENT_H, 2}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 4)});
+
+
+    // Alkoxy / ether
+    known_functional_groups.insert({"oxy", new FunctionalGroup("oxy", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // ethyl
+    known_functional_groups.insert({"Et", new FunctionalGroup("Et", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 2}, {ELEMENT_C13, 0}, {ELEMENT_H, 4}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 4)});
+
+
+    // Dimethylarsinoyl
+    known_functional_groups.insert({"MMAs", new FunctionalGroup("MMAs", -1, 1, new DoubleBonds(1), 0, "", new ElementTable{{ELEMENT_C, 2}, {ELEMENT_C13, 0}, {ELEMENT_H, 5}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 1}}, 0, 8)});
+
+
+    // Butylperoxy
+    known_functional_groups.insert({"BOO", new FunctionalGroup("BOO", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 4}, {ELEMENT_C13, 0}, {ELEMENT_H, 8}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 12)});
+
+
+    // 
+    known_functional_groups.insert({"NH2", new FunctionalGroup("NH2", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // Nitro
+    known_functional_groups.insert({"NO2", new FunctionalGroup("NO2", -1, 1, new DoubleBonds(1), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -1}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 6)});
+
+
+    // 
+    known_functional_groups.insert({"OOH", new FunctionalGroup("OOH", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 4)});
+
+
+    // 
+    known_functional_groups.insert({"SH", new FunctionalGroup("SH", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"CN", new FunctionalGroup("CN", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 1}, {ELEMENT_C13, 0}, {ELEMENT_H, -1}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 4)});
+
+
+    // 
+    known_functional_groups.insert({"Ph", new FunctionalGroup("Ph", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 10)});
+
+
+    // 
+    known_functional_groups.insert({"Su", new FunctionalGroup("Su", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 4}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 10)});
+
+
+    // 
+    known_functional_groups.insert({"T", new FunctionalGroup("T", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 3}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 8)});
+
+
+    // 
+    known_functional_groups.insert({"G", new FunctionalGroup("G", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"Hex", new HeadgroupDecorator("Hex", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Hex2", new HeadgroupDecorator("Hex2", -1, 1, new ElementTable{{ELEMENT_C, 12}, {ELEMENT_C13, 0}, {ELEMENT_H, 20}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 11}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Hex3", new HeadgroupDecorator("Hex3", -1, 1, new ElementTable{{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 30}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 16}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Lac", new HeadgroupDecorator("Lac", -1, 1, new ElementTable{{ELEMENT_C, 12}, {ELEMENT_C13, 0}, {ELEMENT_H, 20}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 11}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Gal", new HeadgroupDecorator("Gal", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Glc", new HeadgroupDecorator("Glc", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"NeuAc", new HeadgroupDecorator("NeuAc", -1, 1, new ElementTable{{ELEMENT_C, 11}, {ELEMENT_C13, 0}, {ELEMENT_H, 17}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 9}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"OAc-NeuAc", new HeadgroupDecorator("OAc-NeuAc", -1, 1, new ElementTable{{ELEMENT_C, 13}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 10}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"SGal", new HeadgroupDecorator("SGal", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"S(3')Gal", new HeadgroupDecorator("S(3')Gal", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"SHex", new HeadgroupDecorator("SHex", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"S(3')Hex", new HeadgroupDecorator("S(3')Hex", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"GlcA", new HeadgroupDecorator("GlcA", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 8}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"HexA", new HeadgroupDecorator("HexA", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 8}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"HexNAc", new HeadgroupDecorator("HexNAc", -1, 1, new ElementTable{{ELEMENT_C, 8}, {ELEMENT_C13, 0}, {ELEMENT_H, 13}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"GalNAc", new HeadgroupDecorator("GalNAc", -1, 1, new ElementTable{{ELEMENT_C, 8}, {ELEMENT_C13, 0}, {ELEMENT_H, 13}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"GlcNAc", new HeadgroupDecorator("GlcNAc", -1, 1, new ElementTable{{ELEMENT_C, 8}, {ELEMENT_C13, 0}, {ELEMENT_H, 13}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Man", new HeadgroupDecorator("Man", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 6}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Neu", new HeadgroupDecorator("Neu", -1, 1, new ElementTable{{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 8}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"NeuGc", new HeadgroupDecorator("NeuGc", -1, 1, new ElementTable{{ELEMENT_C, 11}, {ELEMENT_C13, 0}, {ELEMENT_H, 17}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 10}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"NAc", new HeadgroupDecorator("NAc", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Fuc", new HeadgroupDecorator("Fuc", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Kdn", new HeadgroupDecorator("Kdn", -1, 1, new ElementTable{{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 9}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"KDN", new HeadgroupDecorator("KDN", -1, 1, new ElementTable{{ELEMENT_C, 9}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 9}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"Xyl", new HeadgroupDecorator("Xyl", -1, 1, new ElementTable{{ELEMENT_C, 29}, {ELEMENT_C13, 0}, {ELEMENT_H, 52}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 26}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"COG", new HeadgroupDecorator("COG", -1, 1, new ElementTable{{ELEMENT_C, 18}, {ELEMENT_C13, 0}, {ELEMENT_H, 19}, {ELEMENT_H2, 0}, {ELEMENT_N, 5}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"COT", new HeadgroupDecorator("COT", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 14}, {ELEMENT_H2, 0}, {ELEMENT_N, 2}, {ELEMENT_N15, 0}, {ELEMENT_O, 2}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"OGlc", new HeadgroupDecorator("OGlc", -1, 1, new ElementTable{{ELEMENT_C, 6}, {ELEMENT_C13, 0}, {ELEMENT_H, 10}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 5}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"H", new FunctionalGroup("H", -1, 1, new DoubleBonds(0), 0, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 0)});
+
+
+    // 
+    known_functional_groups.insert({"OGlcNAc", new HeadgroupDecorator("OGlcNAc", -1, 1, new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"NeuAc2", new HeadgroupDecorator("NeuAc2", -1, 1, new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}})});
+
+
+    // 
+    known_functional_groups.insert({"O", new FunctionalGroup("O", -1, 1, new DoubleBonds(0), 1, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 1}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"N", new FunctionalGroup("N", -1, 1, new DoubleBonds(0), 1, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 1}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"P", new FunctionalGroup("P", -1, 1, new DoubleBonds(0), 1, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 1}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"S", new FunctionalGroup("S", -1, 1, new DoubleBonds(0), 1, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, 0}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 1}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"Br", new FunctionalGroup("Br", -1, 1, new DoubleBonds(0), 1, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 1}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"F", new FunctionalGroup("F", -1, 1, new DoubleBonds(0), 1, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 1}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"I", new FunctionalGroup("I", -1, 1, new DoubleBonds(0), 1, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 1}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"Cl", new FunctionalGroup("Cl", -1, 1, new DoubleBonds(0), 1, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 1}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 0}}, 0, 2)});
+
+
+    // 
+    known_functional_groups.insert({"As", new FunctionalGroup("As", -1, 1, new DoubleBonds(0), 1, "", new ElementTable{{ELEMENT_C, 0}, {ELEMENT_C13, 0}, {ELEMENT_H, -1}, {ELEMENT_H2, 0}, {ELEMENT_N, 0}, {ELEMENT_N15, 0}, {ELEMENT_O, 0}, {ELEMENT_O17, 0}, {ELEMENT_O18, 0}, {ELEMENT_P, 0}, {ELEMENT_P32, 0}, {ELEMENT_S, 0}, {ELEMENT_S34, 0}, {ELEMENT_S33, 0}, {ELEMENT_F, 0}, {ELEMENT_Cl, 0}, {ELEMENT_Br, 0}, {ELEMENT_I, 0}, {ELEMENT_As, 1}}, 0, 2)});
+
+
+}
+
