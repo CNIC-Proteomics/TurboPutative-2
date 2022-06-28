@@ -278,7 +278,7 @@ class TPREnameError(Exception, TPErrorClassBase):
 
 class TPRowMergerError(Exception, TPErrorClassBase):
     """
-    Error raised when there is an error in Tagger execution
+    Error raised when there is an error in RowMerger execution
     """
 
     def __init__(self, workdir):
@@ -294,13 +294,46 @@ class TPRowMergerError(Exception, TPErrorClassBase):
 
 class TPTableMergerError(Exception, TPErrorClassBase):
     """
-    Error raised when there is an error in Tagger execution
+    Error raised when there is an error in TableMerger execution
     """
 
     def __init__(self, workdir):
         
         self.code = 50001
         self.msg = f"TPTableMergerError: Error raised in TableMerger execution"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
+class TPMetricsError(Exception, TPErrorClassBase):
+    """
+    Error raised when there is an error in TableMerger execution
+    """
+
+    def __init__(self, workdir):
+        
+        self.code = 60001
+        self.msg = f"TPMetricsError: Error raised in TPMetrics execution"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
+class TPMetricsColumnError(Exception, TPErrorClassBase):
+    """
+    Error raised when there is an error in TPMetrics execution
+    """
+
+    def __init__(self, workdir, missing_columns):
+        
+        logging.error(f"TPMetricsError: Missing columns --> {missing_columns}")
+        self.code = 60002
+        self.msg = f"TPMetricsError: Missing columns (Name, rt, Molecular Weight, mz Error (ppm), Adduct)"
 
         # Initialize base class and go out..
         TPErrorClassBase.__init__(self, workdir, self.msg, self.code)

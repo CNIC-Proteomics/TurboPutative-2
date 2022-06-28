@@ -52,8 +52,8 @@ def main(args, logging):
     msTableTester.testColumns(msTable.tableColumnsLow)
 
     # start configuring ini file read by cpp scripts
-    moduleInfo = ModuleInfo()
-    moduleInfo.addModules(args.workflow, args.workdir)
+    moduleInfo = ModuleInfo(args.workflow, args.workdir)
+    moduleInfo.addModules()
     moduleInfo.addColumnNamesMSTable(msTable.table.columns)
 
     # apply regular expressions to debug and clean the table
@@ -94,6 +94,12 @@ def main(args, logging):
 
         tmTable.writeTable(args.workdir, constants.OUTNAME_TMTABLE)
         tmTable.writeHTMLTable()
+    
+    # Add TPMetrics columns and check for possible errors
+    moduleInfo.addTPMetricsColumns(
+        msTable.table.columns.to_list() if '4' not in args.workflow else tmTable.table.columns.to_list() + msTable.table.columns.to_list()
+    )
+  
 
     # read user ini file and transfer parts of its content to c++ ini file
     userINI = InputINI(args)

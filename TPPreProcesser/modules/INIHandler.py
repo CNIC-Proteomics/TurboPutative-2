@@ -16,20 +16,20 @@ class ModuleInfo:
     """
     Write ini file containing information used by different C++ modules
     """
-    def __init__(self):
+    def __init__(self, workflow, workdir):
         
         # Attributes
         self.config = ConfigParser()
         self.iniDict = {}
-        self.workflow = None
+        self.workdir = workdir
+        self.workflow = workflow
     
 
-    def addModules(self, workflow, workDir):
+    def addModules(self):
         """
         Add information of each module
         """
 
-        self.workflow = workflow
         inFile = constants.OUTNAME
         cores = min(max(int(os.cpu_count()*constants.CORES_RATIO), 1), os.cpu_count()) # Get number of cores between 1 and maxCores
 
@@ -73,6 +73,13 @@ class ModuleInfo:
                     "tmfile": constants.OUTNAME_TMTABLE
                 }
             
+            elif module == "5":
+                outFile = f"{i+1}_TPMetrics.tsv"
+                self.iniDict['TPMetrics'] = {
+                    'infile': inFile,
+                    'outfile': outFile
+                }
+            
             inFile = outFile
         
 
@@ -100,6 +107,25 @@ class ModuleInfo:
                 self.iniDict["TableMerger"]["ms_column_name"] = self.getColumnNameFromType(msColumns, "name")
                 self.iniDict["TableMerger"]["ms_column_mass"] = self.getColumnNameFromType(msColumns, "mass")
                 self.iniDict["TableMerger"]["ms_column_rt"] = self.getColumnNameFromType(msColumns, "rt")
+            
+            #if module == '5': # TPMetrics
+                # TPMetrics column information is added in addTPMetricsColumns method 
+
+
+    def addTPMetricsColumns(self, candidateColumns):
+        '''
+        Add name of the columns used by TPMetrics module
+        ''' 
+        self.iniDict["TPMetrics"]["column_mass"] = self.getColumnNameFromType(candidateColumns, "mass")
+        self.iniDict["TPMetrics"]["column_name"] = self.getColumnNameFromType(candidateColumns, "name")
+        self.iniDict["TPMetrics"]["column_rt"] = self.getColumnNameFromType(candidateColumns, "rt")
+        self.iniDict["TPMetrics"]["column_adduct"] = self.getColumnNameFromType(candidateColumns, "adduct")
+        self.iniDict["TPMetrics"]["column_molweight"] = self.getColumnNameFromType(candidateColumns, "molecular_weight")
+        self.iniDict["TPMetrics"]["column_error"] = self.getColumnNameFromType(candidateColumns, "mzError")
+
+        missing_columns = [i for i,j in self.iniDict["TPMetrics"].items() if j=='None']
+        if len(missing_columns)>0:
+            raise TPExc.TPMetricsColumnError(self.workdir, missing_columns)
 
 
     def addColumnNamesTMTable(self, tmColumns):
@@ -206,6 +232,12 @@ class InputINI:
                 n_digits = user_n_digits if re.match('^[0-9]+$', user_n_digits) else constants.DEFAULT_N_DIGITS
                 moduleInfo.iniDict[module]["n_digits"] = n_digits
 
+            if module == "TPMetrics":
+                moduleInfo.iniDict[module]["rt1"] = self.config[module]["rt1"]
+                moduleInfo.iniDict[module]["rt2"] = self.config[module]["rt2"]
+                moduleInfo.iniDict[module]["i_pattern"] = self.config[module]["i_pattern"]
+                moduleInfo.iniDict[module]["class_adducts"] = self.config[module]["class_adducts"]
+                moduleInfo.iniDict[module]["corr_type"] = self.config[module]["corr_type"]
         
         return moduleInfo
 

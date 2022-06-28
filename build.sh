@@ -2,7 +2,7 @@
 
 # Description: Script to create a folder with required files for execution
 
-BUILD_DIR_NAME="../../../heroku-web/TurboPutative-web/src/TurboPutative-2.0-built"
+BUILD_DIR_NAME="../../../TurboPutative-web/src/TurboPutative-2.0-built"
 
 rm -r $BUILD_DIR_NAME
 mkdir $BUILD_DIR_NAME
@@ -43,7 +43,7 @@ cp ./TPProcesser/REname/REname2 $BUILD_DIR_NAME/TPProcesser/REname/
 cp -r ./TPProcesser/REname/data $BUILD_DIR_NAME/TPProcesser/REname/
 mkdir -p $BUILD_DIR_NAME/TPProcesser/REname/lib/cppgoslin-1.1.2
 cp ./TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin $BUILD_DIR_NAME/TPProcesser/REname/lib/cppgoslin-1.1.2/
-cp -r ./TPProcesser/REname/lib/cppgoslin-1.1.2/lib $BUILD_DIR_NAME/TPProcesser/REname/lib/cppgoslin-1.1.2/ 
+#cp -r ./TPProcesser/REname/lib/cppgoslin-1.1.2/lib $BUILD_DIR_NAME/TPProcesser/REname/lib/cppgoslin-1.1.2/ 
 
 # RowMerger
 mkdir $BUILD_DIR_NAME/TPProcesser/RowMerger

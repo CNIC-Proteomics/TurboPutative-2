@@ -33,6 +33,8 @@ import TPPreProcesser.modules.TPExceptions as TPExc
 from TPPostProcesser.PostProcesser import main as PostProcesser
 from TPPostProcesser.modules.ExtensionMover import ExtensionMover
 
+from TPProcesser.TPMetrics.TPMetrics import TPMetrics
+
 # Constants
 modulePath = {
     'Tagger': os.path.join(scriptPath, "TPProcesser", "Tagger", "Tagger"),
@@ -55,7 +57,6 @@ def main(args):
     logging.info(f"{ti()} - Start PreProcesser")
     PreProcesser(args, logging)
     logging.info(f"{ti()} - End PreProcesser")
-    # sys.exit(0)
 
     #
     # TurboPutative Processing (C++)
@@ -147,6 +148,20 @@ def main(args):
                 raise TPExc.TPTableMergerError(args.workdir)
             
             logging.info(f"{ti()} - End TableMerger")
+        
+
+        if module == '5': # TPMetrics
+            logging.info(f"{ti()} - Start TPMetrics")
+            sys.exit()
+            try:
+                tpmetrics = TPMetrics(args.workdir)
+                tpmetrics.getClasses()
+            
+            except:
+                logging.exception("Error raised when executing TPMetrics. Traceback:")
+                raise TPExc.TPMetricsError(args.workdir)
+
+            logging.info(f"{ti()} - End TPMetrics")
 
     #
     # PostProcesser

@@ -32,7 +32,8 @@ COLUMN_NAMES = {
     "inchi_key": ["inchikey"],
     "adduct": ["adduct"],
     "mzError": ["mz error (ppm)", "mzerror"],
-    "feature": ["feature"]
+    "feature": ["feature"],
+    "molecular_weight": ['molecular weight']
     }
 
 # Column required to input MS table (used to find header)
