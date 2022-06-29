@@ -94,16 +94,15 @@ def main(args, logging):
 
         tmTable.writeTable(args.workdir, constants.OUTNAME_TMTABLE)
         tmTable.writeHTMLTable()
-    
-    # Add TPMetrics columns and check for possible errors
-    moduleInfo.addTPMetricsColumns(
-        msTable.table.columns.to_list() if '4' not in args.workflow else tmTable.table.columns.to_list() + msTable.table.columns.to_list()
-    )
-  
 
     # read user ini file and transfer parts of its content to c++ ini file
     userINI = InputINI(args)
     moduleInfo = userINI.transferToModuleInfo(moduleInfo, msTable.table.columns.to_list())
+
+    # Add TPMetrics columns and check for possible errors
+    moduleInfo.addTPMetricsColumns(
+        msTable.table.columns.to_list() if '4' not in args.workflow else tmTable.table.columns.to_list() + msTable.table.columns.to_list()
+    )
 
     # Write info file
     moduleInfo.writeINI(args.workdir)

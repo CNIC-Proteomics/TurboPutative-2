@@ -333,7 +333,7 @@ class TPMetricsColumnError(Exception, TPErrorClassBase):
         
         logging.error(f"TPMetricsError: Missing columns --> {missing_columns}")
         self.code = 60002
-        self.msg = f"TPMetricsError: Missing columns (Name, rt, Molecular Weight, mz Error (ppm), Adduct)"
+        self.msg = f"TPMetricsError: Missing columns (Name, rt, Molecular Weight, mz Error (ppm), Adduct, Intensities)"
 
         # Initialize base class and go out..
         TPErrorClassBase.__init__(self, workdir, self.msg, self.code)

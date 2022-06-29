@@ -123,6 +123,15 @@ class ModuleInfo:
         self.iniDict["TPMetrics"]["column_molweight"] = self.getColumnNameFromType(candidateColumns, "molecular_weight")
         self.iniDict["TPMetrics"]["column_error"] = self.getColumnNameFromType(candidateColumns, "mzError")
 
+        # get column containing intensities
+        ipatt = re.compile(self.iniDict["TPMetrics"]['i_pattern'])
+        icolumns  = [
+            i for i in candidateColumns if ipatt.search(i)
+        ]
+
+        self.iniDict["TPMetrics"]["column_intensities"] = ' // '.join(icolumns) if len(icolumns)>0 else 'None'
+
+        # Check presence of all columns
         missing_columns = [i for i,j in self.iniDict["TPMetrics"].items() if j=='None']
         if len(missing_columns)>0:
             raise TPExc.TPMetricsColumnError(self.workdir, missing_columns)
