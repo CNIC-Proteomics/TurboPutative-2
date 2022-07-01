@@ -58,21 +58,27 @@ class ResultWriter:
         """
 
         # open table
-        if module: 
+        #if module: # we are reading MSexperiment and FeatureInfo... but we do not need it (html and row table were written in preprocesser)
+        if module not in ['MS_experiment', 'FeatureInfo']:
             try:
                 df = self.openTable(fileName)
+                self.writeTable(fileName, df, module)
             
             except:
                 self.logging.error(f"TPErr: Error when reading table: {fileName}")
                 return None
 
-
-        # write apart if selected
-        if module in ['MS_experiment', 'FeatureInfo']:
+        else:
             self.finalFileNames.append(fileName)
             self.type2basename[module] = os.path.splitext(fileName)[0]
-        else:
-            self.writeTable(fileName, df, module)
+
+
+        # write apart if selected
+        # if module in ['MS_experiment', 'FeatureInfo']:
+        #     self.finalFileNames.append(fileName)
+        #     self.type2basename[module] = os.path.splitext(fileName)[0]
+        # else:
+        #     self.writeTable(fileName, df, module)
         
         # add to combined results
         # self.addSheet(fileName, df)
@@ -92,7 +98,7 @@ class ResultWriter:
             df = pd.read_excel(os.path.join(self.workDir, fileName), engine="openpyxl")
         
         if extension == ".tsv":
-            df = pd.read_csv(os.path.join(self.workDir, fileName), sep="\t")
+            df = pd.read_csv(os.path.join(self.workDir, fileName), sep="\t", na_filter=False)
         
         self.tableFileNames.append(fileName)
 

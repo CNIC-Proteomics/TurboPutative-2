@@ -89,11 +89,12 @@ class TPMetrics:
         self.corrType = self.config['TPMetrics'].get('corr_type')
 
         # Working table
-        self.df = pd.read_csv(os.path.join(self.workdir, self.infile), sep='\t').reset_index() # Generate column with index 
+        self.df = pd.read_csv(os.path.join(self.workdir, self.infile), sep='\t')
         self.LC = self.readLipidClasses()
 
         self.initCols = self.df.columns.to_list()
         self.finalCols = [self.tpc, self.s2argmaxp, self.s2argmaxA, self.sfinal, self.s1, self.s2] +self.initCols
+        self.df = self.df.reset_index() # Generate column with index 
 
 
         # Other values
@@ -122,8 +123,8 @@ class TPMetrics:
         Read list containing classes of lipids
         '''
 
-        #with open(r'./src/TurboPutative-2.0-built/TPProcesser/TPMetrics/data/Lipid_Class.tsv', 'r') as f:
-        with open(r'./data/Lipid_Class.tsv', 'r') as f:
+        with open(r'./src/TurboPutative-2.0-built/TPProcesser/TPMetrics/data/Lipid_Class.tsv', 'r') as f:
+        #with open(r'./data/Lipid_Class.tsv', 'r') as f:
             return pd.DataFrame({'TP_Class': [i.strip() for i in f]})
 
 
@@ -185,6 +186,8 @@ class TPMetrics:
             - ss: [] List containing the sum of all correlations in each list of sa
         '''
         
+        logging.info(f"Identify associated annotations based on {basedCol}")
+
         # Get a dataframe copy unfolding by molecular weight (preserving the same index after unfold)
         df = self.df.loc[:, ['index',self.m, self.rt, basedCol]].copy()
         df[basedCol] = self.df[basedCol].str.split(' // ')
@@ -230,6 +233,18 @@ class TPMetrics:
             for index_w, pair in idx2p if len(pair)>0
         ]
 
+        
+        
+        # --> Las correlaciones se capturan de la tabla original. Para el maximo y la suma se transforman en valores absolutos
+        # --> A partir de ahí, la hipótesis nula la tenemos en valores absolutos.
+        # 
+        
+        # pair must be a numpy array first; the convert to list when building the dataframe
+        #
+        ### !!!!! REMOVE NEGATIVE CORRELATIONS FOR MW CASE --> Solo tienes que indexar los positivos
+        # if rmNeg: idx2p = [(index_w, pair[pair>0]) for index_w, pair in idx2p if sum(pair>0)>0]
+        # 
+
         # add maximum and sum; build dataframe
         idx2p = pd.DataFrame(
             [
@@ -261,6 +276,8 @@ class TPMetrics:
         Get correlations under the null hypothesis of no correlation
         This will be used to calculate empirical p-values
         '''
+
+        logging.info("Calculating correlations under the null hypothesis")
 
         # Get maximum number of correlations associated to an annotation
         maxn = self.df.loc[:, self.s1n].dropna().to_list()+self.df.loc[:, self.s2n].dropna().to_list()
@@ -301,9 +318,13 @@ class TPMetrics:
         Get score based on maximum correlation
         '''
 
+        logging.info(f"Calculating score based on maximum correlation: {sims}")
+
         df = self.df.loc[:, ['index', sim]].dropna().explode(sim).fillna(0)
         df[simp] = [(self.VcorrH0[0, :]>np.abs(i)).sum()/self.VcorrH0.shape[1] for i in df[sim].to_list()]
         df.loc[df[simp] == 0, simp] = 1/self.VcorrH0.shape[1]
+
+        # FORMULA
         df[sims] = np.abs(df[sim]) * (-np.log10(df[simp]))
 
         self.df = pd.merge(
@@ -319,6 +340,8 @@ class TPMetrics:
         Get score based on all correlations
         '''
 
+        logging.info("Calculating score based on sum of all correlations")
+
         df = self.df.loc[:, ['index', sia, sis, sin]].dropna().explode([sia, sis, sin]).fillna(0)
         df[siavg] = [np.mean(np.abs(i)) for i in df[sia]]
 
@@ -329,6 +352,7 @@ class TPMetrics:
 
         df.loc[df[sisp] == 0, sisp] = 1/self.VcorrH0.shape[1]
 
+        # FORMULA
         df[siss] = np.sqrt(df[sin]) * np.abs(df[siavg]) * (-np.log10(df[sisp]))
 
         self.df = pd.merge(
@@ -343,6 +367,8 @@ class TPMetrics:
         '''
         Combine Max and Sum scores in molecular weight and lipid class
         '''
+
+        logging.info("Combining scores based on maximum and addition of correlations")
 
         # Combine score based on molecular weight
         df = self.df.loc[:, ['index', self.s1ms, self.s1ss]].dropna().explode([self.s1ms, self.s1ss]).fillna(0)
@@ -363,6 +389,8 @@ class TPMetrics:
 
         df[self.tpcA] = [False if pd.isna(tpc) or tpc not in self.A.keys() else a in self.A[tpc] for a, tpc in list(zip(df[self.a].to_list(), df[self.tpc]))]
         f = np.ones_like(df[self.tpcA], dtype=float)
+
+        # FORMULA
         f[df[self.tpcA]] = 1 + 0.25
         df[self.s2adduct] = df[self.s2]*f
 
@@ -377,6 +405,8 @@ class TPMetrics:
         '''
         Get maximum score and their corresponding lipid class (and molecular weight)
         '''
+
+        logging.info("Identify group of annotations providing the maximum score")
 
         # Get maximum score for molecular weight
         df = self.df.loc[:, ['index', self.w, self.s1]].dropna()
@@ -441,12 +471,15 @@ class TPMetrics:
         Apply error penalty anf get final tpmetrics
         '''
         
+        logging.info("Calculate final score and apply error penalty")
+
         df = self.df.loc[:, ['index', self.e, self.s]].dropna()
 
         B = 0.25 # Maximum percentage penalty
         Em = df[self.e].max() # Maximum error
         n = 2 # error penalty ~ error^n
 
+        #FORMULA
         df[self.se] = (df[self.e]**2) * B / (Em**n)
 
         df[self.sfinal] = df[self.s] * (1 - df[self.se])
@@ -461,8 +494,9 @@ class TPMetrics:
     def writeOutfile(self):
         '''
         '''
-
+        outpath = os.path.join(self.workdir, self.outfile)
+        logging.info(f"Writing output file: {outpath}")
         self.df.to_csv(
-            os.path.join(self.workdir, self.outfile),
+            outpath,
             sep='\t', index=False, columns=self.finalCols
         )

@@ -74,7 +74,7 @@ class ModuleInfo:
                 }
             
             elif module == "5":
-                outFile = f"{i+1}_TPMetrics.tsv"
+                outFile = f"{i}_TPMetrics.tsv" # change i+1 --> i (TableMerger and TPMetrics are one module in the front-end)
                 self.iniDict['TPMetrics'] = {
                     'infile': inFile,
                     'outfile': outFile

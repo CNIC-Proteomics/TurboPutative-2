@@ -30,7 +30,8 @@ numToMod = {
     '1': "Tagger",
     '2': "REname",
     '3': "RowMerger",
-    '4': "TableMerger"
+    '4': "TableMerger",
+    '5': "TPMetrics"
 }
 
 # Main function
@@ -53,7 +54,8 @@ def main(args, logging):
 
     # --> Add and write output tables
     for i, mod in enumerate(args.workflow):
-        fileName = f"{str(i+1)}_{numToMod[mod]}.tsv"
+        if mod=='4': continue #do not write TableMerger (We write TPMetrics instead)
+        fileName = f"{str(i+1)}_{numToMod[mod]}.tsv" if mod!='5' else f"{str(i)}_{numToMod[mod]}.tsv" # 
         resultWriter.addTable(fileName, numToMod[mod])
 
 

@@ -152,10 +152,12 @@ def main(args):
 
         if module == '5': # TPMetrics
             logging.info(f"{ti()} - Start TPMetrics")
-            sys.exit()
+            
             try:
                 tpmetrics = TPMetrics(args.workdir)
                 tpmetrics.getClasses()
+                tpmetrics.getCorrelations()
+                tpmetrics.writeOutfile()
             
             except:
                 logging.exception("Error raised when executing TPMetrics. Traceback:")
