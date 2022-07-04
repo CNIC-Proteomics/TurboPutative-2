@@ -13,6 +13,7 @@ import numpy as np
 import os
 import pandas as pd
 import re
+from scipy.stats import rankdata
 
 
 #
@@ -36,6 +37,7 @@ class TPMetrics:
         self.a = self.config['TPMetrics']['column_adduct']
         self.w = self.config['TPMetrics']['column_molweight']
         self.e = self.config['TPMetrics']['column_error']
+        self.i = self.config['TPMetrics']['column_intensities'].split(' // ')
 
         self.tpc = 'TP_Class'
         self.tpcA = 'TP_Class_adduct'
@@ -77,6 +79,8 @@ class TPMetrics:
         self.se = 'TP_error_penalty'
         self.sfinal = 'TPMetrics'
 
+        self.rank = 'TPMetrics_rank'
+
         # files
         self.infile = self.config['TPMetrics']['infile']
         self.outfile = self.config['TPMetrics']['outfile']
@@ -92,8 +96,9 @@ class TPMetrics:
         self.df = pd.read_csv(os.path.join(self.workdir, self.infile), sep='\t')
         self.LC = self.readLipidClasses()
 
-        self.initCols = self.df.columns.to_list()
-        self.finalCols = [self.tpc, self.s2argmaxp, self.s2argmaxA, self.sfinal, self.s1, self.s2] +self.initCols
+        self.initCols = [i for i in self.df.columns.to_list() if i not in self.i] # intensity columns in the end
+        # self.finalCols = self.initCols + [self.s2argmaxp, self.sfinal, self.rank] + self.i
+        self.finalCols = self.initCols + [self.tpc, self.s2argmaxp, self.s2argmaxA, self.sfinal, self.rank, self.s1, self.s2]# + self.i
         self.df = self.df.reset_index() # Generate column with index 
 
 
@@ -101,7 +106,7 @@ class TPMetrics:
 
         # column names with intensities
         #self.i = [i for i in self.df.columns if self.ipatt.search(i)] 
-        self.i = self.config['TPMetrics']['column_intensities'].split(' // ')
+        
         
         # correlation matrix between mz
         self.corr = self.df.loc[:, [self.m, *self.i]].drop_duplicates().set_index(self.m).T.corr(method=self.corrType) 
@@ -176,6 +181,8 @@ class TPMetrics:
 
         self.applyErrorPenalty()
 
+        self.getRank()
+
 
     def getCorr(self, basedCol, dtypeCol, sa, sm, ss, sn):
         '''
@@ -188,7 +195,7 @@ class TPMetrics:
         
         logging.info(f"Identify associated annotations based on {basedCol}")
 
-        # Get a dataframe copy unfolding by molecular weight (preserving the same index after unfold)
+        # Get a dataframe copy unfolding by molecular weight/lipid class (preserving the same index after unfold)
         df = self.df.loc[:, ['index',self.m, self.rt, basedCol]].copy()
         df[basedCol] = self.df[basedCol].str.split(' // ')
         df = df.explode(
@@ -228,7 +235,7 @@ class TPMetrics:
         idx2p = [
             (
                 index_w, 
-                self.corr.loc[self.idx2mz[index_w[0]], [self.idx2mz[p] for p in pair]].to_list()
+                self.corr.loc[self.idx2mz[index_w[0]], [self.idx2mz[p] for p in pair]].to_numpy()
             ) 
             for index_w, pair in idx2p if len(pair)>0
         ]
@@ -239,16 +246,15 @@ class TPMetrics:
         # --> A partir de ahí, la hipótesis nula la tenemos en valores absolutos.
         # 
         
-        # pair must be a numpy array first; the convert to list when building the dataframe
         #
-        ### !!!!! REMOVE NEGATIVE CORRELATIONS FOR MW CASE --> Solo tienes que indexar los positivos
-        # if rmNeg: idx2p = [(index_w, pair[pair>0]) for index_w, pair in idx2p if sum(pair>0)>0]
+        ### !!!!! REMOVE NEGATIVE CORRELATIONS FOR MW CASE
+        if basedCol==self.w: idx2p = [(index_w, pair[pair>0]) for index_w, pair in idx2p if sum(pair>0)>0]
         # 
 
         # add maximum and sum; build dataframe
         idx2p = pd.DataFrame(
             [
-                [*index_w, pair, pair[np.argmax(np.abs(pair))], np.sum(np.abs(pair)), len(pair)]
+                [*index_w, pair.tolist(), abs(pair[np.argmax(np.abs(pair))]), np.sum(np.abs(pair)), len(pair)]
                 for index_w, pair in idx2p
             ], 
             columns=['index', basedCol, sa, sm, ss, sn]
@@ -321,11 +327,11 @@ class TPMetrics:
         logging.info(f"Calculating score based on maximum correlation: {sims}")
 
         df = self.df.loc[:, ['index', sim]].dropna().explode(sim).fillna(0)
-        df[simp] = [(self.VcorrH0[0, :]>np.abs(i)).sum()/self.VcorrH0.shape[1] for i in df[sim].to_list()]
+        df[simp] = [(self.VcorrH0[0, :]>i).sum()/self.VcorrH0.shape[1] for i in df[sim].to_list()] # Max (i) was converted to abs when defining
         df.loc[df[simp] == 0, simp] = 1/self.VcorrH0.shape[1]
 
         # FORMULA
-        df[sims] = np.abs(df[sim]) * (-np.log10(df[simp]))
+        df[sims] = df[sim] * (-np.log10(df[simp]))
 
         self.df = pd.merge(
             self.df,
@@ -353,7 +359,7 @@ class TPMetrics:
         df.loc[df[sisp] == 0, sisp] = 1/self.VcorrH0.shape[1]
 
         # FORMULA
-        df[siss] = np.sqrt(df[sin]) * np.abs(df[siavg]) * (-np.log10(df[sisp]))
+        df[siss] = np.sqrt(df[sin]) * df[siavg] * (-np.log10(df[sisp]))
 
         self.df = pd.merge(
             self.df,
@@ -387,7 +393,11 @@ class TPMetrics:
         df = df.explode([self.tpc,self.s2ms, self.s2ss])
         df[self.s2] = df[self.s2ms].fillna(0)+df[self.s2ss].fillna(0)
 
-        df[self.tpcA] = [False if pd.isna(tpc) or tpc not in self.A.keys() else a in self.A[tpc] for a, tpc in list(zip(df[self.a].to_list(), df[self.tpc]))]
+        df[self.tpcA] = [
+            False if pd.isna(tpc) or tpc not in self.A.keys() else a in self.A[tpc] 
+            for a, tpc in list(zip(df[self.a].to_list(), df[self.tpc].to_list()))
+        ]
+
         f = np.ones_like(df[self.tpcA], dtype=float)
 
         # FORMULA
@@ -480,7 +490,7 @@ class TPMetrics:
         n = 2 # error penalty ~ error^n
 
         #FORMULA
-        df[self.se] = (df[self.e]**2) * B / (Em**n)
+        df[self.se] = (df[self.e]**n) * B / (Em**n)
 
         df[self.sfinal] = df[self.s] * (1 - df[self.se])
 
@@ -488,6 +498,25 @@ class TPMetrics:
             self.df,
             df.loc[:, ['index', self.se, self.sfinal]],
             on='index',
+            how='left'
+        )
+    
+    def getRank(self):
+        '''
+        Rank annotations within a feature context considering TPMetrics
+        '''
+        
+        df = self.df.loc[:, ['index', self.m, self.sfinal]].dropna()
+        df['r'] = df[self.sfinal]+1 # avoid error with 0s score
+        df['r'] = 1/df['r'] # invert rank
+        df = df.groupby(self.m).agg(list).reset_index()
+        df[self.rank] = [rankdata(i, method='dense').tolist() for i in df['r'].to_list()]
+        df = df.loc[:, [self.m, 'index', self.rank]].explode(['index', self.rank])
+
+        self.df = pd.merge(
+            self.df,
+            df,
+            on=[self.m, 'index'],
             how='left'
         )
     
