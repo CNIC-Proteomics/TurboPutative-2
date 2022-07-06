@@ -36,8 +36,8 @@ class TPMetrics(TPMetricsSuper):
         self.LC = self.readLipidClasses()
 
         self.initCols = [i for i in self.df.columns.to_list() if i not in self.i] # intensity columns in the end
-        # self.finalCols = self.initCols + [self.s2argmaxp, self.sfinal, self.rank] + self.i
-        self.finalCols = self.initCols + [self.tpc, self.s2argmaxp, self.s2argmaxA, self.sfinal, self.rank, self.s1, self.s2]# + self.i
+        self.finalCols = self.initCols + [self.tpc, self.s2argmaxp, self.s1, self.s2, self.s3s, self.s2m, self.s2mF, self.sfinal, self.rank] + self.i
+        #self.finalCols = self.initCols + [self.tpc, self.s2argmaxp, self.sfinal, self.rank, self.s1, self.s2, self.s3s]# + self.i
         self.df = self.df.reset_index() # Generate column with index 
 
         
@@ -61,8 +61,8 @@ class TPMetrics(TPMetricsSuper):
         Read list containing classes of lipids
         '''
 
-        with open(r'./src/TurboPutative-2.0-built/TPProcesser/TPMetrics/data/Lipid_Class.tsv', 'r') as f:
-        #with open(r'./data/Lipid_Class.tsv', 'r') as f:
+        #with open(r'./src/TurboPutative-2.0-built/TPProcesser/TPMetrics/data/Lipid_Class.tsv', 'r') as f:
+        with open(r'./data/Lipid_Class.tsv', 'r') as f:
             return pd.DataFrame({'TP_Class': [i.strip() for i in f]})
 
 
@@ -76,12 +76,12 @@ class TPMetrics(TPMetricsSuper):
                 pd.DataFrame(
                     {
                         self.tpc: [
-                            [re.sub(r'LMSD{ ([^}]+) }', r'\1', j).split(' ')[0] for j in i.split(' // ')]
+                            [re.sub(r'LMSD{ ([^}]+) }', r'\1', j).split(' ') for j in i.split(' // ')]
                             for i in self.df[self.n].to_list()
                         ],
                         'index': range(self.df.shape[0])
                     }
-                ).explode(self.tpc), # Dataframe with (potential) lipid class and index
+                ).explode(self.tpc).explode(self.tpc), # Dataframe with (potential) lipid class and index
                 self.LC, # Dataframe with permited lipid classes
                 on=self.tpc,
                 how='inner'
@@ -95,8 +95,29 @@ class TPMetrics(TPMetricsSuper):
         '''
         '''
         
-        self.getCorr(basedCol=self.w, dtypeCol=np.float64, rtwindow=self.rt1, sa=self.s1a, sm=self.s1m, ss=self.s1s, sn=self.s1n)
-        self.getCorr(basedCol=self.tpc, dtypeCol=str, rtwindow=self.rt2, sa=self.s2a, sm=self.s2m, ss=self.s2s, sn=self.s2n)
+        self.getCorr(
+            basedCol=self.w, 
+            dtypeCol=np.float64, 
+            rtwindow=self.rt1, 
+            sa=self.s1a, 
+            sm=self.s1m, 
+            ss=self.s1s, 
+            sn=self.s1n,
+            saF=self.s1aF,
+            smF=self.s1mF
+        )
+
+        self.getCorr(
+            basedCol=self.tpc, 
+            dtypeCol=str, 
+            rtwindow=self.rt2, 
+            sa=self.s2a, 
+            sm=self.s2m, 
+            ss=self.s2s, 
+            sn=self.s2n,
+            saF=self.s2aF,
+            smF=self.s2mF
+        )
 
         self.getNullH()
         
@@ -106,9 +127,13 @@ class TPMetrics(TPMetricsSuper):
         self.getScoreSum(sia=self.s1a, sis=self.s1s, sin=self.s1n, siavg=self.s1avg, sisp=self.s1sp, siss=self.s1ss)
         self.getScoreSum(sia=self.s2a, sis=self.s2s, sin=self.s2n, siavg=self.s2avg, sisp=self.s2sp, siss=self.s2ss)
         
-        self.combineScores()
+        self.getScoreAdduct()
 
-        self.getMaximumScores()
+        self.combineScores() # combine scores from Max and Sum (and adduct)
+
+        #self.getMaximumScores()
+        self.getMaximumScores(basedCol=self.w, score=self.s1, argmaxp=self.s1argmaxp, argmaxs=self.s1argmaxs, argmax=self.s1argmax)
+        self.getMaximumScores(basedCol=self.tpc, score=self.s2s3, argmaxp=self.s2argmaxp, argmaxs=self.s2argmaxs, argmax=self.s2argmax)
 
         self.df[self.s] = self.df.loc[:, self.s1argmaxs].fillna(0)+self.df.loc[:, self.s2argmaxs].fillna(0)
 
@@ -117,7 +142,7 @@ class TPMetrics(TPMetricsSuper):
         self.getRank()
 
 
-    def getCorr(self, basedCol, dtypeCol, rtwindow, sa, sm, ss, sn):
+    def getCorr(self, basedCol, dtypeCol, rtwindow, sa, sm, ss, sn, saF, smF):
         '''
         Correlations based on basedCol. Try to identify the same compound in different features. 
         Three columns with correlations will be added to self.df:
@@ -151,40 +176,60 @@ class TPMetrics(TPMetricsSuper):
 
         # Identify possible correlated elements [(index, [pair_index_1, pair_index_2])]
         idx2p = [
-            ([index, w],
-            df_wo_duplicates.loc[
-                np.logical_and.reduce((
-                    m != df_wo_duplicates.loc[:, self.m],
-                    rt-rtwindow <= df_wo_duplicates.loc[:, self.rt],
-                    rt+rtwindow >= df_wo_duplicates.loc[:, self.rt],
-                    w == df_wo_duplicates.loc[:, basedCol]
-                )),
-                'index'
-            ].to_list())
+            (
+                [index, w],
+                df_wo_duplicates.loc[
+                    np.logical_and.reduce((
+                        m != df_wo_duplicates.loc[:, self.m],
+                        rt-rtwindow <= df_wo_duplicates.loc[:, self.rt],
+                        rt+rtwindow >= df_wo_duplicates.loc[:, self.rt],
+                        w == df_wo_duplicates.loc[:, basedCol]
+                    )),
+                    ['index', self.m]
+                ].to_dict('list')
+            )
             for index, m, rt, w in dfl
+        ]
+
+        idx2p = [
+            (index_w, pair_dict['index'], pair_dict[self.m])
+            for index_w, pair_dict in idx2p
         ]
 
         # remove empty elements and replace indexes by correlation
         idx2p = [
             (
                 index_w, 
-                self.corr.loc[self.idx2mz[index_w[0]], [self.idx2mz[p] for p in pair]].to_numpy()
+                self.corr.loc[self.idx2mz[index_w[0]], [self.idx2mz[p] for p in pair_index]].to_numpy(),
+                pair_mass
             ) 
-            for index_w, pair in idx2p if len(pair)>0
+            for index_w, pair_index, pair_mass in idx2p if len(pair_index)>0
         ] 
         
         #
         ### !!!!! REMOVE NEGATIVE CORRELATIONS FOR MW CASE
-        if basedCol==self.w: idx2p = [(index_w, pair[pair>0]) for index_w, pair in idx2p if sum(pair>0)>0]
+        if basedCol==self.w: 
+            idx2p = [
+                (index_w, pair_corr[pair_corr>0], pair_mass)
+                for index_w, pair_corr, pair_mass in idx2p if sum(pair_corr>0)>0
+            ]
         # 
 
         # add maximum and sum; build dataframe
         idx2p = pd.DataFrame(
             [
-                [*index_w, pair.tolist(), abs(pair[np.argmax(np.abs(pair))]), np.sum(np.abs(pair)), len(pair)]
-                for index_w, pair in idx2p
+                [
+                    *index_w, 
+                    pair_corr.tolist(), 
+                    abs(pair_corr[np.argmax(np.abs(pair_corr))]), 
+                    np.sum(np.abs(pair_corr)), 
+                    len(pair_corr),
+                    pair_mass,
+                    pair_mass[np.argmax(np.abs(pair_corr))]
+                ]
+                for index_w, pair_corr, pair_mass in idx2p
             ], 
-            columns=['index', basedCol, sa, sm, ss, sn]
+            columns=['index', basedCol, sa, sm, ss, sn, saF, smF]
         )
 
         # Add correlations to each unfolded element; and group by index (refold)
@@ -198,7 +243,7 @@ class TPMetrics(TPMetricsSuper):
         # Merge to original table based on index (could be a join)
         self.df = pd.merge(
             self.df,
-            df.loc[:, ['index', sa, sm, ss, sn]],
+            df.loc[:, ['index', sa, sm, ss, sn, saF, smF]],
             on='index',
             how='left'
         )
@@ -294,6 +339,48 @@ class TPMetrics(TPMetricsSuper):
             on='index',
             how='left'
         )
+    
+    def getScoreAdduct(self):
+        '''
+        Get score based on adduct
+        ''' 
+
+        df = self.df.loc[:, ['index', self.a, self.tpc]].dropna()
+        df[self.tpc] = df[self.tpc].str.split(' // ')
+        df = df.explode(self.tpc)
+        dfl = list(zip(*[j for i,j in df.to_dict('list').items()]))
+
+        dfl = [
+            (index, adduct, lipid, self.L2An[lipid], self.L2A2i[lipid][adduct])
+            for index, adduct, lipid in dfl if lipid in self.L and adduct in self.L2A[lipid]
+        ]
+
+        dfl = pd.DataFrame(
+            dfl, columns=['index', self.a, self.tpc, self.s3An, self.s3Ai]
+        )
+
+        maxScore = 12
+        minScore = 6
+
+        dfl[self.s3s] = maxScore
+        dfl.loc[dfl[self.s3An]>1, self.s3s] = -((maxScore-minScore)/(dfl.loc[dfl[self.s3An]>1, self.s3An]-1))*(dfl.loc[dfl[self.s3An]>1, self.s3Ai]-1) + maxScore
+
+
+        df = pd.merge(
+            df.loc[:, ['index', self.tpc]],
+            dfl.loc[:, ['index', self.tpc, self.s3An, self.s3Ai, self.s3s]],
+            on=['index', self.tpc],
+            how='left'
+        )
+        df[self.s3s] = df[self.s3s].fillna(0)
+        df = df.groupby('index').agg(list).reset_index()
+
+        self.df = pd.merge(
+            self.df,
+            df.loc[:, ['index', self.s3An, self.s3Ai, self.s3s]],
+            on='index',
+            how='left'
+        )
 
 
     def combineScores(self):
@@ -315,30 +402,19 @@ class TPMetrics(TPMetricsSuper):
         )
 
         # Combine scores from lipid class
-        df = self.df.loc[:, ['index', self.a, self.tpc, self.s2ms, self.s2ss]].dropna()
-        df[self.tpc] = df[self.tpc].str.split(' // ')
-        df = df.explode([self.tpc,self.s2ms, self.s2ss])
+        df = self.df.loc[:, ['index', self.s2ms, self.s2ss, self.s3s]].dropna()
+        df = df.explode([self.s2ms, self.s2ss, self.s3s])
         df[self.s2] = df[self.s2ms].fillna(0)+df[self.s2ss].fillna(0)
-
-        df[self.tpcA] = [
-            False if pd.isna(tpc) or tpc not in self.A.keys() else a in self.A[tpc] 
-            for a, tpc in list(zip(df[self.a].to_list(), df[self.tpc].to_list()))
-        ]
-
-        f = np.ones_like(df[self.tpcA], dtype=float)
-
-        # FORMULA
-        f[df[self.tpcA]] = 1 + 0.25
-        df[self.s2adduct] = df[self.s2]*f
+        df[self.s2s3] = df[self.s2] + df[self.s3s]
 
         self.df = pd.merge(
             self.df,
-            df.groupby('index').agg(list).reset_index().loc[:, ['index',self.s2, self.s2adduct, self.tpcA]],
+            df.groupby('index').agg(list).reset_index().loc[:, ['index',self.s2, self.s2s3]],
             on='index',
             how='left'
         )
 
-    def getMaximumScores(self):
+    def getMaximumScores(self, basedCol, score, argmaxp, argmaxs, argmax):
         '''
         Get maximum score and their corresponding lipid class (and molecular weight)
         '''
@@ -346,7 +422,7 @@ class TPMetrics(TPMetricsSuper):
         logging.info("Identify group of annotations providing the maximum score")
 
         # Get maximum score for molecular weight
-        df = self.df.loc[:, ['index', self.w, self.s1]].dropna()
+        df = self.df.loc[:, ['index', basedCol, score]].dropna()
 
         dfl = list(zip(*[
             j 
@@ -358,42 +434,7 @@ class TPMetrics(TPMetricsSuper):
         dfl = pd.DataFrame([
             (index, w[argmax], s[argmax], argmax) 
             for index, w, s, argmax in dfl
-        ], columns=['index', self.s1argmaxp, self.s1argmaxs, self.s1argmax])
-
-        self.df = pd.merge(
-            self.df,
-            dfl,
-            on='index',
-            how='left'
-        )
-
-
-        # Get maximum for Lipid class
-        df = self.df.loc[:, ['index', self.s2adduct, self.tpc, self.tpcA]].dropna()
-
-        dfl = [
-            (index, s, k.split(' // '), A, np.argmax(s)) 
-            for index, s, k, A in list(zip(*[j for i,j in df.to_dict('list').items()]))
-        ]
-
-        dfl =[
-            (index, s, k, A, argmax, s[argmax], k[argmax], A[argmax], np.array(s)==s[argmax]) 
-            for index, s, k, A, argmax in dfl
-        ]
-
-        dfl = [ # if max score == 0 --> Find another with adduct == True
-            (index, np.where(A)[0].tolist(), np.array(s)[A][0], ' // '.join(np.array(k)[A].tolist()), ' // '.join(np.array(A, dtype=str)[A].tolist()))
-            if s_argmax==0 and A_argmax==False and np.sum(A)>0  else
-            (index, np.where(s_argmax_bool)[0].tolist(), s_argmax, ' // '.join(np.array(k)[s_argmax_bool].tolist()), ' // '.join(np.array(A, dtype=str)[s_argmax_bool].tolist()))
-            if s_argmax_bool.sum()>1  else
-            (index, argmax, s_argmax, k_argmax, A_argmax) 
-            for index, s, k, A, argmax, s_argmax, k_argmax, A_argmax, s_argmax_bool in dfl
-        ]
-
-        dfl = pd.DataFrame(
-            dfl,
-            columns = ['index', self.s2argmax, self.s2argmaxs, self.s2argmaxp, self.s2argmaxA]
-        )
+        ], columns=['index', argmaxp, argmaxs, argmax])
 
         self.df = pd.merge(
             self.df,
@@ -435,7 +476,7 @@ class TPMetrics(TPMetricsSuper):
         
         df = self.df.loc[:, ['index', self.m, self.sfinal]].dropna()
         df['r'] = df[self.sfinal]+1 # avoid error with 0s score
-        df['r'] = 1/df['r'] # invert rank
+        df['r'] = -df['r'] # invert rank
         df = df.groupby(self.m).agg(list).reset_index()
         df[self.rank] = [rankdata(i, method='dense').tolist() for i in df['r'].to_list()]
         df = df.loc[:, [self.m, 'index', self.rank]].explode(['index', self.rank])

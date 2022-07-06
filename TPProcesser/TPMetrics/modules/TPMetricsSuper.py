@@ -38,10 +38,12 @@ class TPMetricsSuper():
         # Define name of added columns
 
         self.tpc = 'TP_Class'
-        self.tpcA = 'TP_Class_adduct'
+        #self.tpcA = 'TP_Class_adduct'
 
         self.s1a = 'TP_all_corr1'
+        self.s1aF = 'TP_corr1_Apex'
         self.s1m = 'TP_max_corr1'
+        self.s1mF = 'TP_max_corr1_Apex'
         self.s1s = 'TP_sum_corr1'
         self.s1n = 'TP_n_corr1'
         self.s1mp = 'TP_max_corr1_pvalue'
@@ -57,7 +59,9 @@ class TPMetricsSuper():
 
 
         self.s2a = 'TP_all_corr2'
+        self.s2aF = 'TP_corr2_Apex'
         self.s2m = 'TP_max_corr2'
+        self.s2mF = 'TP_max_corr2_Apex'
         self.s2s = 'TP_sum_corr2'
         self.s2n = 'TP_n_corr2'
         self.s2mp = 'TP_max_corr2_pvalue'
@@ -67,11 +71,17 @@ class TPMetricsSuper():
         self.s2ss = 'TP_sum_corr2_score'
         self.s2 = 'TP_corr2_score'
 
-        self.s2adduct = 'TP_corr2_score_adduct'
+        #self.s2adduct = 'TP_corr2_score_adduct'
         self.s2argmax = 'TP_corr2_argmax'
         self.s2argmaxs = 'TP_corr2_score_argmax'
         self.s2argmaxp = 'TP_Class_argmax'
-        self.s2argmaxA = 'TP_Class_Adduct_argmax'
+        #self.s2argmaxA = 'TP_Class_Adduct_argmax'
+
+        self.s3Ai = 'TP_Adduct_Index'
+        self.s3An = 'TP_Adduct_Number'
+        self.s3s = 'TP_Adduct_Score'
+
+        self.s2s3 = 'TP_corr2_adduct_Score'
 
         self.s = 'TP_corr12_score_argmax'
         self.se = 'TP_error_penalty'
@@ -90,6 +100,12 @@ class TPMetricsSuper():
 
         self.rt1 = self.config['TPMetrics'].getfloat('rt1')
         self.rt2 = self.config['TPMetrics'].getfloat('rt2')
-        self.A = json.loads(self.config['TPMetrics']['class_adducts'])
-        self.ipatt = re.compile(self.config['TPMetrics'].get('i_pattern'))
+        #self.ipatt = re.compile(self.config['TPMetrics'].get('i_pattern'))
         self.corrType = self.config['TPMetrics'].get('corr_type')
+
+        self.L2A = json.loads(self.config['TPMetrics']['class_adducts']) # From lipid to list of possible adducts
+        self.L = list(self.L2A.keys())
+        self.L2An = {i:len(self.L2A[i]) for i in self.L2A} # From lipids to number of possible adducts
+        
+        # From lipid to dictionary mapping its possible adduct to its index
+        self.L2A2i = {i:{j: n+1 for n,j in enumerate(self.L2A[i])} for i in self.L2A} 
