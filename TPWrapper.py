@@ -26,14 +26,19 @@ import subprocess
 
 # TurboPutative modules
 scriptPath = os.path.dirname(__file__)
+
 sys.path.append(os.path.join(scriptPath, "TPPreProcesser"))
 sys.path.append(os.path.join(scriptPath, "TPPostProcesser"))
+
+
 from TPPreProcesser.PreProcesser import main as PreProcesser
 import TPPreProcesser.modules.TPExceptions as TPExc
 from TPPostProcesser.PostProcesser import main as PostProcesser
 from TPPostProcesser.modules.ExtensionMover import ExtensionMover
 
-from TPProcesser.TPMetrics.TPMetrics import TPMetrics
+sys.path.append(os.path.join(scriptPath, "TPProcesser", 'TPMetrics'))
+#from TPProcesser.TPMetrics.TPMetrics import TPMetrics
+from TPMetrics import TPMetrics
 
 # Constants
 modulePath = {

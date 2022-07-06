@@ -53,3 +53,11 @@ cp ./TPProcesser/RowMerger/RowMerger $BUILD_DIR_NAME/TPProcesser/RowMerger/
 mkdir $BUILD_DIR_NAME/TPProcesser/TableMerger
 cp ./TPProcesser/TableMerger/TableMerger $BUILD_DIR_NAME/TPProcesser/TableMerger/
 # cp ./TPProcesser/TableMerger/libm.so.6 $BUILD_DIR_NAME/TPProcesser/TableMerger/
+
+# TPMetrics
+mkdir -p $BUILD_DIR_NAME/TPProcesser/TPMetrics/modules
+mkdir -p $BUILD_DIR_NAME/TPProcesser/TPMetrics/data
+
+cp ./TPProcesser/TPMetrics/TPMetrics.py $BUILD_DIR_NAME/TPProcesser/TPMetrics/TPMetrics.py
+cp ./TPProcesser/TPMetrics/modules/*.py $BUILD_DIR_NAME/TPProcesser/TPMetrics/modules/
+cp ./TPProcesser/TPMetrics/data/* $BUILD_DIR_NAME/TPProcesser/TPMetrics/data/

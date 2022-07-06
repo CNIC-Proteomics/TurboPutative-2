@@ -15,82 +15,21 @@ import pandas as pd
 import re
 from scipy.stats import rankdata
 
+from modules.TPMetricsSuper import TPMetricsSuper
+
 
 #
 # CLASSES AND FUNCTIONS
 #
 
-class TPMetrics:
+class TPMetrics(TPMetricsSuper):
 
     def __init__(self, workdir):
 
         logging.info('Initializing TPMetrics object')
         
-        self.workdir = workdir
-        self.config = configparser.ConfigParser()
-        self.config.read(os.path.join(self.workdir, 'configFile.ini'))
-
-        # column names
-        self.m = self.config['TPMetrics']['column_mass']
-        self.n = self.config['TPMetrics']['column_name']
-        self.rt = self.config['TPMetrics']['column_rt']
-        self.a = self.config['TPMetrics']['column_adduct']
-        self.w = self.config['TPMetrics']['column_molweight']
-        self.e = self.config['TPMetrics']['column_error']
-        self.i = self.config['TPMetrics']['column_intensities'].split(' // ')
-
-        self.tpc = 'TP_Class'
-        self.tpcA = 'TP_Class_adduct'
-
-        self.s1a = 'TP_all_corr1'
-        self.s1m = 'TP_max_corr1'
-        self.s1s = 'TP_sum_corr1'
-        self.s1n = 'TP_n_corr1'
-        self.s1mp = 'TP_max_corr1_pvalue'
-        self.s1ms = 'TP_max_corr1_score'
-        self.s1avg = 'TP_all_corr1_avg'
-        self.s1sp = 'TP_sum_corr1_pvalue'
-        self.s1ss = 'TP_sum_corr1_score'
-        self.s1 = 'TP_corr1_score'
-
-        self.s1argmax = 'TP_corr1_argmax'
-        self.s1argmaxs = 'TP_corr1_score_argmax'
-        self.s1argmaxp = 'MolWeight_argmax'
-
-
-        self.s2a = 'TP_all_corr2'
-        self.s2m = 'TP_max_corr2'
-        self.s2s = 'TP_sum_corr2'
-        self.s2n = 'TP_n_corr2'
-        self.s2mp = 'TP_max_corr2_pvalue'
-        self.s2ms = 'TP_max_corr2_score'
-        self.s2avg = 'TP_all_corr2_avg'
-        self.s2sp = 'TP_sum_corr2_pvalue'
-        self.s2ss = 'TP_sum_corr2_score'
-        self.s2 = 'TP_corr2_score'
-
-        self.s2adduct = 'TP_corr2_score_adduct'
-        self.s2argmax = 'TP_corr2_argmax'
-        self.s2argmaxs = 'TP_corr2_score_argmax'
-        self.s2argmaxp = 'TP_Class_argmax'
-        self.s2argmaxA = 'TP_Class_Adduct_argmax'
-
-        self.s = 'TP_corr12_score_argmax'
-        self.se = 'TP_error_penalty'
-        self.sfinal = 'TPMetrics'
-
-        self.rank = 'TPMetrics_rank'
-
-        # files
-        self.infile = self.config['TPMetrics']['infile']
-        self.outfile = self.config['TPMetrics']['outfile']
-
-        # parameters
-        self.rt1 = self.config['TPMetrics'].getfloat('rt1')
-        self.rt2 = self.config['TPMetrics'].getfloat('rt2')
-        self.A = json.loads(self.config['TPMetrics']['class_adducts'])
-        self.ipatt = re.compile(self.config['TPMetrics'].get('i_pattern'))
-        self.corrType = self.config['TPMetrics'].get('corr_type')
+        # Get parameters from config and set some constants
+        TPMetricsSuper.__init__(self, workdir)
 
         # Working table
         self.df = pd.read_csv(os.path.join(self.workdir, self.infile), sep='\t')
@@ -101,12 +40,6 @@ class TPMetrics:
         self.finalCols = self.initCols + [self.tpc, self.s2argmaxp, self.s2argmaxA, self.sfinal, self.rank, self.s1, self.s2]# + self.i
         self.df = self.df.reset_index() # Generate column with index 
 
-
-        # Other values
-
-        # column names with intensities
-        #self.i = [i for i in self.df.columns if self.ipatt.search(i)] 
-        
         
         # correlation matrix between mz
         self.corr = self.df.loc[:, [self.m, *self.i]].drop_duplicates().set_index(self.m).T.corr(method=self.corrType) 
@@ -162,8 +95,8 @@ class TPMetrics:
         '''
         '''
         
-        self.getCorr(basedCol=self.w, dtypeCol=np.float64, sa=self.s1a, sm=self.s1m, ss=self.s1s, sn=self.s1n)
-        self.getCorr(basedCol=self.tpc, dtypeCol=str, sa=self.s2a, sm=self.s2m, ss=self.s2s, sn=self.s2n)
+        self.getCorr(basedCol=self.w, dtypeCol=np.float64, rtwindow=self.rt1, sa=self.s1a, sm=self.s1m, ss=self.s1s, sn=self.s1n)
+        self.getCorr(basedCol=self.tpc, dtypeCol=str, rtwindow=self.rt2, sa=self.s2a, sm=self.s2m, ss=self.s2s, sn=self.s2n)
 
         self.getNullH()
         
@@ -184,7 +117,7 @@ class TPMetrics:
         self.getRank()
 
 
-    def getCorr(self, basedCol, dtypeCol, sa, sm, ss, sn):
+    def getCorr(self, basedCol, dtypeCol, rtwindow, sa, sm, ss, sn):
         '''
         Correlations based on basedCol. Try to identify the same compound in different features. 
         Three columns with correlations will be added to self.df:
@@ -222,8 +155,8 @@ class TPMetrics:
             df_wo_duplicates.loc[
                 np.logical_and.reduce((
                     m != df_wo_duplicates.loc[:, self.m],
-                    rt-self.rt1 <= df_wo_duplicates.loc[:, self.rt],
-                    rt+self.rt1 >= df_wo_duplicates.loc[:, self.rt],
+                    rt-rtwindow <= df_wo_duplicates.loc[:, self.rt],
+                    rt+rtwindow >= df_wo_duplicates.loc[:, self.rt],
                     w == df_wo_duplicates.loc[:, basedCol]
                 )),
                 'index'
@@ -238,13 +171,7 @@ class TPMetrics:
                 self.corr.loc[self.idx2mz[index_w[0]], [self.idx2mz[p] for p in pair]].to_numpy()
             ) 
             for index_w, pair in idx2p if len(pair)>0
-        ]
-
-        
-        
-        # --> Las correlaciones se capturan de la tabla original. Para el maximo y la suma se transforman en valores absolutos
-        # --> A partir de ahí, la hipótesis nula la tenemos en valores absolutos.
-        # 
+        ] 
         
         #
         ### !!!!! REMOVE NEGATIVE CORRELATIONS FOR MW CASE
