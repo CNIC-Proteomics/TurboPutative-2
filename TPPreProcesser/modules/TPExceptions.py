@@ -310,7 +310,7 @@ class TPTableMergerError(Exception, TPErrorClassBase):
 
 class TPMetricsError(Exception, TPErrorClassBase):
     """
-    Error raised when there is an error in TableMerger execution
+    Error raised when there is an error in TPMetrics execution
     """
 
     def __init__(self, workdir):
@@ -334,6 +334,22 @@ class TPMetricsColumnError(Exception, TPErrorClassBase):
         logging.error(f"TPMetricsError: Missing columns --> {missing_columns}")
         self.code = 60002
         self.msg = f"TPMetricsError: Missing columns (Name, rt, Molecular Weight, mz Error (ppm), Adduct, Intensities)"
+
+        # Initialize base class and go out..
+        TPErrorClassBase.__init__(self, workdir, self.msg, self.code)
+        self.writeErrorLog()
+        self.exitProgram()
+
+
+class TPMetricsError(Exception, TPErrorClassBase):
+    """
+    Error raised when there is an error in TPFilter execution
+    """
+
+    def __init__(self, workdir):
+        
+        self.code = 70001
+        self.msg = f"TPFilter: Error raised in TPMetrics execution"
 
         # Initialize base class and go out..
         TPErrorClassBase.__init__(self, workdir, self.msg, self.code)

@@ -38,6 +38,7 @@ class TPMetricsSuper():
         # Define name of added columns
 
         self.tpc = 'TP_Class'
+        self.tpcL = 'TP_Class_List'
         #self.tpcA = 'TP_Class_adduct'
 
         self.s1a = 'TP_all_corr1'
@@ -88,7 +89,7 @@ class TPMetricsSuper():
         self.sfinal = 'TPMetrics'
 
         self.rank = 'TPMetrics_rank'
-
+        self.nFilt = 'Name_filtered'
 
         # Name of input and output files
         

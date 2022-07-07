@@ -14,7 +14,7 @@ import modules.constants as constants
 
 class ModuleInfo:
     """
-    Write ini file containing information used by different C++ modules
+    Write ini file containing information used by different C++ modules (and Python classes)
     """
     def __init__(self, workflow, workdir):
         
@@ -33,50 +33,65 @@ class ModuleInfo:
         inFile = constants.OUTNAME
         cores = min(max(int(os.cpu_count()*constants.CORES_RATIO), 1), os.cpu_count()) # Get number of cores between 1 and maxCores
 
-        for i, module in enumerate(self.workflow):
+        i = 0
+        for module in self.workflow:
 
             if module == "1":
-                outFile = f"{i+1}_Tagger.tsv"
+                i += 1
+                outFile = f"{i}_Tagger.tsv"
 
                 self.iniDict['Tagger'] = {
                     'infile': inFile,
                     'outfile': outFile,
-                    'n': i+1,
+                    'n': i,
                     'cores': cores
                 }
 
             elif module == "2":
-                outFile = f"{i+1}_REname.tsv"
+                i += 1
+                outFile = f"{i}_REname.tsv"
 
                 self.iniDict['REname'] = {
                     'infile': inFile,
                     'outfile': outFile,
-                    'n': i+1,
+                    'n': i,
                     'cores': cores
                 }
 
             elif module == "3":
-                outFile = f"{i+1}_RowMerger.tsv"
+                i += 1
+                outFile = f"{i}_RowMerger.tsv"
+
                 self.iniDict['RowMerger'] = {
                     'infile': inFile,
                     'outfile': outFile,
-                    'n': i+1
+                    'n': i
                 }
 
             elif module == "4":
-                outFile = f"{i+1}_TableMerger.tsv"
+                i += 1
+                outFile = f"{i}_TableMerger.tsv"
 
                 self.iniDict['TableMerger'] = {
                     'infile': inFile,
                     'outfile': outFile,
-                    'n': i+1,
+                    'n': i,
                     "tmfile": constants.OUTNAME_TMTABLE
                 }
             
             elif module == "5":
                 outFile = f"{i}_TPMetrics.tsv" # change i+1 --> i (TableMerger and TPMetrics are one module in the front-end)
+
                 self.iniDict['TPMetrics'] = {
                     'infile': inFile,
+                    'outfile': outFile
+                }
+            
+            elif module == "6":
+                outFile = f"{i}_TPFilter.tsv" # change i+1 --> i (TableMerger and TPFilter are one module in the front-end)
+
+                self.iniDict['TPFilter'] = {
+                    #'infile': inFile, # infile of TPFilter is in TPMetrics object
                     'outfile': outFile
                 }
             

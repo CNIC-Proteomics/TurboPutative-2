@@ -7,6 +7,7 @@
 #
 
 import configparser
+from itertools import repeat
 import json
 import logging
 import numpy as np
@@ -34,6 +35,7 @@ class TPMetrics(TPMetricsSuper):
         # Working table
         self.df = pd.read_csv(os.path.join(self.workdir, self.infile), sep='\t')
         self.LC = self.readLipidClasses()
+        self.LC['bool'] = True
 
         self.initCols = [i for i in self.df.columns.to_list() if i not in self.i] # intensity columns in the end
         self.finalCols = self.initCols + [self.tpc, self.s2argmaxp, self.s1, self.s2, self.s3s, self.s2m, self.s2mF, self.sfinal, self.rank] + self.i
@@ -61,9 +63,9 @@ class TPMetrics(TPMetricsSuper):
         Read list containing classes of lipids
         '''
 
-        #with open(r'./src/TurboPutative-2.0-built/TPProcesser/TPMetrics/data/Lipid_Class.tsv', 'r') as f:
-        with open(r'./data/Lipid_Class.tsv', 'r') as f:
-            return pd.DataFrame({'TP_Class': [i.strip() for i in f]})
+        with open(r'./src/TurboPutative-2.0-built/TPProcesser/TPMetrics/data/Lipid_Class.tsv', 'r') as f:
+        #with open(r'./data/Lipid_Class.tsv', 'r') as f:
+            return pd.DataFrame({self.tpc: [i.strip() for i in f]})
 
 
     def getClasses(self):
@@ -71,24 +73,67 @@ class TPMetrics(TPMetricsSuper):
         Add to input table lipid classes (found in LMSD)
         '''
 
-        self.df = self.df.join(
-            pd.merge(
-                pd.DataFrame(
-                    {
-                        self.tpc: [
-                            [re.sub(r'LMSD{ ([^}]+) }', r'\1', j).split(' ') for j in i.split(' // ')]
-                            for i in self.df[self.n].to_list()
-                        ],
-                        'index': range(self.df.shape[0])
-                    }
-                ).explode(self.tpc).explode(self.tpc), # Dataframe with (potential) lipid class and index
-                self.LC, # Dataframe with permited lipid classes
-                on=self.tpc,
-                how='inner'
-            ).drop_duplicates().groupby('index').agg(list), # Dataframe with permitted lipid classes associated to each index
+        dfl = list(zip(*[j for i,j in self.df.loc[:, ['index', self.n]].to_dict('list').items()]))
+        dfl = [(index, name.split(' // ')) for index,name in dfl]
+
+        # dataframe with possible lipid class, annotation index, and name index
+        dfl = pd.DataFrame([
+            (index_f, index_n, re.sub(r'LMSD{ ([^}]+) }', r'\1', name).split(' '))        
+            for index, name_list in dfl
+            for index_f, name, index_n in      
+            list(zip(
+                list(repeat(index, len(name_list))), 
+                name_list, 
+                list(range(len(name_list)))
+            ))
+        ], columns=['index', 'in', self.tpcL]).explode(self.tpcL, ignore_index=True).drop_duplicates()
+
+        # map index of annotation to index of its possible name
+        index2tpcL = dfl.loc[:, ['index', 'in']].drop_duplicates()
+
+        # find possible lipid class present in LMSD (maintaining the first)
+        dfl = pd.merge(
+            dfl,
+            self.LC,
+            left_on=self.tpcL,
+            right_on=self.tpc,
+            how='left'
+        ).dropna().drop_duplicates(subset=['index','in'], keep='first')
+
+        dfl = pd.merge(
+            index2tpcL,
+            dfl,
+            on=['index', 'in'],
+            how='left'
+        ).groupby(['index']).agg(list).reset_index()
+
+        dfl[self.tpc] = [' // '.join([j for j in list(set(i)) if not pd.isna(j)]) for i in dfl[self.tpc]]
+
+        self.df = pd.merge(
+            self.df,
+            dfl.loc[:, ['index', self.tpcL, self.tpc]],
+            on='index',
+            how='left'
         )
 
-        self.df[self.tpc] = self.df.loc[:, self.tpc].str.join(' // ')
+        # self.df = self.df.join(
+        #     pd.merge(
+        #         pd.DataFrame(
+        #             {
+        #                 self.tpc: [
+        #                     [re.sub(r'LMSD{ ([^}]+) }', r'\1', j).split(' ') for j in i.split(' // ')]
+        #                     for i in self.df[self.n].to_list()
+        #                 ],
+        #                 'index': range(self.df.shape[0])
+        #             }
+        #         ).explode(self.tpc).explode(self.tpc), # Dataframe with (potential) lipid class and index
+        #         self.LC, # Dataframe with permited lipid classes
+        #         on=self.tpc,
+        #         how='inner'
+        #     ).drop_duplicates().groupby('index').agg(list), # Dataframe with permitted lipid classes associated to each index
+        # )
+
+        # self.df[self.tpc] = self.df.loc[:, self.tpc].str.join(' // ')
 
     
     def getCorrelations(self):
@@ -421,7 +466,7 @@ class TPMetrics(TPMetricsSuper):
 
         logging.info("Identify group of annotations providing the maximum score")
 
-        # Get maximum score for molecular weight
+        # Get maximum score
         df = self.df.loc[:, ['index', basedCol, score]].dropna()
 
         dfl = list(zip(*[
@@ -429,10 +474,10 @@ class TPMetrics(TPMetricsSuper):
             for i,j in df.to_dict('list').items()
         ]))
 
-        dfl = [(index, w.split(' // '), s, np.argmax(s)) for index, w, s in dfl]
+        dfl = [(index, w.split(' // '), s, np.where(np.array(s) == s[np.argmax(np.array(s))])[0]) for index, w, s in dfl]
 
         dfl = pd.DataFrame([
-            (index, w[argmax], s[argmax], argmax) 
+            (index, ' // '.join([i for n,i in enumerate(w) if n in argmax]), s[argmax[0]], argmax.tolist()) 
             for index, w, s, argmax in dfl
         ], columns=['index', argmaxp, argmaxs, argmax])
 
@@ -488,12 +533,53 @@ class TPMetrics(TPMetricsSuper):
             how='left'
         )
     
-    def writeOutfile(self):
+    def writeOutfile(self, df, outfile, finalCols):
         '''
         '''
-        outpath = os.path.join(self.workdir, self.outfile)
+        outpath = os.path.join(self.workdir, outfile)
         logging.info(f"Writing output file: {outpath}")
-        self.df.to_csv(
+        df.to_csv(
             outpath,
-            sep='\t', index=False, columns=self.finalCols
+            sep='\t', index=False, columns=finalCols
         )
+    
+
+    #
+    # Module 6: TableFilter
+    #
+
+    def TPFilter(self):
+        '''
+        Initialize TPFilter option
+        '''
+
+        self.outfileFilt = self.config['TPFilter']['outfile']
+        self.dfFilt = None # dataframe filtered
+        self.finalColsFilt = self.initCols + [self.nFilt, self.tpc, self.s2argmaxp, self.s1, self.s2, self.s3s, self.s2m, self.s2mF, self.sfinal, self.rank] + self.i
+
+
+
+    def filterTable(self):
+        '''
+        
+        '''
+        logging.info(f"Filtering table")
+
+        self.dfFilt = self.df.loc[self.df[self.rank]==1, :].copy()
+
+        dfl = list(zip(*[j for i,j in self.dfFilt.loc[:, [self.n, self.tpcL, self.s2argmaxp]].to_dict('list').items()]))
+
+        dfl = [
+            (
+                np.array(nameL.split(' // ')), 
+                np.array(['' if pd.isna(i) else i for i in tpcL]), 
+                maxpL.split(' // ')
+            ) 
+            for nameL, tpcL, maxpL in dfl ]
+
+        self.dfFilt[self.nFilt] = [
+            ' // '.join(
+                [name for maxp in maxpL for name in nameL[tpcL==maxp]]
+            )
+            for nameL, tpcL, maxpL in dfl
+        ]

@@ -162,13 +162,28 @@ def main(args):
                 tpmetrics = TPMetrics(args.workdir)
                 tpmetrics.getClasses()
                 tpmetrics.getCorrelations()
-                tpmetrics.writeOutfile()
+                tpmetrics.writeOutfile(tpmetrics.df, tpmetrics.outfile, tpmetrics.finalCols)
             
             except:
                 logging.exception("Error raised when executing TPMetrics. Traceback:")
                 raise TPExc.TPMetricsError(args.workdir)
 
             logging.info(f"{ti()} - End TPMetrics")
+        
+
+        if module == '6': # TPFilter
+            logging.info(f"{ti()} - Start TPFilter")
+
+            try:
+                tpmetrics.TPFilter()
+                tpmetrics.filterTable()
+                tpmetrics.writeOutfile(tpmetrics.dfFilt, tpmetrics.outfileFilt, tpmetrics.finalColsFilt)
+
+            except:
+                logging.exception("Error raised when executing TPFilter. Traceback:")
+                raise TPExc.TPFilterError(args.workdir)
+
+            logging.info(f"{ti()} - End TPFilter")
 
     #
     # PostProcesser
