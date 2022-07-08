@@ -134,15 +134,18 @@ class ResultWriter:
 
 
         # write HTML tables
+        #exportColumns = df.columns if len(df.columns)<6  \
+        #    else [k for k in df.columns for i in constants.COLUMN_NAMES for j in constants.COLUMN_NAMES[i] if k.lower() == j and i != 'inchi_key']
         exportColumns = df.columns if len(df.columns)<6  \
-            else [k for k in df.columns for i in constants.COLUMN_NAMES for j in constants.COLUMN_NAMES[i] if k.lower() == j and i != 'inchi_key']
-        
+            else [k for k in df.columns for i in constants.HTML_COLUMNS[module] for j in constants.COLUMN_NAMES[i] if k.lower() == j and i != 'inchi_key']
+
         fullPath = os.path.join(self.workDir, outFileName_noExt)
 
         falseArr = np.zeros(df.shape[0], dtype='bool')  #header
         df.loc[falseArr, :].to_html(fullPath+'.html', index=False, na_rep='-', columns=exportColumns)
 
-        df.to_csv(fullPath+'.row', sep="\t", index=False, header=False, na_rep='-', columns=exportColumns) #rows
+        # replace because NA are not interpreted when reading table.
+        df.replace('','-').to_csv(fullPath+'.row', sep="\t", index=False, header=False, na_rep='-', columns=exportColumns) #rows
 
         self.finalFileNames.append(outFileName)
         

@@ -32,9 +32,19 @@ COLUMN_NAMES = {
     "inchi_key": ["inchikey"],
     "adduct": ["adduct"],
     "mzError": ["mz error (ppm)", "mzerror"],
-    "feature": ["feature"],
-    "molecular_weight": ['molecular weight']
-    }
+    "feature": ["feature", "featureinfo_name"],
+    "molecular_weight": ['molecular weight'],
+    "tpmetrics": ["name_filtered", "tp_class_argmax", "tpmetrics", "tpmetrics_rank"]
+}
+
+HTML_COLUMNS = {
+    "Tagger": ["mass", "adduct", "mzError", "molecular_weight", "name", "tags", "chemical_formula"],
+    "REname": ["mass", "adduct", "mzError", "molecular_weight", "name", "tags", "chemical_formula"],
+    "RowMerger": ["mass", "adduct", "mzError", "molecular_weight", "name", "tags", "chemical_formula"],
+    "TableMerger": ["feature", "rt", "mass", "adduct", "mzError", "molecular_weight", "name", "tags", "chemical_formula"],
+    "TPMetrics": ["feature", "rt", "mass", "adduct", "mzError", "molecular_weight", "name", "tags", "chemical_formula", "tpmetrics"],
+    "TPFilter": ["feature", "rt", "mass", "adduct", "tpmetrics"]
+}
 
 # Column required to input MS table (used to find header)
 REQUIRED_COLUMN = [COLUMN_NAMES["name"]]

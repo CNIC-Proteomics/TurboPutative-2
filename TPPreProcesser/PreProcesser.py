@@ -100,9 +100,10 @@ def main(args, logging):
     moduleInfo = userINI.transferToModuleInfo(moduleInfo, msTable.table.columns.to_list())
 
     # Add TPMetrics columns and check for possible errors
-    moduleInfo.addTPMetricsColumns(
-        msTable.table.columns.to_list() if '4' not in args.workflow else tmTable.table.columns.to_list() + msTable.table.columns.to_list()
-    )
+    if '5' in args.workflow:
+        moduleInfo.addTPMetricsColumns(
+            msTable.table.columns.to_list() if '4' not in args.workflow else tmTable.table.columns.to_list() + msTable.table.columns.to_list()
+        )
 
     # Write info file
     moduleInfo.writeINI(args.workdir)
