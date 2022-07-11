@@ -34,7 +34,7 @@ COLUMN_NAMES = {
     "mzError": ["mz error (ppm)", "mzerror"],
     "feature": ["feature", "featureinfo_name"],
     "molecular_weight": ['molecular weight'],
-    "tpmetrics": ["name_filtered", "tp_class_argmax", "tpmetrics", "tpmetrics_rank"]
+    "tpmetrics": ["tp_class_argmax", "tpmetrics", "tpmetrics_rank"]
 }
 
 HTML_COLUMNS = {
@@ -43,7 +43,7 @@ HTML_COLUMNS = {
     "RowMerger": ["mass", "adduct", "mzError", "molecular_weight", "name", "tags", "chemical_formula"],
     "TableMerger": ["feature", "rt", "mass", "adduct", "mzError", "molecular_weight", "name", "tags", "chemical_formula"],
     "TPMetrics": ["feature", "rt", "mass", "adduct", "mzError", "molecular_weight", "name", "tags", "chemical_formula", "tpmetrics"],
-    "TPFilter": ["feature", "rt", "mass", "adduct", "tpmetrics"]
+    "TPFilter": ["feature", "rt", "mass", "adduct", "name", "tags", "tpmetrics"]
 }
 
 # Column required to input MS table (used to find header)

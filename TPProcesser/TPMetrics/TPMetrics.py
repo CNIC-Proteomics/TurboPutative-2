@@ -116,25 +116,6 @@ class TPMetrics(TPMetricsSuper):
             how='left'
         )
 
-        # self.df = self.df.join(
-        #     pd.merge(
-        #         pd.DataFrame(
-        #             {
-        #                 self.tpc: [
-        #                     [re.sub(r'LMSD{ ([^}]+) }', r'\1', j).split(' ') for j in i.split(' // ')]
-        #                     for i in self.df[self.n].to_list()
-        #                 ],
-        #                 'index': range(self.df.shape[0])
-        #             }
-        #         ).explode(self.tpc).explode(self.tpc), # Dataframe with (potential) lipid class and index
-        #         self.LC, # Dataframe with permited lipid classes
-        #         on=self.tpc,
-        #         how='inner'
-        #     ).drop_duplicates().groupby('index').agg(list), # Dataframe with permitted lipid classes associated to each index
-        # )
-
-        # self.df[self.tpc] = self.df.loc[:, self.tpc].str.join(' // ')
-
     
     def getCorrelations(self):
         '''
@@ -555,7 +536,10 @@ class TPMetrics(TPMetricsSuper):
 
         self.outfileFilt = self.config['TPFilter']['outfile']
         self.dfFilt = None # dataframe filtered
-        self.finalColsFilt = self.initCols + [self.nFilt, self.tpc, self.s2argmaxp, self.s1, self.s2, self.s3s, self.s2m, self.s2mF, self.sfinal, self.rank] + self.i
+        #self.finalColsFilt = [i for i in self.initCols if i not in [self.n]] + \
+        #    [self.nFilt, self.tpc, self.s2argmaxp, self.s2m, self.s2mF, self.sfinal, self.rank] + self.i
+        self.finalColsFilt = self.initCols + \
+                    [self.tpc, self.s2argmaxp, self.s2m, self.s2mF, self.sfinal, self.rank] + self.i
 
 
 
@@ -567,6 +551,7 @@ class TPMetrics(TPMetricsSuper):
 
         self.dfFilt = self.df.loc[self.df[self.rank]==1, :].copy()
 
+        # tpcL indicates the lipid class per name
         dfl = list(zip(*[j for i,j in self.dfFilt.loc[:, [self.n, self.tpcL, self.s2argmaxp]].to_dict('list').items()]))
 
         dfl = [
@@ -577,7 +562,8 @@ class TPMetrics(TPMetricsSuper):
             ) 
             for nameL, tpcL, maxpL in dfl ]
 
-        self.dfFilt[self.nFilt] = [
+        #self.dfFilt[self.nFilt] = [
+        self.dfFilt[self.n] = [
             ' // '.join(
                 [name for maxp in maxpL for name in nameL[tpcL==maxp]]
             )
