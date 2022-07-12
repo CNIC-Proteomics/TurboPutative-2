@@ -44,7 +44,7 @@ class TPMetrics(TPMetricsSuper):
 
         
         # correlation matrix between mz
-        self.corr = self.df.loc[:, [self.m, *self.i]].drop_duplicates().set_index(self.m).T.corr(method=self.corrType) 
+        self.corr = self.df.loc[:, [self.m, self.rt, *self.i]].drop_duplicates().set_index([self.m, self.rt]).T.corr(method=self.corrType) 
         
         # map index to mz
         self.idx2mz = dict(list(zip(
@@ -160,11 +160,12 @@ class TPMetrics(TPMetricsSuper):
         #self.getMaximumScores()
         self.getMaximumScores(basedCol=self.w, score=self.s1, argmaxp=self.s1argmaxp, argmaxs=self.s1argmaxs, argmax=self.s1argmax)
         self.getMaximumScores(basedCol=self.tpc, score=self.s2s3, argmaxp=self.s2argmaxp, argmaxs=self.s2argmaxs, argmax=self.s2argmax)
-
+        
         self.df[self.s] = self.df.loc[:, self.s1argmaxs].fillna(0)+self.df.loc[:, self.s2argmaxs].fillna(0)
 
+        
         self.applyErrorPenalty()
-
+        
         self.getRank()
 
 
@@ -192,6 +193,9 @@ class TPMetrics(TPMetricsSuper):
                      #   subset=[self.m, self.rt, basedCol], keep='first'
                      #   )
 
+        # rows without lipid class are '' instead of na
+        df = df.loc[df[basedCol]!='', :]
+
         # This is the dataframe used to search associated features/annotations. One feature can have 
         # annotations with the same basedCol. We must remove the duplicates to avoid repeated intensities
         # and correlations
@@ -203,41 +207,48 @@ class TPMetrics(TPMetricsSuper):
         # Identify possible correlated elements [(index, [pair_index_1, pair_index_2])]
         idx2p = [
             (
-                [index, w],
+                [index, w, m, rt],
                 df_wo_duplicates.loc[
                     np.logical_and.reduce((
-                        m != df_wo_duplicates.loc[:, self.m],
+                        ~np.logical_and(
+                            m == df_wo_duplicates.loc[:, self.m], 
+                            rt == df_wo_duplicates.loc[:, self.rt]
+                        ), # if mass and rt are the same, they are the same feature
                         rt-rtwindow <= df_wo_duplicates.loc[:, self.rt],
                         rt+rtwindow >= df_wo_duplicates.loc[:, self.rt],
                         w == df_wo_duplicates.loc[:, basedCol]
                     )),
-                    ['index', self.m]
+                    ['index', self.m, self.rt]
                 ].to_dict('list')
             )
             for index, m, rt, w in dfl
         ]
 
         idx2p = [
-            (index_w, pair_dict['index'], pair_dict[self.m])
-            for index_w, pair_dict in idx2p
+            (index_w_m_rt, pair_dict['index'], pair_dict[self.m], pair_dict[self.rt])
+            for index_w_m_rt, pair_dict in idx2p
         ]
 
         # remove empty elements and replace indexes by correlation
+        idx = pd.IndexSlice
         idx2p = [
             (
-                index_w, 
-                self.corr.loc[self.idx2mz[index_w[0]], [self.idx2mz[p] for p in pair_index]].to_numpy(),
-                pair_mass
+                index_w_m_rt, 
+                self.corr.loc[idx[index_w_m_rt[2], index_w_m_rt[3]], idx[pair_mass, pair_rt]].to_numpy(),
+                pair_mass,
+                pair_rt
             ) 
-            for index_w, pair_index, pair_mass in idx2p if len(pair_index)>0
-        ] 
+            for index_w_m_rt, pair_index, pair_mass, pair_rt in idx2p if len(pair_index)>0
+        ]
+
+        
         
         #
         ### !!!!! REMOVE NEGATIVE CORRELATIONS FOR MW CASE
         if basedCol==self.w: 
             idx2p = [
-                (index_w, pair_corr[pair_corr>0], pair_mass)
-                for index_w, pair_corr, pair_mass in idx2p if sum(pair_corr>0)>0
+                (index_w_m_rt, pair_corr[pair_corr>0], pair_mass, pair_rt)
+                for index_w_m_rt, pair_corr, pair_mass, pair_rt in idx2p if sum(pair_corr>0)>0
             ]
         # 
 
@@ -245,7 +256,7 @@ class TPMetrics(TPMetricsSuper):
         idx2p = pd.DataFrame(
             [
                 [
-                    *index_w, 
+                    *index_w_m_rt[:2], 
                     pair_corr.tolist(), 
                     abs(pair_corr[np.argmax(np.abs(pair_corr))]), 
                     np.sum(np.abs(pair_corr)), 
@@ -253,7 +264,7 @@ class TPMetrics(TPMetricsSuper):
                     pair_mass,
                     pair_mass[np.argmax(np.abs(pair_corr))]
                 ]
-                for index_w, pair_corr, pair_mass in idx2p
+                for index_w_m_rt, pair_corr, pair_mass, pair_rt in idx2p
             ], 
             columns=['index', basedCol, sa, sm, ss, sn, saF, smF]
         )
@@ -477,7 +488,9 @@ class TPMetrics(TPMetricsSuper):
         
         logging.info("Calculate final score and apply error penalty")
 
-        df = self.df.loc[:, ['index', self.e, self.s]].dropna()
+        df = self.df.loc[:, ['index', self.e, self.s]].dropna().copy()
+
+        df[self.e] = [max([float(j) for j in i.split(' // ')]) if type(i)==str else i for i in df[self.e].to_list()]
 
         B = 0.25 # Maximum percentage penalty
         Em = df[self.e].max() # Maximum error
@@ -558,7 +571,7 @@ class TPMetrics(TPMetricsSuper):
             (
                 np.array(nameL.split(' // ')), 
                 np.array(['' if pd.isna(i) else i for i in tpcL]), 
-                maxpL.split(' // ')
+                [''] if pd.isna(maxpL) else maxpL.split(' // ')
             ) 
             for nameL, tpcL, maxpL in dfl ]
 

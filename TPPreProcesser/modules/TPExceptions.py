@@ -341,7 +341,7 @@ class TPMetricsColumnError(Exception, TPErrorClassBase):
         self.exitProgram()
 
 
-class TPMetricsError(Exception, TPErrorClassBase):
+class TPFilterError(Exception, TPErrorClassBase):
     """
     Error raised when there is an error in TPFilter execution
     """
