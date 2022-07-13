@@ -37,8 +37,11 @@ class TPMetrics(TPMetricsSuper):
         self.LC = self.readLipidClasses()
         self.LC['bool'] = True
 
-        self.initCols = [i for i in self.df.columns.to_list() if i not in self.i] # intensity columns in the end
-        self.finalCols = self.initCols + [self.tpc, self.s2argmaxp, self.s1, self.s2, self.s3s, self.s2m, self.s2mF, self.sfinal, self.rank] + self.i
+        self.cmmCol = [i for i in self.df.columns if i in self.cmmCol or 'Unnamed' in i]
+        self.initCols = [i for i in self.df.columns.to_list() if i not in [*self.i, *self.cmmCol]] # intensity columns in the end
+        self.finalCols = self.initCols + \
+            [self.tpc, self.s2argmaxp, self.s1, self.s2, self.tpcL_s3s, self.s2m, self.s2mF, self.sfinal, self.rank] + \
+            self.cmmCol + self.i
         #self.finalCols = self.initCols + [self.tpc, self.s2argmaxp, self.sfinal, self.rank, self.s1, self.s2, self.s3s]# + self.i
         self.df = self.df.reset_index() # Generate column with index 
 
@@ -157,16 +160,17 @@ class TPMetrics(TPMetricsSuper):
 
         self.combineScores() # combine scores from Max and Sum (and adduct)
 
-        #self.getMaximumScores()
         self.getMaximumScores(basedCol=self.w, score=self.s1, argmaxp=self.s1argmaxp, argmaxs=self.s1argmaxs, argmax=self.s1argmax)
         self.getMaximumScores(basedCol=self.tpc, score=self.s2s3, argmaxp=self.s2argmaxp, argmaxs=self.s2argmaxs, argmax=self.s2argmax)
         
         self.df[self.s] = self.df.loc[:, self.s1argmaxs].fillna(0)+self.df.loc[:, self.s2argmaxs].fillna(0)
-
         
         self.applyErrorPenalty()
         
         self.getRank()
+
+        # method to obtain a column indicating adduct score per name
+        self.getName2AdductColumn()
 
 
     def getCorr(self, basedCol, dtypeCol, rtwindow, sa, sm, ss, sn, saF, smF):
@@ -537,6 +541,28 @@ class TPMetrics(TPMetricsSuper):
             sep='\t', index=False, columns=finalCols
         )
     
+    def getName2AdductColumn(self):
+        '''
+        Method to obtain a column: [(name1, AdductScore), (name2,AdductScore)...]
+        '''
+
+        df = self.df.loc[:, ['index', self.tpcL, self.tpc, self.s3s]].dropna()
+        dfl = list(zip(*[j for i, j in df.to_dict('list').items()]))
+
+        dfl = [(index, ['' if pd.isna(ii) else ii for ii in i], j.split(' // '), k, {'': 0}) for index,i,j,k in dfl]
+        _ = [d.update({i:j for i,j in zip(tpc, s3s)}) for index,tpcL,tpc,s3s,d in dfl]
+
+        self.df = pd.merge(
+            self.df,
+            pd.DataFrame(
+                [[index, list(zip(tpcL, [d[i] for i in tpcL]))] for index, tpcL,tpc,s3s,d in dfl],
+                columns=['index', self.tpcL_s3s]
+            ),
+            on='index',
+            how='left'
+        )
+
+        #self.df[self.tpcL_s3s] = [[index, list(zip(tpcL, [d[i] for i in tpcL]))] for index, tpcL,tpc,s3s,d in dfl]
 
     #
     # Module 6: TableFilter
@@ -552,7 +578,7 @@ class TPMetrics(TPMetricsSuper):
         #self.finalColsFilt = [i for i in self.initCols if i not in [self.n]] + \
         #    [self.nFilt, self.tpc, self.s2argmaxp, self.s2m, self.s2mF, self.sfinal, self.rank] + self.i
         self.finalColsFilt = self.initCols + \
-                    [self.tpc, self.s2argmaxp, self.s2m, self.s2mF, self.sfinal, self.rank] + self.i
+                    [self.tpc, self.s2argmaxp, self.s2m, self.s2mF, self.sfinal, self.rank] + self.cmmCol + self.i
 
 
 

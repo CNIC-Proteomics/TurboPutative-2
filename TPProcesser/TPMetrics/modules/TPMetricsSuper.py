@@ -39,6 +39,7 @@ class TPMetricsSuper():
 
         self.tpc = 'TP_Class'
         self.tpcL = 'TP_Class_List'
+        self.tpcL_s3s = 'TP_Class_Adduct_List'
         #self.tpcA = 'TP_Class_adduct'
 
         self.s1a = 'TP_all_corr1'
@@ -109,4 +110,8 @@ class TPMetricsSuper():
         self.L2An = {i:len(self.L2A[i]) for i in self.L2A} # From lipids to number of possible adducts
         
         # From lipid to dictionary mapping its possible adduct to its index
-        self.L2A2i = {i:{j: n+1 for n,j in enumerate(self.L2A[i])} for i in self.L2A} 
+        self.L2A2i = {i:{j: n+1 for n,j in enumerate(self.L2A[i])} for i in self.L2A}
+
+
+        # CMM columns moved to the end of the table
+        self.cmmCol = ['Score 1','Score 2','Score 3','Final Score','CAS','Kegg','HMDB','LipidMaps','Metlin','PubChem','InChIKey','SMILES','Pathways']
