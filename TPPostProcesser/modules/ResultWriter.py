@@ -194,7 +194,7 @@ class ResultWriter:
         outColumnNames = [i for i in df_columns if i.lower() in  user_columns]
         
         # if there is no column, take all...
-        if len(outColumnNames) == 0: outColumnNames = df_columns
+        if len(outColumnNames) == 0: outColumnNames = [i for i in df_columns if i!=constants.TPIDX]
 
         return outColumnNames
         

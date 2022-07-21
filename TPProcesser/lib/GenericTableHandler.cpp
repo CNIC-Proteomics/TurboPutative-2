@@ -219,7 +219,7 @@ void GenericTableHandler::writeTable(std::string outfilePath)
     //LOG_F(INFO, &(log.str()[0]));
 }
 
-void GenericTableHandler::fuseRows(std::vector<std::string> compareCol, std::vector<std::string> conserveCol, std::string name)
+void GenericTableHandler::fuseRows(std::vector<std::string> compareCol, std::vector<std::string> conserveCol, std::string name, std::string separator)
 {
     // logging
     std::stringstream log;
@@ -343,7 +343,7 @@ void GenericTableHandler::fuseRows(std::vector<std::string> compareCol, std::vec
             // --> Loop conserved column
             for (int k=0; k<conserveIdx.size(); k++)
             {
-                newRow[conserveIdx[k]] = conserveField(newRow[conserveIdx[k]], table[conserveIdx[k]][sortedRowIdx[j]]);
+                newRow[conserveIdx[k]] = conserveField(newRow[conserveIdx[k]], table[conserveIdx[k]][sortedRowIdx[j]], separator);
             }
 
             processedRows.push_back(sortedRowIdx[j]);
@@ -385,9 +385,10 @@ bool GenericTableHandler::compareNames(std::string& name1, std::string& name2)
     return equal;
 }
 
-std::string GenericTableHandler::conserveField(std::string& field1, std::string& field2)
+std::string GenericTableHandler::conserveField(std::string& field1, std::string& field2, std::string separator)
 {
-    std::string fieldDelim = " // ";
+    // std::string fieldDelim = " // ";
+    std::string fieldDelim = separator;
     std::string outField = "";
 
     if (field2 == "N/A" || field2 == "")

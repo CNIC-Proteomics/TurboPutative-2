@@ -10,6 +10,7 @@ import configparser
 import json
 import os
 import re
+import modules.constants as constants
 
 #
 # FUNTION AND CLASSES
@@ -29,10 +30,17 @@ class TPMetricsSuper():
         self.m = self.config['TPMetrics']['column_mass']
         self.n = self.config['TPMetrics']['column_name']
         self.rt = self.config['TPMetrics']['column_rt']
-        self.a = self.config['TPMetrics']['column_adduct']
-        self.w = self.config['TPMetrics']['column_molweight']
-        self.e = self.config['TPMetrics']['column_error']
         self.i = self.config['TPMetrics']['column_intensities'].split(' // ')
+
+        self.a_original = self.config['TPMetrics']['column_adduct']
+        self.e_original = self.config['TPMetrics']['column_error']
+        self.w_original = self.config['TPMetrics']['column_molweight']
+        
+        self.a = '_TP-' + self.a_original
+        self.e = '_TP-' + self.e_original
+        self.w = '_TP-' + self.w_original
+
+        self.tpidx = constants.TPIDX
 
         
         # Define name of added columns

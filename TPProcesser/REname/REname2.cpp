@@ -27,6 +27,10 @@
 #define REGEX_INI_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/regex.ini"
 
 #define LMSD_TABLE_PATH "./src/TurboPutative-2.0-built/TPProcesser/REname/data/LMSD_abbreviation.tsv"
+
+// separator between values of fused rows
+#define SEPARATOR " ; "
+
 // 
 
 // DECLARE FUNCTIONS AND CLASSES
@@ -157,7 +161,7 @@ int main(int argc, char *argv[])
         if (col != compoundColumnName && col != experimentalMassCol) conserveCols.push_back(col);
     }
 
-    msTable.fuseRows(compareCols, conserveCols, compoundColumnName);
+    msTable.fuseRows(compareCols, conserveCols, compoundColumnName, SEPARATOR);
 
 
     //

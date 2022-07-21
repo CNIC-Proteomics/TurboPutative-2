@@ -60,7 +60,12 @@ def main(args):
     # PreProcesser
     #
     logging.info(f"{ti()} - Start PreProcesser")
-    PreProcesser(args, logging)
+    pPTable = PreProcesser(args) 
+
+    import pickle
+    with open ('pPTable.pickle', 'wb') as f:
+        pickle.dump(pPTable, f)
+
     logging.info(f"{ti()} - End PreProcesser")
 
     #
@@ -177,6 +182,7 @@ def main(args):
             try:
                 tpmetrics.TPFilter()
                 tpmetrics.filterTable()
+                tpmetrics.getFilteredValues(pPTable)
                 tpmetrics.writeOutfile(tpmetrics.dfFilt, tpmetrics.outfileFilt, tpmetrics.finalColsFilt)
 
             except:

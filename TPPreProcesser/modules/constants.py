@@ -85,3 +85,6 @@ DEFAULT_AA_SEPARATOR = "\s"
 
 # Default TableMerger
 DEFAULT_N_DIGITS = "4"
+
+# Name of the column containing annotation index (inserted to MS_experiment to track fusion, but removed)
+TPIDX = "_TPIDX"

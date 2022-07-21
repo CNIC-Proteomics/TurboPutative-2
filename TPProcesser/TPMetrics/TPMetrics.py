@@ -33,16 +33,22 @@ class TPMetrics(TPMetricsSuper):
         TPMetricsSuper.__init__(self, workdir)
 
         # Working table
-        self.df = pd.read_csv(os.path.join(self.workdir, self.infile), sep='\t')
+        self.df = self.readTable()
+
         self.LC = self.readLipidClasses()
         self.LC['bool'] = True
 
+        # Organize columns
         self.cmmCol = [i for i in self.df.columns if i in self.cmmCol or 'Unnamed' in i]
-        self.initCols = [i for i in self.df.columns.to_list() if i not in [*self.i, *self.cmmCol]] # intensity columns in the end
+        
+        self.initCols = [
+            i for i in self.df.columns.to_list() 
+            if i not in [*self.i, *self.cmmCol, self.a, self.e, self.w]] # intensity and cmm columns in the end & modified w, a and e should not appear
+        
         self.finalCols = self.initCols + \
             [self.tpc, self.s2argmaxp, self.s1, self.s2, self.tpcL_s3s, self.s2m, self.s2mF, self.sfinal, self.rank] + \
             self.cmmCol + self.i
-        #self.finalCols = self.initCols + [self.tpc, self.s2argmaxp, self.sfinal, self.rank, self.s1, self.s2, self.s3s]# + self.i
+        
         self.df = self.df.reset_index() # Generate column with index 
 
         
@@ -59,6 +65,18 @@ class TPMetrics(TPMetricsSuper):
         self.VcorrH0 = np.array([])
 
         logging.info('TPMetrics object initialized')
+
+    def readTable(self):
+        '''
+        Read dataframe (from tablemerger) and "clean" columns with values separated by ' ; '.
+        These values were joined in REname (they should not but well...) and they should be
+        a single value (single annotation)
+        '''
+        df = pd.read_csv(os.path.join(self.workdir, self.infile), sep='\t')
+        df[self.a] = [i.split(' ; ')[0] if type(i)==str else i for i in df[self.a_original].to_list()]
+        df[self.e] = [i.split(' ; ')[0] if type(i)==str else i for i in df[self.e_original].to_list()]
+        df[self.w] = [i.split(' ; ')[0] if type(i)==str else i for i in df[self.w_original].to_list()]
+        return df
 
 
     def readLipidClasses(self):
@@ -591,20 +609,87 @@ class TPMetrics(TPMetricsSuper):
         self.dfFilt = self.df.loc[self.df[self.rank]==1, :].copy()
 
         # tpcL indicates the lipid class per name
-        dfl = list(zip(*[j for i,j in self.dfFilt.loc[:, [self.n, self.tpcL, self.s2argmaxp]].to_dict('list').items()]))
+        dfl = list(zip(*[j for i,j in self.dfFilt.loc[:, [self.n, self.tpidx, self.tpcL, self.s2argmaxp]].to_dict('list').items()]))
 
         dfl = [
             (
                 np.array(nameL.split(' // ')), 
+                np.array(tpidx.split(' // ')), 
                 np.array(['' if pd.isna(i) else i for i in tpcL]), 
                 [''] if pd.isna(maxpL) else maxpL.split(' // ')
             ) 
-            for nameL, tpcL, maxpL in dfl ]
+            for nameL, tpidx, tpcL, maxpL in dfl ]
 
-        #self.dfFilt[self.nFilt] = [
-        self.dfFilt[self.n] = [
-            ' // '.join(
-                [name for maxp in maxpL for name in nameL[tpcL==maxp]]
-            )
-            for nameL, tpcL, maxpL in dfl
+        dfl = [
+            zip(*[
+                (nameL[n], tpidxL[n])
+                for maxp in maxpL for n,boolean in enumerate(tpcL==maxp) if boolean
+            ])
+            for nameL, tpidxL, tpcL, maxpL in dfl
         ]
+
+        self.dfFilt[self.n], self.dfFilt[self.tpidx] = zip(*[(' // '.join(i), ' // '.join(j)) for i,j in dfl])
+
+    
+    def getFilteredValues(self, pPTable):
+        '''
+        Extract from conserved columns of RowMerger the values corresponding
+        to filtered annotations. We have to explode // and then explode ; to 
+        get original annotation index. Then we merge and add the values.
+        '''
+
+        # Explode to original annotations
+        idx2 = self.dfFilt.loc[:, ['index', self.tpidx]]
+        idx2[self.tpidx] = idx2[self.tpidx].str.split(' // ')
+        idx2 = idx2.explode(self.tpidx, ignore_index=True)
+        idx2['ridx'] = idx2.index
+        idx2[self.tpidx] = idx2[self.tpidx].str.split(' ; ')
+        idx2 = idx2.explode(self.tpidx)
+        idx2 = idx2.astype({self.tpidx: int})
+
+        # Merge to include values of annotations
+        idx2 = pd.merge(
+            idx2,
+            pPTable,
+            how='left',
+            on=self.tpidx
+        )
+
+        # Regroup to recover the rowmerger annotations with // and ; structure
+        idx2 = idx2.fillna('')
+        idx2 = idx2.astype({i: str for i in idx2.columns})
+
+        idx2 = idx2.groupby(['index', 'ridx']).agg(list).reset_index().groupby('index').agg(list).reset_index()
+
+        idx2 = idx2.to_dict('list')
+
+        idx2 = {
+            col: [
+                re.sub(r'^(\s//\s)+$', '',
+                ' // '.join([
+                    ' ; '.join([ann for ann in set(rann) if ann!='']) for rann in row
+                ])) for row in idx2[col]
+            ] if col != 'index' else idx2[col]
+            for col in idx2
+        }
+
+        idx2 = pd.DataFrame(idx2)
+
+        # columns that will be replaced [excluding some...]
+        cols = [i for i in idx2.columns if i not in ['index', self.n, self.a_original, self.e_original, self.w_original]]
+
+        self.dfFilt = pd.merge(
+            self.dfFilt.drop([i for i in self.dfFilt.columns if i in cols], axis=1).astype({'index': int}),
+            idx2.loc[:, ['index', *cols]].astype({'index': int}),
+            how='outer',
+            on='index'
+        )
+
+
+
+        # Al tiempo que filtras los nombres, debes sacar los _TPIDX (fijalo como atributo...) spliteados por ' // '
+        # A partir de ahí, sacas tabla con _TPIDX y index. Aplicas explode en _TPIDX sobre ' // ' (duplica index (s)), 
+        # creas nuevo indice (index_r) y aplicas explode sobre ' ; ' (ya tienes indice de anotacion)
+        # Ahora, haces merge con la pPTable (por indice de anotacion). 
+        # Aplicar groupby sobre index_r y join por ' ; '. Reaplicar groupby por index y join por ' // '
+        # Aplicar drop de todas estas columnas en dfFilt (salvo index) y haces un merge para añadir los valores filtrados y voilà

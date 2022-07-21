@@ -18,7 +18,7 @@ class GenericTableHandler
     bool compareNames(std::string& name1, std::string& name2);
 
     // Method to combine two fields hen fusing rows
-    std::string conserveField(std::string& field1, std::string& field2);
+    std::string conserveField(std::string& field1, std::string& field2, std::string separator);
 
 
     public:
@@ -55,7 +55,7 @@ class GenericTableHandler
     void removeIndexes(std::vector<int>& indexes);
 
     // Method to fuse rows of the table, given compared and conserved columns
-    void fuseRows(std::vector<std::string> compareCol, std::vector<std::string> conserveCol, std::string name="");
+    void fuseRows(std::vector<std::string> compareCol, std::vector<std::string> conserveCol, std::string name="", std::string separator=" // ");
 
     // Method to write output table
     void writeTable(std::string outfilePath);

@@ -14,6 +14,8 @@
 // DEFINES
 #define MODULE "RowMerger"
 
+#define SEPARATOR " // "
+
 
 // MAIN FUNCTION
 int main(int argc, char *argv[])
@@ -50,7 +52,7 @@ int main(int argc, char *argv[])
     std::string nameCompare = config.getValue("compared_name");
 
     // --> apply fusion
-    msTable.fuseRows(comparedVec, conservedVec, nameCompare);
+    msTable.fuseRows(comparedVec, conservedVec, nameCompare, SEPARATOR);
 
     //
     // WRITE TABLE

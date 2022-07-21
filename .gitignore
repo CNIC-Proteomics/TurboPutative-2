@@ -23,10 +23,11 @@ TPProcesser/Tagger/Tagger
 #
 # Ignore Python pycache
 #
-/TPPreProcesser/__pycache__/*
-/TPPreProcesser/modules/__pycache__/*
-/TPPostProcesser/__pycache__/*
-/TPPostProcesser/modules/__pycache__/*
+__pycache__
+#/TPPreProcesser/__pycache__/*
+#/TPPreProcesser/modules/__pycache__/*
+#/TPPostProcesser/__pycache__/*
+#/TPPostProcesser/modules/__pycache__/*
 
 #
 # Ignore Processer libraries

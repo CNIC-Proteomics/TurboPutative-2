@@ -31,7 +31,7 @@ import modules.constants as constants
 
 
 # Main function
-def main(args, logging):
+def main(args):
     """
     Execute main function
     """
@@ -44,6 +44,7 @@ def main(args, logging):
 
     # read table
     msTable.readTable()
+    msTable.table[constants.TPIDX] = msTable.table.index
 
     # test input table
     msTableTester = MSTableTester(args)
@@ -107,6 +108,10 @@ def main(args, logging):
 
     # Write info file
     moduleInfo.writeINI(args.workdir)
+
+    # return input MS table: It will be used by TPFilter to get information of conserved properties (avoid re-reading the file)
+    outcols = moduleInfo.iniDict['RowMerger']["conserved_columns"].split(',') if "RowMerger" in moduleInfo.iniDict.keys() else []
+    return msTable.table.loc[:, set([constants.TPIDX, *outcols])]
 
 
 if __name__ == "__main__":

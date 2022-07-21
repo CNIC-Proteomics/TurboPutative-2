@@ -279,7 +279,8 @@ class InputINI:
             comparedList = [
                 [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mass"]],
                 [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["adduct"]],
-                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mzError"]]
+                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["mzError"]],
+                [i for i in columnsList if i.lower() in constants.COLUMN_NAMES["chemical_formula"]]
             ]
 
             # comparedList will not be empty (in TableTester we check that mass is present if RowMerger is selected)
