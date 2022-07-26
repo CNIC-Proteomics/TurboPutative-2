@@ -7,9 +7,7 @@
 __author__ = "Rafael Barrero Rodriguez"
 __credits__ = ["Rafael Barrero Rodriguez", "Jose Rodriguez", "Jesus Vazquez"]
 __license__ = "Creative Commons Attribution-NonCommercial-NoDerivs 4.0 Unported License https://creativecommons.org/licenses/by-nc-nd/4.0/"
-__version__ = "0.0.1"
-__maintainer__ = "Jose Rodriguez"
-__email__ = "rbarreror@cnic.es;jmrodriguezc@cnic.es"
+__email__ = "rbarreror@cnic.es"
 __status__ = "Development"
 
 # time control
@@ -18,11 +16,16 @@ ti = lambda: f"{str(round(time.time()-start_time, 3))}s"
 
 
 # Import modules
-import os
-import sys
-import logging
 import argparse
+import glob
+import logging
+import os
+import shutil
 import subprocess
+import sys
+
+
+
 
 # TurboPutative modules
 scriptPath = os.path.dirname(__file__)
@@ -50,6 +53,37 @@ modulePath = {
     'TableMerger': os.path.join(scriptPath, "TPProcesser", "TableMerger", "TableMerger")
 }
 
+# Functions
+def pendingFiles(args):
+    '''
+    Create folder with two files: 
+        - MS_experiment with name and index only
+        - REname.tsv with all columns
+    '''
+    
+    jobid = os.path.basename(args.workdir)
+    basedir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ppGenerator/pendingFiles')
+    
+    logging.info(f'Creating pending file folder: {basedir}/{jobid}')
+
+    os.mkdir(os.path.join(basedir, jobid))
+
+    _ = shutil.copyfile(
+        os.path.join(args.workdir, 'preProcessedTable.tsv'),
+        os.path.join(basedir, jobid, jobid+'.tsv')
+    )
+
+    _ = shutil.copyfile(
+        glob.glob(os.path.join(args.workdir, "*_REname.tsv"))[0],
+        os.path.join(basedir, jobid, jobid+'_REname.tsv')
+    )
+
+    _ = shutil.copyfile(
+        os.path.join(args.workdir, 'configFile.ini'),
+        os.path.join(basedir, jobid, jobid+'.ini')
+    )
+
+
 # Main
 def main(args):
     """
@@ -61,10 +95,6 @@ def main(args):
     #
     logging.info(f"{ti()} - Start PreProcesser")
     pPTable = PreProcesser(args) 
-
-    import pickle
-    with open ('pPTable.pickle', 'wb') as f:
-        pickle.dump(pPTable, f)
 
     logging.info(f"{ti()} - End PreProcesser")
 
@@ -119,6 +149,7 @@ def main(args):
 
             try:
                 subprocess.run([modulePath['REname2'], args.workdir], check=True)# , shell=True)
+                _ = pendingFiles(args)
             
             except Exception as e:
                 logging.exception("Error raised when executing REname2. Traceback:")

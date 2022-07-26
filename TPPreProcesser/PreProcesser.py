@@ -77,7 +77,7 @@ def main(args):
     msTable.writeHTMLTable()
 
     # extract name of the compounds to be added to TPMapTable
-    msTable.extractCompoundNames(args.workdir)
+    #msTable.extractCompoundNames(args.workdir)
 
     # process TableMerger table with additional information
     if ('4' in args.workflow) and (args.tmfile):

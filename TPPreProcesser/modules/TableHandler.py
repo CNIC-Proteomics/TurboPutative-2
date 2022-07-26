@@ -213,6 +213,7 @@ class MSTable(TPTable):
     def extractCompoundNames(self, workdir):
         """
         Extract compound names and save in ppGenerator pendingFiles folder
+        NOT USED
         """
         
         # The name of the will be the id of the project
