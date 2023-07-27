@@ -59,7 +59,10 @@ def main(args):
 
     # apply regular expressions to debug and clean the table
 
-        # Remove fields with more than one compound
+    # Remove CMM annotation with certain identifier (yielding error)
+    msTable.table = msTable.table[~np.isin(msTable.table['Identifier'], [188282])]
+
+    # Remove fields with more than one compound
     colNameCompounds = moduleInfo.getColumnNameFromType(msTable.table.columns, "name")
     msTable.table[colNameCompounds] = msTable.table[colNameCompounds].str.replace(r"(;(\n|\s)|\s/\s\n?|\n).*$", "", regex=True)
 

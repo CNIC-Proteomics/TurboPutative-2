@@ -63,6 +63,7 @@ class TPMetrics(TPMetricsSuper):
 
         # Array containing correlation values under the null hypothesis; getNullH()
         self.VcorrH0 = np.array([])
+        self.MaxVcorrH0 = 5
 
         logging.info('TPMetrics object initialized')
 
@@ -141,6 +142,8 @@ class TPMetrics(TPMetricsSuper):
     def getCorrelations(self):
         '''
         '''
+
+        self.df = self.df.astype({self.w:str})
         
         self.getCorr(
             basedCol=self.w, 
@@ -204,7 +207,7 @@ class TPMetrics(TPMetricsSuper):
 
         # Get a dataframe copy unfolding by molecular weight/lipid class (preserving the same index after unfold)
         df = self.df.loc[:, ['index',self.m, self.rt, basedCol]].copy()
-        df[basedCol] = self.df[basedCol].str.split(' // ')
+        df[basedCol] = self.df.astype({basedCol:str})[basedCol].str.split(' // ')
         df = df.explode(
             basedCol, ignore_index=True
             ).dropna(
@@ -256,7 +259,7 @@ class TPMetrics(TPMetricsSuper):
         idx2p = [
             (
                 index_w_m_rt, 
-                self.corr.loc[idx[index_w_m_rt[2], index_w_m_rt[3]], idx[pair_mass, pair_rt]].to_numpy(),
+                self.corr.loc[(index_w_m_rt[2], index_w_m_rt[3]), [(i,j) for i,j in zip(pair_mass, pair_rt)]].to_numpy(),
                 pair_mass,
                 pair_rt
             ) 
@@ -269,7 +272,7 @@ class TPMetrics(TPMetricsSuper):
         ### !!!!! REMOVE NEGATIVE CORRELATIONS FOR MW CASE
         if basedCol==self.w: 
             idx2p = [
-                (index_w_m_rt, pair_corr[pair_corr>0], pair_mass, pair_rt)
+                (index_w_m_rt, pair_corr[pair_corr>0], np.array(pair_mass)[pair_corr>0].tolist(), pair_rt)
                 for index_w_m_rt, pair_corr, pair_mass, pair_rt in idx2p if sum(pair_corr>0)>0
             ]
         # 
@@ -341,7 +344,7 @@ class TPMetrics(TPMetricsSuper):
 
         # Get correlation distribution considering the addition
         VcorrH0 = [np.abs(Vcorr)]
-        for n in range(2, maxn+1):
+        for n in range(2, self.MaxVcorrH0+1):#maxn+1):
             Vcorrl = [Vcorr.copy() for i in range(n)]
             _ = [np.random.shuffle(i) for i in Vcorrl]
             VcorrH0.append(np.sum(np.abs(Vcorrl), axis=0))
@@ -383,7 +386,7 @@ class TPMetrics(TPMetricsSuper):
         df[siavg] = [np.mean(np.abs(i)) for i in df[sia]]
 
         df[sisp] = [
-            1 if n==0 else (self.VcorrH0[int(n)-1,:]>s).sum()/self.VcorrH0.shape[1] 
+            1 if n==0 else (self.VcorrH0[int(min(self.MaxVcorrH0,n))-1,:]>s).sum()/self.VcorrH0.shape[1] 
             for s, n in zip(df[sis].to_list(), df[sin].to_list())
         ]
 
