@@ -114,7 +114,7 @@ def main(args):
 
     # return input MS table: It will be used by TPFilter to get information of conserved properties (avoid re-reading the file)
     outcols = moduleInfo.iniDict['RowMerger']["conserved_columns"].split(',') if "RowMerger" in moduleInfo.iniDict.keys() else []
-    return msTable.table.loc[:, set([constants.TPIDX, *outcols])]
+    return msTable.table.loc[:, list(set([constants.TPIDX, *outcols]))]
 
 
 if __name__ == "__main__":

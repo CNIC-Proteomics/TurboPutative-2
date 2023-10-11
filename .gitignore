@@ -12,12 +12,12 @@
 **/*.ilk
 **/*.exe
 **/*.log
-TPProcesser/REname/REname1
-TPProcesser/REname/REname2
-TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin
-TPProcesser/RowMerger/RowMerger
-TPProcesser/TableMerger/TableMerger
-TPProcesser/Tagger/Tagger
+# TPProcesser/REname/REname1
+# TPProcesser/REname/REname2
+# TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin
+# TPProcesser/RowMerger/RowMerger
+# TPProcesser/TableMerger/TableMerger
+# TPProcesser/Tagger/Tagger
 
 
 #

@@ -2,7 +2,7 @@
 
 # Description: Script to create a folder with required files for execution
 
-BUILD_DIR_NAME="../../../TurboPutative-web/src/TurboPutative-2.0-built"
+BUILD_DIR_NAME="../TurboPutative-web/src/TurboPutative-2.0-built"
 
 rm -r $BUILD_DIR_NAME
 mkdir $BUILD_DIR_NAME
