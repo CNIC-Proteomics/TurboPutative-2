@@ -1,0 +1,279 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "compile Tagger",
+			"command": "/usr/bin/g++",
+			"args": [ // Para debuggear se debe comentar -static-libstdc++ (y -static -lm para TableMerger); Para compilar se debe descomentar
+					  // -ldl y-lpthread eran necesarios para loguru. Eliminamos este paquete para simplificar
+				"-g",
+				"./TPProcesser/Tagger/Tagger.cpp",
+				"./TPProcesser/Tagger/lib/TagList.cpp",
+				"./TPProcesser/Tagger/lib/TagRegex.cpp",
+				"./TPProcesser/lib/ConfigReader.cpp",
+				"./TPProcesser/lib/GenericTableHandler.cpp",
+				"./TPProcesser/lib/Tokenizer.cpp",
+				//"./TPProcesser/lib/logging/loguru.cpp",
+				"-o",
+				"./TPProcesser/Tagger/Tagger",
+				/*"-lpthread",
+				"-ldl"*/
+				"-static-libstdc++"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "compile REname1",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"./TPProcesser/REname/REname1.cpp",
+				"./TPProcesser/REname/lib/RemoveRow.cpp",
+				"./TPProcesser/REname/lib/MapCompound.cpp",
+				"./TPProcesser/REname/lib/LipidList_and_PreProcess.cpp",
+				"./TPProcesser/lib/ConfigReader.cpp",
+				"./TPProcesser/lib/GenericTableHandler.cpp",
+				"./TPProcesser/lib/Tokenizer.cpp",
+				"-o",
+				"./TPProcesser/REname/REname1",
+				"-I",
+				"./TPProcesser/lib/boost_1_78_0",
+				"./TPProcesser/lib/boost_1_78_0/stage/lib/libboost_regex.a",
+				/*"-lpthread",
+				"-ldl",*/
+				"-static-libstdc++"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "compile TPGoslin",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"./TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin.cpp",
+				"./TPProcesser/REname/lib/cppgoslin-1.1.2/cppgoslin/src/domain/*.cpp",
+				"./TPProcesser/REname/lib/cppgoslin-1.1.2/cppgoslin/src/parser/*.cpp",
+				"-o",
+				"./TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin",
+				"-I",
+				"./TPProcesser/REname/lib/cppgoslin-1.1.2",
+				"-static-libstdc++",
+				"-static",
+				"-lm"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "compile TPGoslinSO",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"./TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin.cpp",
+				"-o",
+				"./TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin",
+				"-I",
+				"./TPProcesser/REname/lib/cppgoslin-1.1.2",
+				"-L",
+				"./TPProcesser/REname/lib/cppgoslin-1.1.2/lib",
+				"-static",
+				"-lcppGoslin",
+				"-static",
+				"-lm",
+				"-static-libstdc++"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "compile REname2",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"./TPProcesser/REname/REname2.cpp",
+				"./TPProcesser/REname/lib/RegexObject.cpp",
+				"./TPProcesser/REname/lib/SortPeptide.cpp",
+				"./TPProcesser/REname/lib/LipidList_and_PreProcess.cpp",
+				"./TPProcesser/REname/lib/LipidMapsAbb.cpp",
+				"./TPProcesser/lib/ConfigReader.cpp",
+				"./TPProcesser/lib/GenericTableHandler.cpp",
+				"./TPProcesser/lib/Tokenizer.cpp",
+				"-o",
+				"./TPProcesser/REname/REname2",
+				"-I",
+				"./TPProcesser/lib/boost_1_78_0",
+				"./TPProcesser/lib/boost_1_78_0/stage/lib/libboost_regex.a",
+				/*"-lpthread",
+				"-ldl",*/
+				"-static-libstdc++"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "compile RowMerger",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"./TPProcesser/RowMerger/RowMerger.cpp",
+				"./TPProcesser/lib/ConfigReader.cpp",
+				"./TPProcesser/lib/GenericTableHandler.cpp",
+				"./TPProcesser/lib/Tokenizer.cpp",
+				"-o",
+				"./TPProcesser/RowMerger/RowMerger",
+				/*"-lpthread",
+				"-ldl",*/
+				"-static-libstdc++"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "compile TableMerger",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"./TPProcesser/TableMerger/TableMerger.cpp",
+				"./TPProcesser/lib/ConfigReader.cpp",
+				"./TPProcesser/lib/GenericTableHandler.cpp",
+				"./TPProcesser/lib/Tokenizer.cpp",
+				"-o",
+				"./TPProcesser/TableMerger/TableMerger",
+				/*"-lpthread",
+				"-ldl",*/
+				"-static-libstdc++",
+				"-static",
+				"-lm"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "compile ppGenerator1",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"./ppGenerator/ppGenerator1.cpp",
+				"./TPProcesser/REname/lib/LipidList_and_PreProcess.cpp",
+				"-o",
+				"./ppGenerator/ppGenerator1",
+				"-I",
+				"./TPProcesser/lib/boost_1_78_0",
+				"./TPProcesser/lib/boost_1_78_0/stage/lib/libboost_regex.a",
+				/*"-lpthread",
+				"-ldl",*/
+				"-static-libstdc++"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "compile ppGenerator2",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"./ppGenerator/ppGenerator2.cpp",
+				"./TPProcesser/REname/lib/RegexObject.cpp",
+				"./TPProcesser/REname/lib/SortPeptide.cpp",
+				"-o",
+				"./ppGenerator/ppGenerator2",
+				"-I",
+				"./TPProcesser/lib/boost_1_78_0",
+				"./TPProcesser/lib/boost_1_78_0/stage/lib/libboost_regex.a",
+				/*"-lpthread",
+				"-ldl",*/
+				"-static-libstdc++"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/g++"
+		},
+		{
+			"type": "cppbuild",
+			"label": "compile REprueba",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"./TPProcesser/REname/REprueba.cpp",
+				"./TPProcesser/REname/lib/LipidMapsAbb.cpp",
+				"-o",
+				"./TPProcesser/REname/REprueba",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/g++"
+		},
+	]
+}

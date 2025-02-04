@@ -1,0 +1,198 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "debug Tagger",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/TPProcesser/Tagger/Tagger",
+            "args": ["/home/rafael/CNIC/Metabolomica/TurboPutativeCode/testing/std_test_2"],
+            "stopAtEntry": false,
+            "cwd": "/home/rafael/CNIC/Metabolomica/TurboPutativeCode",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "compile Tagger",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "debug REname1",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/TPProcesser/REname/REname1",
+            "args": ["/home/rafael/CNIC/Metabolomica/TurboPutativeCode/testing/fix_1"],
+            "stopAtEntry": false,
+            "cwd": "/home/rafael/CNIC/Metabolomica/TurboPutativeCode",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "compile REname1",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "debug TPGoslin",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/TPProcesser/REname/lib/cppgoslin-1.1.2/TPGoslin",
+            "args": ["/home/rafael/CNIC/Metabolomica/TurboPutativeCode/testing/fix_1"],
+            "stopAtEntry": false,
+            "cwd": "/home/rafael/CNIC/Metabolomica/TurboPutativeCode",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "compile TPGoslin",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "debug REname2",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/TPProcesser/REname/REname2",
+            "args": ["/home/rafael/CNIC/Metabolomica/TurboPutativeCode/testing/fix_1"],
+            "stopAtEntry": false,
+            "cwd": "/home/rafael/CNIC/Metabolomica/TurboPutativeCode",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "compile REname2",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "debug RowMerger",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/TPProcesser/RowMerger/RowMerger",
+            "args": ["/home/rafael/CNIC/Metabolomica/TurboPutativeCode/testing/aless_test/aless_TPResults/HFD"],
+            "stopAtEntry": false,
+            "cwd": "/home/rafael/CNIC/Metabolomica/TurboPutativeCode",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "compile RowMerger",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "debug TableMerger",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/TPProcesser/TableMerger/TableMerger",
+            "args": ["/home/rafael/CNIC/Metabolomica/TurboPutativeCode/testing/std_test_2"],
+            "stopAtEntry": false,
+            "cwd": "/home/rafael/CNIC/Metabolomica/TurboPutativeCode",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "compile TableMerger",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "debug ppGenerator1",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ppGenerator/ppGenerator1",
+            "args": ["${workspaceFolder}/ppGenerator", "compoundList.txt"],
+            "stopAtEntry": false,
+            "cwd": "/home/rafael/CNIC/Metabolomica/TurboPutativeCode",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "compile ppGenerator1",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+
+        {
+            "name": "debug ppGenerator2",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ppGenerator/ppGenerator2",
+            "args": ["${workspaceFolder}/ppGenerator"],
+            "stopAtEntry": false,
+            "cwd": "/home/rafael/CNIC/Metabolomica/TurboPutativeCode",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "compile ppGenerator2",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "debug REprueba",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/TPProcesser/REname/REprueba",
+            "args": [""],
+            "stopAtEntry": false,
+            "cwd": "/home/rafael/CNIC/Metabolomica/TurboPutativeCode",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "compile REprueba",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+    ]
+}
