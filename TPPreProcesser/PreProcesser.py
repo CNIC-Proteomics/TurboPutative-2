@@ -60,7 +60,7 @@ def main(args):
     # apply regular expressions to debug and clean the table
 
     # Remove CMM annotation with certain identifier (yielding error)
-    msTable.table = msTable.table[~np.isin(msTable.table['Identifier'], [188282])]
+    msTable.table = msTable.table[~np.isin(msTable.table['Identifier'], [188282,188310])]
 
     # Remove fields with more than one compound
     colNameCompounds = moduleInfo.getColumnNameFromType(msTable.table.columns, "name")

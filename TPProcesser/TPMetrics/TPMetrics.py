@@ -687,12 +687,3 @@ class TPMetrics(TPMetricsSuper):
             how='outer',
             on='index'
         )
-
-
-
-        # Al tiempo que filtras los nombres, debes sacar los _TPIDX (fijalo como atributo...) spliteados por ' // '
-        # A partir de ahí, sacas tabla con _TPIDX y index. Aplicas explode en _TPIDX sobre ' // ' (duplica index (s)), 
-        # creas nuevo indice (index_r) y aplicas explode sobre ' ; ' (ya tienes indice de anotacion)
-        # Ahora, haces merge con la pPTable (por indice de anotacion). 
-        # Aplicar groupby sobre index_r y join por ' ; '. Reaplicar groupby por index y join por ' // '
-        # Aplicar drop de todas estas columnas en dfFilt (salvo index) y haces un merge para añadir los valores filtrados y voilà

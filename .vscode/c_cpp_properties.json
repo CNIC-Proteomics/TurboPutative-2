@@ -4,10 +4,10 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/home/rafael/CNIC/Metabolomics/TurboPutativeCode/src/TurboPutative-2.0-built/TPProcesser/REname/lib/cppgoslin-1.1.2"
+                "/home/rbarreror/projects/TurboPutative-2/TPProcesser/REname/lib/cppgoslin-1.1.2"//"/home/rafael/CNIC/Metabolomics/TurboPutativeCode/src/TurboPutative-2.0-built/TPProcesser/REname/lib/cppgoslin-1.1.2"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/bin/g++",
             "cStandard": "gnu17",
             "cppStandard": "gnu++14",
             "intelliSenseMode": "linux-gcc-x64"
